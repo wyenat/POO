@@ -11,7 +11,6 @@ public class TestLecteurDonnees {
             System.out.println("Syntaxe: java TestLecteurDonnees <nomDeFichier>");
             System.exit(1);
         }
-
         try {
             LecteurDonnees.lire(args[0]);
         } catch (FileNotFoundException e) {
@@ -22,4 +21,3 @@ public class TestLecteurDonnees {
     }
 
 }
-
