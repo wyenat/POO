@@ -1,7 +1,7 @@
 package io;
 
 // import java.io.Carte;
-import java.io.NatureTerrain;
+// import java.io.NatureTerrain;
 
 public class Case{
     /**
@@ -11,7 +11,7 @@ public class Case{
      */
      private int ligne;
      private int colonne;
-     private NatureTerrain nature;
+    //  private NatureTerrain nature;
 
      public int GetLigne(){
          /**
@@ -27,10 +27,10 @@ public class Case{
          return this.colonne;
      }
 
-     public enum NatureTerrain GetNature{
-         /**
-          *  Retourne la nature de la cases
-          */
-          return this.nature;
-     }
+    //  public enum NatureTerrain GetNature{
+    //      /**
+    //       *  Retourne la nature de la cases
+    //       */
+    //       return this.nature;
+    //  }
 }
