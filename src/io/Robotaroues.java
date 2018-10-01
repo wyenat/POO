@@ -29,7 +29,7 @@ public class Robotaroues extend Robot{
     }
 
     public void deverserEau(int Volume){
-      if (Volume<=this.litres_en_reserve){
+      if (Volume <= this.litres_en_reserve){
         /*On vérifie qu'il puisse verser autant de litres*/
         this.litres_en_reserve = this.litres_en_reserve - Volume;
       }
@@ -38,5 +38,10 @@ public class Robotaroues extend Robot{
       }
     }
 
+    public void remplirReservoir(){
+
+      //Fonction qui doit remplir le reservoir de 5000L 
+
+    }
 
 }
