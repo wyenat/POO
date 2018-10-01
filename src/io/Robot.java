@@ -4,53 +4,16 @@ package io;
 // import java.io.Carte;
 import java.io.Carte;
 
-public class Incendie{
-    /**
-     * Contient les données d'un incendie:
-        -position
-        -force
-     */
-     private int ligne;
-     private int colonne;
-     private int intensite;
+public class Robot{
 
-     public int GetLigne(){
-       /* Permet la recupération de la ligne*/
-       return this.ligne;
-     }
+    /* Attributs communs à tous les robots et fonctions associées*/
+    private Case position;
+    private int vitesse;
+    private int litres_en_reserve;
 
-     public int SetLigne(int lig){
-       /* Permet l'affectation de la ligne
-          N'a pour l'instant pas de test */
-        this.ligne = lig;
-     }
+    public Case getPosition(){
+      /* Renvoie la case sur laquelle est le robot*/
+      return this.position;
+    }
 
-
-     public int GetColonne(){
-       /* Permet la recupération de la colonne*/
-       return this.colonne;
-     }
-
-     public int SetLigne(int col){
-       /* Permet l'affectation de la colonne
-          N'a pour l'instant pas de test */
-        this.col = col;
-     }
-
-     public int GetIntensite(){
-       /* Permet la recupération de l'intensité*/
-       return this.intensite;
-     }
-
-     public int SetLigne(int intensite){
-       /* Permet l'affectation de l'intensite
-          N'a pour l'instant qu'un test simple */
-        if (intensite > 0){
-          this.intensite = intensite;
-        }
-        else{
-          throw new IllegalArgumentException("Une intensité ne peut être negative");
-        }
-
-     }
 }

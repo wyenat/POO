@@ -45,7 +45,7 @@ public class Incendie{
      public int SetLigne(int intensite){
        /* Permet l'affectation de l'intensiteInce
           N'a pour l'instant qu'un test simple */
-        if (intensite > 0){
+        if (intensite >= 0){
           this.intensite = intensite;
         }
         else{
