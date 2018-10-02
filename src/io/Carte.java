@@ -73,9 +73,86 @@ public class Carte{
           return this.NbColonnes;
      }
 
-     public int voisinExiste(Case C,){
+     public int GetTableauDeCases(){
+         /**
+          * Retourne le tableau de cases
+          */
+          return this.TableauDeCases;
+     }
 
+     public int voisinExiste(Case C, dir direction){
+       /*Renvoie 1 s'il a un voisin dans la direction donnée*/
+          switch(direction){
+            /*Fais un case sur la direction
+            On vérifie qu'on ne depasse pas */
+              case "NORD":
+                if (C.ligne -1 =>0){
+                  return 1;
+                }
+                else{
+                  return 0;
+                }
+                break;
 
+              case "EST":
+                if (C.colonne +1 < = this.GetNbColonnes()){
+                  return 1;
+                }
+                else{
+                  return 0;
+                }
+                break;
+
+              case "SUD":
+                if (C.ligne -1 < = this.GetColonne()){
+                  return 1;
+                }
+                else{
+                  return 0;
+                }
+                break;
+              case "OUEST":
+                if ((C.colonne -1 >=0){
+                  return 1;
+                  }
+                else{
+                  return 0;
+                }
+                break;
+
+          }
+
+     }
+
+     public int GetVoisin(Case C, dir direction){
+          /*Renvoie le voisin de la case C dans la direction donnée*/
+          if (voisinExiste(C, direction)){
+
+            /*On vérifie quand même que ce voisin existe*/
+            int ligne = C.GetLigne();
+            int colonne = C.GetColonne();
+            Case[] Tableau = this.GetTableauDeCases();
+            int taille = this.GetNbColonnes();
+
+            switch(direction){
+
+              case "NORD":
+                return Tableau[taille*(ligne-1) + colonne];
+
+              case "EST":
+                return Tableau[taille*(ligne) + colonne+1];
+
+              case "SUD":
+                return Tableau[taille*(ligne+1) + colonne];
+
+              case "OUEST":
+                return Tableau[taille*(ligne) + colonne -1];
+          }
+          else{
+            /*Triche pour renvoyer quelquechose même s'il y a pas de voisin*/
+            return C;
+          }
+        }
      }
 
 

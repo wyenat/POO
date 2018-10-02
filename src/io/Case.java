@@ -27,6 +27,23 @@ public class Case{
          return this.colonne;
      }
 
+
+     public void SetLigne(int i){
+         /**
+          * Affecte la ligne de la case
+          */
+         this.ligne = i;;
+     }
+
+     public void SetColonne(int i){
+         /**
+          * Affecte la colonne de la case
+          */
+         this.colonne = i;;
+     }
+
+
+
     //  public enum NatureTerrain GetNature{
     //      /**
     //       *  Retourne la nature de la cases

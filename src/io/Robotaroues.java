@@ -49,6 +49,8 @@ public class Robotaroues extends Robot{
 
     public void remplirReservoir(){
       //Fonction qui doit remplir le reservoir de 5000L
+      // Case C = this.position.GetVoisin();
+      // ON DOIT PARCOURIR TOUTES LES DIRECTIONS POUR TESTER
       if (this.position.NatureTerrain == "this.litres_en_reserve
     }
 
