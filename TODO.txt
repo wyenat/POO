@@ -1,0 +1,8 @@
+
+
+
+
+Enguerran:
+	sur carte et Robotaroues:
+		besoin d'une classe direction
+		suis en train de créer recupération de Case, et voisin
