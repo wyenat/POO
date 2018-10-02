@@ -3,9 +3,17 @@ package io;
 // import java.io.Carte;
 import java.io.Carte;
 
-public class Robotaroues extend Robot{
+public class Robotaroues extends Robot{
 
     /* Attributs relatifs aux robots à roues et fonctions associées*/
+
+    public Robotaroues()
+         {
+             this.vitesse = 80;
+             this.litres_en_reserve = 5000;
+             this.type = "Robotaroues";
+
+         }
 
     public void setPosition(Case C){
       /* Change la case sur laquelle est le robot si c'est possible*/
@@ -29,19 +37,19 @@ public class Robotaroues extend Robot{
     }
 
     public void deverserEau(int Volume){
-      if (Volume <= this.litres_en_reserve){
+      if (Volume => this.litres_en_reserve){
         /*On vérifie qu'il puisse verser autant de litres*/
-        this.litres_en_reserve = this.litres_en_reserve - Volume;
+        this.litres_en_reserve = (this.litres_en_reserve) - Volume;
       }
       else{
         throw new IllegalArgumentException("On ne peut pas verser autant d'eau");
       }
     }
 
+
     public void remplirReservoir(){
-
-      //Fonction qui doit remplir le reservoir de 5000L 
-
+      //Fonction qui doit remplir le reservoir de 5000L
+      if (this.position.NatureTerrain == "this.litres_en_reserve
     }
 
 }

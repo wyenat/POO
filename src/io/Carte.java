@@ -73,5 +73,10 @@ public class Carte{
           return this.NbColonnes;
      }
 
+     public int voisinExiste(Case C,){
+
+
+     }
+
 
  }
