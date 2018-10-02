@@ -26,7 +26,7 @@ public class Carte{
          /* Définit la taille des cases.
           *Invariant de classe : taille > 0
           */
-          if (taille =< 0){
+          if (taille <= 0){
               throw new IllegalArgumentException("Taille des cases nulle ou négative !");
           }
           this.tailleCases = taille;
@@ -43,7 +43,7 @@ public class Carte{
          /* Définit le nombre de lignes.
           *Invariant de classe : NbLignes > 0
           */
-          if (taille =< 0){
+          if (taille <= 0){
               throw new IllegalArgumentException("Nombre de lignes nul ou négatif !");
           }
           this.NbLignes = taille;
@@ -60,7 +60,7 @@ public class Carte{
          /* Définit le nombre de Colonnes.
           *Invariant de classe : NbColonnes > 0
           */
-          if (taille =< 0){
+          if (taille <= 0){
               throw new IllegalArgumentException("Nombre de Colonnes nul ou négatif !");
           }
           this.NbColonnes = taille;
