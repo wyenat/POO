@@ -1,159 +1,55 @@
 package io;
 
-import java.io.Case;
-
 public class Carte{
     /**
      * Contient les données de la carte
      */
 
-     private int tailleCases;
-     private int NbLignes;
-     private int nbColonnes;
-     private Case[] TableauDeCases;
+     private int taille_cases;
+     private int nb_lignes;
+     private int nb_colonnes;
+     private Case[] tableau_de_cases;
 
-     public Carte(int tailleC, int nbL, int nbC){
-         /**
-          * Crée une carte de taille nbL*nbC dont les cases sont de taille tailleC
-          */
-         this.SetTailleCases(tailleC);
-         this.SetNbLignes(nbL);
-         this.SetNbColonnes(nbC);
-
+     public Carte(int taille_cases, int nb_lignes, int nb_colonnes){
+       /**
+       Crée une carte de taille nb_lignes*nb_colonnes dont les cases sont de
+       taille taille_cases
+       */
+       this.SetTailleCases(taille_cases);
+       this.SetNbLignes(nb_lignes);
+       this.SetNbColonnes(nb_colonnes);
      }
 
      public void SetTailleCases(int taille){
          /* Définit la taille des cases.
-          *Invariant de classe : taille > 0
-          */
-          if (taille <= 0){
-              throw new IllegalArgumentException("Taille des cases nulle ou négative !");
-          }
-          this.tailleCases = taille;
+         Invariant de classe : taille > 0
+         */
+         if (taille <= 0){
+           throw new IllegalArgumentException("Taille des cases nulle ou négative !");
+         }
+         this.taille_cases = taille;
      }
 
-     public int GetTailleCases(){
-         /**
-          * Retourne la taille des cases
-          */
-          return this.tailleCases;
-     }
 
-     public void SetNbLignes(int taille){
+     public void SetNbLignes(int nbl){
          /* Définit le nombre de lignes.
-          *Invariant de classe : NbLignes > 0
-          */
-          if (taille <= 0){
-              throw new IllegalArgumentException("Nombre de lignes nul ou négatif !");
-          }
-          this.NbLignes = taille;
+         Invariant de classe : NbLignes > 0
+         */
+         if (nbl <= 0){
+           throw new IllegalArgumentException("Nombre de lignes nul ou négatif !");
+         }
+         this.nb_lignes = nbl;
      }
 
-     public int GetNbLignes(){
-         /**
-          * Retourne le nombre de lignes
-          */
-          return this.NbLignes;
-     }
 
-     public void SetNbColonnes(int taille){
+     public void SetNbColonnes(int nbc){
          /* Définit le nombre de Colonnes.
-          *Invariant de classe : NbColonnes > 0
-          */
-          if (taille <= 0){
-              throw new IllegalArgumentException("Nombre de Colonnes nul ou négatif !");
-          }
-          this.NbColonnes = taille;
+         Invariant de classe : NbColonnes > 0
+         */
+         if (nbc <= 0){
+           throw new IllegalArgumentException("Nombre de Colonnes nul ou négatif !");
+         }
+         this.nb_colonnes = nbc;
      }
 
-     public int GetNbColonnes(){
-         /**
-          * Retourne le nombre de Colonnes
-          */
-          return this.NbColonnes;
-     }
-
-     public int GetTableauDeCases(){
-         /**
-          * Retourne le tableau de cases
-          */
-          return this.TableauDeCases;
-     }
-
-     public int voisinExiste(Case C, dir direction){
-       /*Renvoie 1 s'il a un voisin dans la direction donnée*/
-          switch(direction){
-            /*Fais un case sur la direction
-            On vérifie qu'on ne depasse pas */
-              case "NORD":
-                if (C.ligne -1 =>0){
-                  return 1;
-                }
-                else{
-                  return 0;
-                }
-                break;
-
-              case "EST":
-                if (C.colonne +1 < = this.GetNbColonnes()){
-                  return 1;
-                }
-                else{
-                  return 0;
-                }
-                break;
-
-              case "SUD":
-                if (C.ligne -1 < = this.GetColonne()){
-                  return 1;
-                }
-                else{
-                  return 0;
-                }
-                break;
-              case "OUEST":
-                if ((C.colonne -1 >=0){
-                  return 1;
-                  }
-                else{
-                  return 0;
-                }
-                break;
-
-          }
-
-     }
-
-     public int GetVoisin(Case C, dir direction){
-          /*Renvoie le voisin de la case C dans la direction donnée*/
-          if (voisinExiste(C, direction)){
-
-            /*On vérifie quand même que ce voisin existe*/
-            int ligne = C.GetLigne();
-            int colonne = C.GetColonne();
-            Case[] Tableau = this.GetTableauDeCases();
-            int taille = this.GetNbColonnes();
-
-            switch(direction){
-
-              case "NORD":
-                return Tableau[taille*(ligne-1) + colonne];
-
-              case "EST":
-                return Tableau[taille*(ligne) + colonne+1];
-
-              case "SUD":
-                return Tableau[taille*(ligne+1) + colonne];
-
-              case "OUEST":
-                return Tableau[taille*(ligne) + colonne -1];
-          }
-          else{
-            /*Triche pour renvoyer quelquechose même s'il y a pas de voisin*/
-            return C;
-          }
-        }
-     }
-
-
- }
+}

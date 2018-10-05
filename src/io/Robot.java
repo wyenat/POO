@@ -1,29 +1,13 @@
-
 package io;
 
-// import java.io.Carte;
-import java.io.Carte;
+public class Robot {
+  private TypeRobot type;
+  private Case position;
+  private int vitesse_deplacement;
 
-public enum Type_Robot{
-  "drone",
-  "robot_a_roues",
-  "robot_a_chenilles",
-  "robot_a_pattes";
-}
-
-public class Robot{
-
-    /* Attributs communs à tous les robots et fonctions associées*/
-    private Type_Robot type;
-    private Case position;
-    private int vitesse_deplacement;
-    private int capacite_reservoir;
-    private int temps_remplissage;
-    private int vitesse_vidage;
-
-    public Case getPosition(){
-      /* Renvoie la case sur laquelle est le robot*/
-      return this.position;
-    }
-
+  public Robot(TypeRobot type, Case position, int vitesse_deplacement){
+    this.type = type;
+    this.position = position;
+    this.vitesse_deplacement = vitesse_deplacement;
+  }
 }
