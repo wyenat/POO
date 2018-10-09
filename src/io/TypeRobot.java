@@ -1,10 +1,10 @@
 package io;
 
 public enum TypeRobot {
-  Drone ("drone"),
-  RobotARoues ("robot_a_roues"),
-  RobotAChenilles ("robot_a_chenilles"),
-  RobotAPattes ("robot_a_pattes");
+  DRONE ("DRONE"),
+  ROUES ("ROUES"),
+  CHENILLES ("CHENILLES"),
+  PATTES ("PATTES");
 
   private String name = "";
 

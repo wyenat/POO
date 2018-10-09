@@ -29,7 +29,7 @@ invader:
 
 lecture:
 	javac -d bin -sourcepath src src/TestLecteurDonnees.java
-	java -classpath bin TestLecteurDonnees cartes/carteSujet.map
+	java -classpath bin:bin/io/* TestLecteurDonnees cartes/carteSujet.map
 
 simulateur:
 	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestSimulateur.java
@@ -37,3 +37,4 @@ simulateur:
 
 clean:
 	rm -rf bin/*.class
+	rm -rf bin/io/*.class

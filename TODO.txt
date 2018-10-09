@@ -6,3 +6,8 @@ Enguerran:
 	sur carte et Robotaroues:
 		besoin d'une classe direction
 		suis en train de créer recupération de Case, et voisin
+
+Vivien:
+	pour LectureDonnees.java:
+		Toutes les classes existantes sont correctement récupérées :
+			=> besoin de la classe DonnesSimulation pour récuperer tout ça.

@@ -13,4 +13,11 @@ public class Case {
     this.colonne = c;
     this.nature = n;
   }
+
+  public NatureTerrain GetNature(){
+      /**
+       * Retourne la nature de la case
+       */
+       return this.nature;
+  }
 }

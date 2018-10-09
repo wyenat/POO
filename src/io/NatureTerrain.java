@@ -1,11 +1,11 @@
 package io;
 
 public enum NatureTerrain {
-  Eau ("eau"),
-  Foret ("foret"),
-  Roche ("roche"),
-  TerrainLibre ("terrain libre"),
-  Habitat ("habitat");
+  EAU ("EAU"),
+  FORET ("FORET"),
+  ROCHE ("ROCHE"),
+  TERRAIN_LIBRE ("TERRAIN_LIBRE"),
+  HABITAT ("HABITAT");
 
   private String name = "";
 
