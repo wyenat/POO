@@ -31,6 +31,10 @@ lecture:
 	javac -d bin -sourcepath src src/TestLecteurDonnees.java
 	java -classpath bin:bin/io/* TestLecteurDonnees cartes/carteSujet.map
 
+simulation:
+	javac -d bin -sourcepath src src/TestDonneesSimulation.java
+	java -classpath bin:bin/io/* TestDonneesSimulation cartes/carteSujet.map
+
 simulateur:
 	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestSimulateur.java
 	java -classpath bin:bin/gui.jar TestSimulateur

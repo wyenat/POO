@@ -37,50 +37,24 @@ public class LecteurDonnees {
      * LecteurDonnees.lire(fichierDonnees)
      * @param fichierDonnees nom du fichier à lire
      */
-    public static void lire(String fichierDonnees)
+    public static DonneesSimulation lire(String fichierDonnees)
         throws FileNotFoundException, DataFormatException {
-        System.out.println("\n == Lecture du fichier" + fichierDonnees);
         LecteurDonnees lecteur = new LecteurDonnees(fichierDonnees);
         Carte carte = lecteur.lireCarte();
-        System.out.println(carte.ToString());
         Incendie incendies[];
         incendies = lecteur.lireIncendies();
-        AfficherIncendies(incendies);
         Robot robots[];
         robots = lecteur.lireRobots();
-        AfficherRobots(robots);
         scanner.close();
-        System.out.println("\n == Lecture terminee");
+        DonneesSimulation donneesSimulation = new DonneesSimulation(carte, incendies, robots);
+        System.out.println(donneesSimulation.afficher());
+        return donneesSimulation;
     }
 
 
 
 
     // Tout le reste de la classe est prive!
-
-    private static void AfficherIncendies(Incendie[] incendies){
-        /**
-         * Affiche les incendies
-         */
-         System.out.println("\n\t#Incendies");
-         for (int i=0; i<incendies.length; i++){
-             System.out.println("Incendie " + i + ": Position : (" + incendies[i].GetLigne()
-                    + "," + incendies[i].GetColonne() + ")\tIntensité : "
-                    + incendies[i].GetIntensite());
-         }
-    }
-
-    private static void AfficherRobots(Robot[] robots){
-        /**
-         * Affiche les robots
-         */
-         System.out.println("\n\t#Robots");
-         for (int i=0; i<robots.length; i++){
-             System.out.println("Robot " + i + ": Position : (" + robots[i].GetLigne()
-                    + "," + robots[i].GetColonne() + ")\t type : " + robots[i].GetType()
-                    + "\t Vitesse : " + robots[i].GetVitesse());
-         }
-    }
 
     private static Scanner scanner;
 
@@ -132,7 +106,6 @@ public class LecteurDonnees {
      */
     private Case lireCase(int lig, int col) throws DataFormatException {
         ignorerCommentaires();
-        // System.out.print("Case (" + lig + "," + col + "): ");
         String chaineNature = new String();
         NatureTerrain nature;
 
@@ -143,15 +116,11 @@ public class LecteurDonnees {
             nature = NatureTerrain.valueOf(chaineNature);
 
             verifieLigneTerminee();
-
-            // System.out.print("nature = " + chaineNature);
-
         } catch (NoSuchElementException e) {
             throw new DataFormatException("format de case invalide. "
                     + "Attendu: nature altitude [valeur_specifique]");
         }
         Case caseActive = new Case(lig, col, nature);
-        // System.out.println();
         return caseActive;
     }
 
@@ -188,8 +157,6 @@ public class LecteurDonnees {
      */
     private Incendie lireIncendie(int i) throws DataFormatException {
         ignorerCommentaires();
-        // System.out.print("Incendie " + i + ": ");
-
         try {
             int lig = scanner.nextInt();
             int col = scanner.nextInt();
@@ -200,8 +167,6 @@ public class LecteurDonnees {
             }
             verifieLigneTerminee();
 
-            // System.out.println("position = (" + lig + "," + col
-                    // + ");\t intensite = " + intensite);
             Incendie incendie = new Incendie(lig, col, intensite);
             return incendie;
 
@@ -224,7 +189,6 @@ public class LecteurDonnees {
             }
             Robot robots[];
             robots = new Robot[nbRobots];
-            // System.out.println("Nb de robots = " + nbRobots);
             for (int i = 0; i < nbRobots; i++) {
                 robots[i] = lireRobot(i);
             }
@@ -243,19 +207,11 @@ public class LecteurDonnees {
      */
     private Robot lireRobot(int i) throws DataFormatException {
         ignorerCommentaires();
-        // System.out.print("Robot " + i + ": ");
 
         try {
             int lig = scanner.nextInt();
             int col = scanner.nextInt();
-            // System.out.print("position = (" + lig + "," + col + ");");
             String type = scanner.next();
-
-            // System.out.print("\t type = " + type);
-
-
-            // lecture eventuelle d'une vitesse du robot (entier)
-            // System.out.print("; \t vitesse = ");
             String s = scanner.findInLine("(\\d+)");	// 1 or more digit(s) ?
             // pour lire un flottant:    ("(\\d+(\\.\\d+)?)");
             int vitesse;
@@ -264,7 +220,6 @@ public class LecteurDonnees {
                 vitesse = VitesseDefaut(typeRobot);
             } else {
                 vitesse = Integer.parseInt(s);
-                // System.out.print(vitesse);
             }
             verifieLigneTerminee();
             Robot robot = new Robot(typeRobot, lig, col, vitesse);
@@ -282,7 +237,6 @@ private static int VitesseDefaut(TypeRobot type){
      * précisée dans le .map
      */
      int vitesseDefaut;
-     System.out.println(type);
      switch(type){
         case CHENILLES:
             vitesseDefaut = 60;
