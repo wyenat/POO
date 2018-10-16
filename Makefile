@@ -35,6 +35,10 @@ simulateur:
 	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestSimulateur.java
 	java -classpath bin:bin/gui.jar TestSimulateur cartes/carteSujet.map
 
+robot:
+	javac -d bin -sourcepath src src/TestRobot.java
+	java -classpath bin:bin/io/* TestRobot
+
 clean:
 	rm -rf bin/*.class
 	rm -rf bin/io/*.class
