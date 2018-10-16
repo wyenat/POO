@@ -32,6 +32,10 @@ public class Carte{
           this.tableau_de_cases = tab;
      }
 
+     public Case[] GetTableauDeCases(){
+       return this.tableau_de_cases;
+     }
+
      public void SetTailleCases(int taille){
          /* Définit la taille des cases.
          Invariant de classe : taille > 0
