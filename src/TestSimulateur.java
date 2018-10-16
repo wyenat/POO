@@ -2,58 +2,33 @@
 Fichier à modifier pour faire l'affichage !
 On veut crééer une classe qui réalise l'interface Simulable
 (Simulateur implements Simulable)
+
+
+TEST DE LUCILLE, bas les pattes pour le moment svp
 */
 
-import java.awt.Color;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+package io;
 
-import gui.GUISimulator;
-import gui.Rectangle;
-import gui.Simulable;
-import gui.Text;
+import io.LecteurDonnees;
+
+import java.io.FileNotFoundException;
+import java.util.zip.DataFormatException;
+
 
 public class TestSimulateur {
+
     public static void main(String[] args) {
-        // crée la fenêtre graphique dans laquelle dessiner
-        GUISimulator gui = new GUISimulator(800, 600, Color.BLACK);
-        // crée l'invader, en l'associant à la fenêtre graphique précédente
-        Simulateur simulateur = new Simulateur(gui, Color.decode("#f2ff28"));
-    }
-}
 
-class Simulateur implements Simulable {
-    /** L'interface graphique associée */
-    private GUISimulator gui;
-
-    /** La couleur de dessin du simulateur */
-    private Color simulateurColor;
-
-
-    public Simulateur(GUISimulator gui, Color simulateurColor) {
-        this.gui = gui;
-        gui.setSimulable(this);				// association a la gui!
-        this.simulateurColor = simulateurColor;
-
-        draw();
-    }
-
-    @Override
-    public void next() {
-        draw();
-    }
-
-    @Override
-    public void restart() {
-        draw();
-    }
-
-    /**
-     Lance le simulateur
-     C'est cette fonction qui va réellement dessiner la carte
-     */
-    private void draw() {
-        gui.reset();	//clear the window
+        if (args.length < 1) {
+            System.out.println("Syntaxe: java TestSimulateur <nomDeFichier>");
+            System.exit(1);
+        }
+        try {
+            LectureDonneesSimulateur.lire(args[0]);
+        } catch (FileNotFoundException e) {
+            System.out.println("fichier " + args[0] + " inconnu ou illisible");
+        } catch (DataFormatException e) {
+            System.out.println("\n\t**format du fichier " + args[0] + " invalide: " + e.getMessage());
+        }
     }
 }

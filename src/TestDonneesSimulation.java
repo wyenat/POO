@@ -8,7 +8,7 @@ public class TestDonneesSimulation{
             System.exit(1);
         }
         try {
-            DonneesSimulation donneesSimulation = DonneesSimulation(args[0]);
+            DonneesSimulation donneesSimulation = new DonneesSimulation(args[0]);
         } catch (FileNotFoundException e) {
             System.out.println("fichier " + args[0] + " inconnu ou illisible");
         } catch (DataFormatException e) {
