@@ -31,6 +31,10 @@ lecture:
 	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestLecteurDonnees.java
 	java -classpath bin:bin/* TestLecteurDonnees cartes/carteSujet.map
 
+robot:
+	javac -d bin -sourcepath src src/TestRobot.java
+	java -classpath bin:bin/io/* TestRobot
+
 clean:
 	rm -rf bin/*.class
 	rm -rf bin/io/*.class

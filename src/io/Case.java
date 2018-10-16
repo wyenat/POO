@@ -14,6 +14,14 @@ public class Case {
     this.nature = n;
   }
 
+  public int GetLigne(){
+    return this.ligne;
+  }
+
+  public int GetColonne(){
+    return this.colonne;
+  }
+
   public NatureTerrain GetNature(){
       /**
        * Retourne la nature de la case
