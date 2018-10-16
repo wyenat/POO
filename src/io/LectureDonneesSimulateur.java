@@ -7,48 +7,28 @@ import java.util.zip.DataFormatException;
 import io.Carte;
 
 
-/**
- * Lecteur de cartes au format spectifié dans le sujet.
- * Les données sur les cases, robots puis incendies sont lues dans le fichier,
- * puis simplement affichées.
- * A noter: pas de vérification sémantique sur les valeurs numériques lues.
- *
- * IMPORTANT:
- *
- * Cette classe ne fait que LIRE les infos et les afficher.
- * A vous de modifier ou d'ajouter des méthodes, inspirées de celles présentes
- * (ou non), qui CREENT les objets au moment adéquat pour construire une
- * instance de la classe DonneesSimulation à partir d'un fichier.
- *
- * Vous pouvez par exemple ajouter une méthode qui crée et retourne un objet
- * contenant toutes les données lues:
- *    public static DonneesSimulation creeDonnees(String fichierDonnees);
- * Et faire des méthode creeCase(), creeRobot(), ... qui lisent les données,
- * créent les objets adéquats et les ajoutent ds l'instance de
- * DonneesSimulation.
- */
-public class LecteurDonnees {
-
+public class LectureDonneesSimulateur {
 
     /**
-     * Lit et affiche le contenu d'un fichier de donnees (cases,
+     * Lit et simule le contenu d'un fichier de donnees (cases,
      * robots et incendies).
      * Ceci est méthode de classe; utilisation:
      * LecteurDonnees.lire(fichierDonnees)
      * @param fichierDonnees nom du fichier à lire
      */
-    public static DonneesSimulation lire(String fichierDonnees)
+
+    public static DonneesSimulateur lire(String fichierDonnees)
         throws FileNotFoundException, DataFormatException {
-        LecteurDonnees lecteur = new LecteurDonnees(fichierDonnees);
-        Carte carte = lecteur.lireCarte();
+        LectureDonneesSimulateur lecteur = new LectureDonneesSimulateur(fichierDonnees);
+        Carte carte = lecteur.lire_et_simuler_Carte();
         Incendie incendies[];
-        incendies = lecteur.lireIncendies();
+        incendies = lecteur.lire_et_simuler_Incendies();
         Robot robots[];
-        robots = lecteur.lireRobots();
+        robots = lecteur.lire_et_simuler_Robots();
         scanner.close();
-        DonneesSimulation donneesSimulation = new DonneesSimulation(carte, incendies, robots);
-        System.out.println(donneesSimulation.afficher());
-        return donneesSimulation;
+        DonneesSimulateur donneesSimulateur = new DonneesSimulateur(carte, incendies, robots);
+        donneesSimulateur.afficher();
+        return donneesSimulateur;
     }
 
 
@@ -62,7 +42,7 @@ public class LecteurDonnees {
      * Constructeur prive; impossible d'instancier la classe depuis l'exterieur
      * @param fichierDonnees nom du fichier a lire
      */
-    public LecteurDonnees(String fichierDonnees)
+    public LectureDonneesSimulateur(String fichierDonnees)
         throws FileNotFoundException {
         scanner = new Scanner(new File(fichierDonnees));
         scanner.useLocale(Locale.US);
@@ -72,7 +52,7 @@ public class LecteurDonnees {
      * Lit et affiche les donnees de la carte.
      * @throws ExceptionFormatDonnees
      */
-    public Carte lireCarte() throws DataFormatException {
+    public Carte lire_et_simuler_Carte() throws DataFormatException {
         ignorerCommentaires();
         try {
             int nbLignes = scanner.nextInt();
@@ -85,7 +65,7 @@ public class LecteurDonnees {
 
                     for (int lig = 0; lig < nbLignes; lig++) {
                         for (int col = 0; col < nbColonnes; col++) {
-                        cases[lig*nbColonnes + col] = this.lireCase(lig, col);
+                        cases[lig*nbColonnes + col] = this.lire_et_simuler_Case(lig, col);
                         }
             }
             Carte carte = new Carte(tailleCases, nbLignes, nbColonnes, cases);
@@ -102,7 +82,7 @@ public class LecteurDonnees {
     /**
      * Lit et affiche les donnees d'une case.
      */
-    public Case lireCase(int lig, int col) throws DataFormatException {
+    public Case lire_et_simuler_Case(int lig, int col) throws DataFormatException {
         ignorerCommentaires();
         String chaineNature = new String();
         NatureTerrain nature;
@@ -126,7 +106,7 @@ public class LecteurDonnees {
     /**
      * Lit et affiche les donnees des incendies.
      */
-    public Incendie[] lireIncendies() throws DataFormatException {
+    public Incendie[] lire_et_simuler_Incendies() throws DataFormatException {
         ignorerCommentaires();
         try {
             int nbIncendies = scanner.nextInt();
@@ -138,7 +118,7 @@ public class LecteurDonnees {
 
             // System.out.println("Nb d'incendies = " + nbIncendies);
             for (int i = 0; i < nbIncendies; i++) {
-                incendies[i] = lireIncendie(i);
+                incendies[i] = lire_et_simuler_Incendie(i);
             }
             return incendies;
 
@@ -153,7 +133,7 @@ public class LecteurDonnees {
      * Lit et affiche les donnees du i-eme incendie.
      * @param i
      */
-    public Incendie lireIncendie(int i) throws DataFormatException {
+    public Incendie lire_et_simuler_Incendie(int i) throws DataFormatException {
         ignorerCommentaires();
         try {
             int lig = scanner.nextInt();
@@ -178,7 +158,7 @@ public class LecteurDonnees {
     /**
      * Lit et affiche les donnees des robots.
      */
-    public Robot[] lireRobots() throws DataFormatException {
+    public Robot[] lire_et_simuler_Robots() throws DataFormatException {
         ignorerCommentaires();
         try {
             int nbRobots = scanner.nextInt();
@@ -188,7 +168,7 @@ public class LecteurDonnees {
             Robot robots[];
             robots = new Robot[nbRobots];
             for (int i = 0; i < nbRobots; i++) {
-                robots[i] = lireRobot(i);
+                robots[i] = lire_et_simuler_Robot(i);
             }
             return robots;
 
@@ -203,7 +183,7 @@ public class LecteurDonnees {
      * Lit et affiche les donnees du i-eme robot.
      * @param i
      */
-    public Robot lireRobot(int i) throws DataFormatException {
+    public Robot lire_et_simuler_Robot(int i) throws DataFormatException {
         ignorerCommentaires();
 
         try {
