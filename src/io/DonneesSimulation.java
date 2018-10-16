@@ -1,5 +1,7 @@
 package io;
 
+import io.Simulateur;
+
 import java.io.FileNotFoundException;
 import java.util.zip.DataFormatException;
 
