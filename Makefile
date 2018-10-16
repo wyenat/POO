@@ -37,7 +37,7 @@ simulateur:
 
 robot:
 	javac -d bin -sourcepath src src/TestRobot.java
-	java -classpath bin:bin/io/* TestRobot
+	java -classpath bin:bin/* TestRobot
 
 clean:
 	rm -rf bin/*.class
