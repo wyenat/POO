@@ -7,9 +7,7 @@ On veut crééer une classe qui réalise l'interface Simulable
 TEST DE LUCILLE, bas les pattes pour le moment svp
 */
 
-package io;
-
-import io.LecteurDonnees;
+import io.LectureDonneesSimulateur;
 
 import java.io.FileNotFoundException;
 import java.util.zip.DataFormatException;
