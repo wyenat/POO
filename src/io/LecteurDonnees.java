@@ -50,7 +50,6 @@ public class LecteurDonnees {
         DonneesSimulation donneesSimulation = new DonneesSimulation(carte, incendies, robots);
         System.out.println(donneesSimulation.afficher());
         Simulateur simulateur = new Simulateur(donneesSimulation);
-        // simulateur.draw();
         return donneesSimulation;
     }
 

@@ -1,6 +1,7 @@
 package io;
 
 import io.LecteurDonnees;
+import io.Case;
 
 import java.io.FileNotFoundException;
 import java.util.zip.DataFormatException;
@@ -9,6 +10,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.lang.Math;
 
 import gui.GUISimulator;
 import gui.Rectangle;
@@ -17,12 +19,9 @@ import gui.Text;
 
 class Simulateur implements Simulable {
 
-    /** La couleur de dessin du simulateur */
-    public Color simulateurColor = Color.decode("#f2ff28");
-
     public DonneesSimulation donnees;
 
-    private GUISimulator gui = new GUISimulator(800, 600, Color.BLACK);
+    public GUISimulator gui = new GUISimulator(800, 600, Color.BLACK);
 
     public Simulateur(DonneesSimulation data) {
         gui.setSimulable(this);				// association a la gui!
@@ -45,16 +44,26 @@ class Simulateur implements Simulable {
 
     public void draw(){
       // gui.reset();
-      /** Bon, alors j'ai rien écrit d'autre, c'était juste pour m'assurer que ya pas des problèmes de compilation de merde
-       * avec le make.
-       * J'ai mis des chiffres au pif, fais ton truc. Il accède correctement à DonneesSimulation, les valeurs
-       * sont celles rentrées. Tout est private, s'il te manque un GetX, écris le.
-       * Note : pas besoin de static pour ce draw pour l'instant. :)
-       * Autre note : pas besoin de copier-coller ce code dans un Simulation.java et de ne travailler que là-bas, tout marche :)
-       */
-      int ligne = this.donnees.GetCarte().GetTableauDeCases()[6].GetLigne();
-      int col = this.donnees.GetCarte().GetTableauDeCases()[6].GetColonne();
-      System.out.println("LIGNE = " + ligne + "\nColonne = " + col);
-      gui.addGraphicalElement(new Rectangle(30*col, 30*ligne, this.simulateurColor, this.simulateurColor, 100, 100));
+
+      Carte cart = this.donnees.GetCarte();
+      int nb_lignes = cart.GetNbLignes();
+      int nb_colonnes = cart.GetNbColonnes();
+
+      /*La valeur taille_cases dans Cartes sert à quoi ?? J'ai choisi
+      d'adapter la taille des cases à ce qu'on peut bien voir à l'écran
+      en fonction du nb de lignes et de colonnes*/
+      //int taille_theorique cases = cart.GetTailleCases();
+
+      int taille_ecran = 500;
+      int taille_cases = taille_ecran/Math.max(nb_colonnes, nb_lignes);
+
+      System.out.println("LIGNE = " + nb_lignes + "\nColonne = " + nb_colonnes);
+      System.out.println("Taille des cases = " + taille_cases);
+
+      for (Case c : cart.GetTableauDeCases()){
+          c.draw_case(this.gui, taille_cases);
+      }
+      //Case c = cart.GetTableauDeCases()[0];
+      //c.draw_case(this.gui, taille_cases);
     }
 }
