@@ -63,7 +63,9 @@ class Simulateur implements Simulable {
       for (Case c : cart.GetTableauDeCases()){
           c.draw_case(this.gui, taille_cases);
       }
-      //Case c = cart.GetTableauDeCases()[0];
-      //c.draw_case(this.gui, taille_cases);
+
+      for (Incendie i : this.donnees.GetIncendies()){
+        i.draw_incendie(this.gui, taille_cases);
+      }
     }
 }

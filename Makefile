@@ -32,7 +32,7 @@ lecture:
 	java -classpath bin:bin/* TestLecteurDonnees cartes/carteSujet.map
 
 robot:
-	javac -d bin -sourcepath src src/TestRobot.java
+	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestRobot.java
 	java -classpath bin:bin/* TestRobot
 
 clean:
