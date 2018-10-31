@@ -11,7 +11,7 @@ public class TestRobot {
         Robot Enguerran = new Robotachenilles(0, 0 ,10);
         Robot Roux = new Robotaroues(0, 0 ,10);
         System.out.println(BOB.GetLigne());
-        System.out.println(Vivien.GetLigne());
+        //System.out.println(Vivien.GetVitesse("EAU"));
         System.out.println(Lucille.GetLigne());
         System.out.println(Enguerran.GetLigne());
     }

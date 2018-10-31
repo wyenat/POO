@@ -35,6 +35,10 @@ robot:
 	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestRobot.java
 	java -classpath bin:bin/* TestRobot
 
+evenement:
+	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestEvenement.java
+	java -classpath bin:bin/* TestEvenement
+
 clean:
 	rm -rf bin/*.class
 	rm -rf bin/io/*.class

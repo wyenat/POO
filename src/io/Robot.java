@@ -23,7 +23,7 @@ public class Robot {
     this.ligne = lig;
     this.colonne = col;
     this.vitesse_deplacement = vitesse_deplacement;
-    this.reservoir = -1; //Absurde car c'est pas lui qui remplit
+    this.reservoir = 0; //Absurde car c'est pas lui qui remplit
   }
 
     public int GetLigne(){
