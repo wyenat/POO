@@ -1,7 +1,7 @@
 package io;
 import java.io.*;
 
-public class Evenement{
+public abstract class Evenement{
   private long Datefin;
 
   public Evenement(long Datefin){
@@ -16,5 +16,8 @@ public class Evenement{
     return this.Datefin;
   }
 
+  public void execute(){
+    //A FAIRE
+  }
 
 }

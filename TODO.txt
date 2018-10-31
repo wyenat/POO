@@ -1,11 +1,12 @@
 
-
+TODO:
+	Fonction next
+	Gestion des evenements (execute)
 
 
 Enguerran:
-	sur carte et Robotaroues:
-		suis en train de créer recupération de Case, et voisin
+	Evenement et ses executions
 
 
-Lucille : j'essaie de faire fonctionner le make simulateur, pour l'instant on créé la fenêtre d'affichage dans TestSimulateur.java ! 
+Lucille : j'essaie de faire fonctionner le make simulateur, pour l'instant on créé la fenêtre d'affichage dans TestSimulateur.java !
 J'ai créé DonneesSimulateur et LectureDonneesSimulateur

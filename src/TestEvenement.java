@@ -5,8 +5,8 @@ import io.NatureTerrain;
 public class TestEvenement {
 
     public static void main(String[] args) {
-        Robot Lucille = new Robot(0, 0 ,10);
-        Robot Vivien = new Robotdrone(0, 0 ,10);
+        Robot Lucille = new Robotaroues(0, 0, 10);
+        Robot Vivien = new Robotdrone(0, 0, 10);
         NatureTerrain nature;
         String mmnature = "EAU";
         nature = NatureTerrain.valueOf(mmnature);

@@ -12,6 +12,6 @@ public class EvenementviderReservoir extends Evenement {
   }
 
   public void execute(){
-    Robot.setPosition(Case);
+    Robot.setReservoir(0);
   }
 }

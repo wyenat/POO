@@ -12,7 +12,7 @@ import gui.Rectangle;
 import gui.Simulable;
 import gui.Text;
 
-public class Robot {
+public abstract class Robot {
   private int ligne;
   private int colonne;
   private double vitesse_deplacement;
