@@ -1,7 +1,10 @@
 
 TODO:
-	Fonction next
-	Gestion des evenements (execute)
+	Fonction next, restart
+	Gestion des evenements (execute) (destroy de l'évènement à mettre dans le execute de la classe abstraite Evenement)
+	Créer un tableau d'évènements.
+	// Evenement_deplacer ; création d'une fonction calculer_chemin qui renvoie un tableau de case de la case initiale à la case finale
+	// Pour l'instant, une seule contrainte : que le chemin soit empruntable pour le robot. A faire plus tard..
 
 
 Enguerran:
