@@ -1,8 +1,5 @@
 package io;
 
-import io.LecteurDonnees;
-import io.Case;
-
 import java.io.FileNotFoundException;
 import java.util.zip.DataFormatException;
 
@@ -17,10 +14,9 @@ import gui.Rectangle;
 import gui.Simulable;
 import gui.Text;
 
-class Simulateur implements Simulable {
+public class Simulateur implements Simulable {
 
     public DonneesSimulation donnees;
-    public DonneesSimulation donneesInitiales;
     
     public int pas;
     public int time;
@@ -35,9 +31,9 @@ class Simulateur implements Simulable {
 
         /*Lecture des données de simulation */
         this.donnees = data;
-        this.donneesInitiales = new DonneesSimulation(data);
         this.time = 0;
         this.pas = 20; //Pour l'instant je le set à 20.
+        this.nb_evenements = 0;
         draw();
     }
     
@@ -52,6 +48,14 @@ class Simulateur implements Simulable {
          }
     }
     
+    public void addEvenement(Evenement e){
+        /** 
+         * Ajoute un évènement
+         */
+         this.Evenements[nb_evenements] = e;
+         this.nb_evenements++;
+    }
+    
     
     @Override
     public void next() {
@@ -61,16 +65,24 @@ class Simulateur implements Simulable {
       this.time += this.pas;
       executeEvenements();
       draw();
+      System.out.println("time = " + this.time);
     }
 
     @Override
-    public void restart() {
+    public void restart(){
       /**
        * Replace la simulation dans les conditions initiales 
        */
       this.time = 0;
-      this.donnees = new DonneesSimulation(donneesInitiales);
-      draw();
+      try{
+          this.donnees = LecteurDonnees.lire(this.donnees.fichier);
+          draw();
+      }
+      catch (FileNotFoundException e) {
+          System.out.println("fichier " + this.donnees.fichier+ " inconnu ou illisible");
+      } catch (DataFormatException e) {
+          System.out.println("\n\t**format du fichier " +this.donnees.fichier+ " invalide: " + e.getMessage());
+      }
     }
 
 
@@ -89,8 +101,8 @@ class Simulateur implements Simulable {
       int taille_ecran = 500;
       int taille_cases = taille_ecran/Math.max(nb_colonnes, nb_lignes);
 
-      System.out.println("LIGNE = " + nb_lignes + "\nColonne = " + nb_colonnes);
-      System.out.println("Taille des cases = " + taille_cases);
+      // System.out.println("LIGNE = " + nb_lignes + "\nColonne = " + nb_colonnes);
+      // System.out.println("Taille des cases = " + taille_cases);
 
       for (Case c : cart.GetTableauDeCases()){
           c.draw_case(this.gui, taille_cases);

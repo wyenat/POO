@@ -5,7 +5,8 @@ TODO:
 	Créer un tableau d'évènements.
 	// Evenement_deplacer ; création d'une fonction calculer_chemin qui renvoie un tableau de case de la case initiale à la case finale
 	// Pour l'instant, une seule contrainte : que le chemin soit empruntable pour le robot. A faire plus tard..
-
+	Programmer une méthode qui, en fonction de la case et de la direction, renvoie la case voisine
+	Programmer une méthode qui renvoie un pointeur vers la case (i,j) si on donne les entiers (i,j)
 
 Enguerran:
 	Evenement et ses executions

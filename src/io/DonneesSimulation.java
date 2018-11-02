@@ -1,7 +1,5 @@
 package io;
 
-import io.Simulateur;
-
 import java.io.FileNotFoundException;
 import java.util.zip.DataFormatException;
 
@@ -10,22 +8,20 @@ public class DonneesSimulation{
     private Carte carte;
     private Incendie[] incendies;
     private Robot[] robots;
+    public String fichier;
 
-    public DonneesSimulation(Carte c, Incendie i[], Robot r[]){
+    public DonneesSimulation(Carte c, Incendie i[], Robot r[], String file) 
+    throws FileNotFoundException, DataFormatException
+    {
         /**
          * Constucteur de DonneesSimulation
          */
          this.SetCarte(c);
          this.SetIncendies(i);
          this.SetRobot(r);
+         this.fichier = file;
      }
 
-    public DonneesSimulation(DonneesSimulation data){
-        /**
-         * Constructeur pour copier une DonneesSimulation. 
-         */
-         this(data.GetCarte(), data.GetIncendies(), data.GetRobots());
-    }
 
      public void SetCarte(Carte c){
          this.carte =c ;

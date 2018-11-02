@@ -4,8 +4,6 @@ package io;
 import java.io.*;
 import java.util.*;
 import java.util.zip.DataFormatException;
-import io.Carte;
-import io.Simulateur;
 
 
 /**
@@ -47,9 +45,7 @@ public class LecteurDonnees {
         Robot robots[];
         robots = lecteur.lireRobots();
         scanner.close();
-        DonneesSimulation donneesSimulation = new DonneesSimulation(carte, incendies, robots);
-        System.out.println(donneesSimulation.afficher());
-        Simulateur simulateur = new Simulateur(donneesSimulation);
+        DonneesSimulation donneesSimulation = new DonneesSimulation(carte, incendies, robots, fichierDonnees);
         return donneesSimulation;
     }
 
