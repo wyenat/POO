@@ -21,15 +21,17 @@ public class EvenementviderReservoir extends Evenement {
       switch (this.robot.GetTypeRobot()) {
         case ROUES:
           Robotaroues Robot_roue = new Robotaroues(robot.GetLigne(), this.robot.GetColonne(), this.robot.GetVitesse());
-
+          possible = Robot_roue.testVider(this.incendie);
           break;
 
         case CHENILLES:
           Robotachenilles Robot_chenille = new Robotachenilles(this.robot.GetLigne(), this.robot.GetColonne(), this.robot.GetVitesse());
+          possible = Robot_chenille.testVider(this.incendie);
           break;
 
         case PATTES:
           Robotapattes Robot_pattes = new Robotapattes(this.robot.GetLigne(), this.robot.GetColonne(), this.robot.GetVitesse());
+          possible = Robot_pattes.testVider(this.incendie);
           break;
 
         case DRONE:

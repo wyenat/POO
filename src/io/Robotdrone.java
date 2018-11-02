@@ -32,14 +32,21 @@ public class Robotdrone extends Robot{
   }
 
 
+  public int remplirReservoir(){
+    return 10000;
+  }
 
 
+  public boolean test_deplacement(Case C){
+    return true;
+  }
 
-  public Case[] calcul_deplacement(Robot robot, Case C/*, DonneesSimulation donnees*/){
+
+  public Case[] calcul_deplacement(Robot robot, Case C, DonneesSimulation donnees){
       NatureTerrain nature;
       String mmnature = "EAU";
       nature = NatureTerrain.valueOf(mmnature);
-      // Carte carte = donnees.GetCarte();
+      Carte carte = donnees.GetCarte();
       int nb_lignes =100;// carte.GetNbLignes();
       int nb_colonnes = 100;//carte.GetNbColonnes();
       int ligne_arrivee = C.GetLigne();

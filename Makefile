@@ -37,8 +37,8 @@ robot:
 
 evenement:
 	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestEvenement.java
-	java -classpath bin:bin/* TestEvenement
-	
+	java -classpath bin:bin/* TestEvenement cartes/carteSujet.map
+
 clean:
 	rm -rf bin/*.class
 	rm -rf bin/io/*.class

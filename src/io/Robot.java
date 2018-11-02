@@ -55,9 +55,39 @@ public abstract class Robot {
       this.reservoir = reservoir;
     }
 
+    public void setVitesse(double vitesse){
+        this.vitesse_deplacement = vitesse;
+    }
+
     public void setPosition(Case Case){
       this.setLigne(Case.GetLigne());
       this.setColonne(Case.GetColonne());
+      switch (this.GetTypeRobot()) {
+        case ROUES:
+          Robotaroues Robot_roue = new Robotaroues(this.GetLigne(), this.GetColonne(), this.GetVitesse());
+          Robot_roue.setVitesse(Robot_roue.GetVitesse());
+          break;
+
+        case CHENILLES:
+          Robotachenilles Robot_chenille = new Robotachenilles(this.GetLigne(), this.GetColonne(), this.GetVitesse());
+          Robot_chenille.setVitesse(Robot_chenille.GetVitesse());
+          break;
+
+        case PATTES:
+          Robotapattes Robot_pattes = new Robotapattes(this.GetLigne(), this.GetColonne(), this.GetVitesse());
+          Robot_pattes.setVitesse(Robot_pattes.GetVitesse());
+          break;
+
+        case DRONE:
+          Robotdrone Robot_drone = new Robotdrone(this.GetLigne(), this.GetColonne(), this.GetVitesse());
+          Robot_drone.setVitesse(Robot_drone.GetVitesse());
+          break;
+
+        default:
+          System.out.println("AIE");
+          break;
+
+      }
     }
 
     public TypeRobot GetTypeRobot(){
