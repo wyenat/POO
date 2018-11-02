@@ -20,21 +20,12 @@ public class DonneesSimulation{
          this.SetRobot(r);
      }
 
-    //  public DonneesSimulation RecupererDonnees(String fichierDonnees){
-    //      /**
-    //       * Constucteur qui ne prends que le nom du fichier
-    //       */
-    //       DonneesSimulation donneesSimulation;
-    //       try {
-    //           donneesSimulation = LecteurDonnees.lire(fichierDonnees);
-    //       } catch (FileNotFoundException e) {
-    //           System.out.println("fichier " + fichierDonnees + " inconnu ou illisible");
-    //       } catch (DataFormatException e) {
-    //           System.out.println("\n\t**format du fichier " + fichierDonnees + " invalide: " + e.getMessage());
-    //       }
-    //       donneesSimulation = LecteurDonnees.lire(fichierDonnees);
-    //       return donneesSimulation;
-    //  }
+    public DonneesSimulation(DonneesSimulation data){
+        /**
+         * Constructeur pour copier une DonneesSimulation. 
+         */
+         this(data.GetCarte(), data.GetIncendies(), data.GetRobots());
+    }
 
      public void SetCarte(Carte c){
          this.carte =c ;
@@ -62,7 +53,7 @@ public class DonneesSimulation{
 
     private static String AfficherIncendies(Incendie[] incendies){
         /**
-         * Affiche les incendies
+         * Affiche textuellement les incendies 
          */
          String returned_string = "\n\n\t#Incendies";
          for (int i=0; i<incendies.length; i++){
@@ -75,7 +66,7 @@ public class DonneesSimulation{
 
     private static String AfficherRobots(Robot[] robots){
         /**
-         * Affiche les robots
+         * Affiche textuellement les robots
          */
          String stringReturned = "\n\n\t#Robots";
          for (int i=0; i<robots.length; i++){
@@ -86,6 +77,9 @@ public class DonneesSimulation{
     }
 
     public String afficher(){
+        /**
+         * Affiche textuellement les DonneesSimulation
+         */
         String stringReturned = "\t #Carte" + this.carte.ToString();
         stringReturned += AfficherIncendies(this.incendies) + AfficherRobots(this.robots);
         return stringReturned;

@@ -20,8 +20,13 @@ import gui.Text;
 class Simulateur implements Simulable {
 
     public DonneesSimulation donnees;
+    public DonneesSimulation donneesInitiales;
+    
+    public int pas;
+    public int time;
 
     public Evenement[] Evenements = new Evenement[1000];
+    public int nb_evenements;
 
     public GUISimulator gui = new GUISimulator(800, 600, Color.BLACK);
 
@@ -30,17 +35,42 @@ class Simulateur implements Simulable {
 
         /*Lecture des données de simulation */
         this.donnees = data;
+        this.donneesInitiales = new DonneesSimulation(data);
+        this.time = 0;
+        this.pas = 20; //Pour l'instant je le set à 20.
         draw();
     }
-
+    
+    public void executeEvenements(){
+        /** Trouve dans la liste des évènements ceux dont la date est passée, 
+         * et les execute
+         */
+         for (int i=0; i<nb_evenements; i++){
+             if (this.Evenements[0].getDate() <= this.time){
+                this.Evenements[0].execute();
+             }
+         }
+    }
+    
+    
     @Override
     public void next() {
-      //A FAIRE
+      /** 
+       * Avance la simulation d'un pas de temps
+       */
+      this.time += this.pas;
+      executeEvenements();
+      draw();
     }
 
     @Override
     public void restart() {
-      //A FAIRE
+      /**
+       * Replace la simulation dans les conditions initiales 
+       */
+      this.time = 0;
+      this.donnees = new DonneesSimulation(donneesInitiales);
+      draw();
     }
 
 
