@@ -80,7 +80,7 @@ public class DonneesSimulation{
          String stringReturned = "\n\n\t#Robots";
          for (int i=0; i<robots.length; i++){
              stringReturned += "\nRobot " + i + ": Position : (" + robots[i].GetLigne()
-                    + "," + robots[i].GetColonne() + ")\t type : " + "\t Vitesse : " + robots[i].getVitesse();
+                    + "," + robots[i].GetColonne() + ")\t type : " + "\t Vitesse : " + robots[i].GetVitesse();
          }
          return stringReturned;
     }

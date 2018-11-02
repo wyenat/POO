@@ -21,6 +21,8 @@ class Simulateur implements Simulable {
 
     public DonneesSimulation donnees;
 
+    public Evenement[] Evenements = new Evenement[1000];
+
     public GUISimulator gui = new GUISimulator(800, 600, Color.BLACK);
 
     public Simulateur(DonneesSimulation data) {
@@ -66,6 +68,10 @@ class Simulateur implements Simulable {
 
       for (Incendie i : this.donnees.GetIncendies()){
         i.draw_incendie(this.gui, taille_cases);
+      }
+
+      for (Robot r : this.donnees.GetRobots()){
+        r.draw_robot(this.gui, taille_cases);
       }
     }
 }

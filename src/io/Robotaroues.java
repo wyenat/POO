@@ -3,14 +3,21 @@ package io;
 
 public class Robotaroues extends Robot {
 
-  public Robotaroues(int lig, int col, int vitesse_deplacement){
+  public Robotaroues(int lig, int col, double vitesse_deplacement){
     super(lig, col, vitesse_deplacement);
     super.setReservoir(5000);
+    //Degueu mais je sais pas faire autrement
+    TypeRobot T;
+    String mmT = "ROUES";
+    T = TypeRobot.valueOf(mmT);
+    super.SetTypeRobot(T);
+    //
+
   }
 
 
   public double GetVitesse(NatureTerrain Nature){
-    double vitesse = super.getVitesse();
+    double vitesse = super.GetVitesse();
     switch (Nature){
         case TERRAIN_LIBRE:
           break;

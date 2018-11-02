@@ -5,6 +5,9 @@ package io;
 
 public class EvenementviderReservoir extends Evenement {
   private Robot Robot;
+  private Incendie incendie;
+  private DonneesSimulation Donnees;
+
 
   public EvenementviderReservoir(long Datefin, Robot Robot){
     super(Datefin);
@@ -12,6 +15,14 @@ public class EvenementviderReservoir extends Evenement {
   }
 
   public void execute(){
-    Robot.setReservoir(0);
+      int reste = super.getReservoir();
+      super.setReservoir(0);
+      int intensite = incendie.GetIntensite();
+      if (intensite - reste < 0 ){
+        incendie.setIntensite(0);
+      }
+      else {
+        incendie.setIntensite(intensite - reste);
+      }
   }
 }

@@ -1,4 +1,6 @@
 package io;
+import gui.*;
+import java.awt.*;
 
 import io.TypeRobot;
 
@@ -42,7 +44,7 @@ public abstract class Robot {
         this.colonne = colonne;
     }
 
-    public double getVitesse(){
+    public double GetVitesse(){
       return this.vitesse_deplacement;
     }
 
@@ -62,17 +64,28 @@ public abstract class Robot {
       return this.type;
     }
 
-    private void draw_robot(GUISimulator gui, int taille_case){
+    public void SetTypeRobot(TypeRobot T){
+      this.type = T;
+    }
+
+    public void draw_robot(GUISimulator gui, int taille_case){
+      int x = taille_case/5 + (this.GetLigne())* taille_case;
+      int y =  taille_case/5 + (this.GetColonne())* taille_case;
+      int taille = 4 * taille_case/5;
 
       /*A FINIR*/
       switch (this.GetTypeRobot()){
           case DRONE:
+              gui.addGraphicalElement(new ImageElement(y, x, "drone.jpg", taille, taille, new Canvas()));
               break;
           case ROUES:
+              gui.addGraphicalElement(new ImageElement(y, x, "roues.jpg", taille, taille, new Canvas()));
               break;
           case CHENILLES:
+              gui.addGraphicalElement(new ImageElement(y, x, "chenilles.png", taille, taille, new Canvas()));
               break;
           case PATTES:
+              gui.addGraphicalElement(new ImageElement(y, x, "pattes.jpg", taille, taille, new Canvas()));
               break;
       }
     }

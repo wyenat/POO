@@ -222,8 +222,30 @@ public class LecteurDonnees {
                 vitesse = Integer.parseInt(s);
             }
             verifieLigneTerminee();
-            Robot robot = new Robot(lig, col, vitesse);
-            return robot;
+
+            switch (typeRobot){
+              case DRONE:
+                Robot drone = new Robotdrone(lig, col, vitesse);
+                return drone;
+
+              case ROUES:
+                Robot roues =  new Robotaroues(lig, col, vitesse);
+                return roues;
+
+              case PATTES:
+                Robot pattes = new Robotapattes(lig, col, vitesse);
+                return pattes;
+
+              case CHENILLES:
+                  Robot chenilles = new Robotdrone(lig, col, vitesse);
+                  return chenilles;
+
+              default:
+                  Robot dronee = new Robotdrone(lig, col, vitesse);
+                  return dronee;
+            }
+
+
             // System.out.println();
         } catch (NoSuchElementException e) {
             throw new DataFormatException("format de robot invalide. "

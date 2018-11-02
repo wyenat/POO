@@ -1,5 +1,6 @@
 package io;
-
+import gui.*;
+import java.awt.*;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -38,20 +39,29 @@ public class Incendie{
       return this.nb_litres_extinction;
   }
 
-  public void draw_incendie(GUISimulator gui, int taille_case){
-      Color rouge = Color.decode("#e74c3c");
-      Color orange = Color.decode("#f39c12");
-      Color jaune = Color.decode("#f1c40f");
+  public void setIntensite(int intensite){
+      this.nb_litres_extinction = intensite;
+  }
 
-      gui.addGraphicalElement(
-          new Oval(
-              taille_case/2 + this.colonne*taille_case, //abscisse milieu
-              taille_case/2 + this.ligne*taille_case, //ordonnee milieu
-              rouge,
-              rouge,
-              (taille_case*9)/10 //diamètre
-          )
-      );
+  public void draw_incendie(GUISimulator gui, int taille_case){
+      // Color rouge = Color.decode("#e74c3c");
+      // Color orange = Color.decode("#f39c12");
+      // Color jaune = Color.decode("#f1c40f");
+      //
+      // gui.addGraphicalElement(
+      //     new Oval(
+      //         taille_case/2 + this.colonne*taille_case, //abscisse milieu
+      //         taille_case/2 + this.ligne*taille_case, //ordonnee milieu
+      //         rouge,
+      //         rouge,
+      //         (taille_case*9)/10 //diamètre
+      //     )
+      //)
+      int x = taille_case/5 + (this.GetLigne())* taille_case;
+      int y =  taille_case/5 + (this.GetColonne())* taille_case;
+      int taille = 4 * taille_case/5;
+      gui.addGraphicalElement(new ImageElement(y, x, "incendie.jpg", taille, taille, new Canvas()));
+      ;
   }
 
 }
