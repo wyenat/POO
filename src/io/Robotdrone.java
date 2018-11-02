@@ -23,6 +23,18 @@ public class Robotdrone extends Robot{
     return vitesse;
   }
 
+
+  public int testVider(Incendie incendie){
+    if (this.GetLigne() == incendie.GetLigne() && this.GetColonne() == incendie.GetColonne()){
+      return 1;
+    }
+    return 0;
+  }
+
+
+
+
+
   public Case[] calcul_deplacement(Robot robot, Case C/*, DonneesSimulation donnees*/){
       NatureTerrain nature;
       String mmnature = "EAU";
