@@ -16,11 +16,11 @@ public class TestLecteurDonnees {
             Robot aDeplacer = simu.donnees.GetRobots()[0];
             long dateFin = (long) simu.donnees.GetCarte().GetTailleCases()/ (long) aDeplacer.GetVitesse();
             Case voisine = simu.donnees.GetCarte().GetTableauDeCases()[3*8+4];
-            Evenementdeplacement deplacer = new Evenementdeplacement(dateFin, aDeplacer, voisine);
+            Evenementdeplacement deplacer = new Evenementdeplacement(simu, aDeplacer, voisine);
             System.out.println("Date fin = " + dateFin);
             simu.addEvenement(deplacer);
-        } 
-        
+        }
+
         // Partie levée d'exception
         catch (FileNotFoundException e) {
             System.out.println("fichier " + args[0] + " inconnu ou illisible");

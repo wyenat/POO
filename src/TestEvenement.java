@@ -42,9 +42,35 @@ public class TestEvenement {
 
 
 
-          Case voisine = simu.donnees.GetCarte().GetTableauDeCases()[8*simu.donnees.GetRobots()[0].GetLigne() + simu.donnees.GetRobots()[0].GetColonne() +1];
+          Case voisine = simu.donnees.GetCarte().GetTableauDeCases()[8*(simu.donnees.GetRobots()[0].GetLigne()+1) + simu.donnees.GetRobots()[0].GetColonne()];
           Evenementdeplacement deplacer = new Evenementdeplacement(simu, simu.donnees.GetRobots()[0], voisine);
           simu.addEvenement(deplacer);
+
+          Case voisine7 = simu.donnees.GetCarte().GetTableauDeCases()[8*(simu.donnees.GetRobots()[0].GetLigne()+2) + simu.donnees.GetRobots()[0].GetColonne()];
+          Evenementdeplacement deplacer7 = new Evenementdeplacement(simu, simu.donnees.GetRobots()[0], voisine7);
+          simu.addEvenement(deplacer7);
+
+          Case voisine8 = simu.donnees.GetCarte().GetTableauDeCases()[8*(simu.donnees.GetRobots()[0].GetLigne()+3) + simu.donnees.GetRobots()[0].GetColonne()];
+          Evenementdeplacement deplacer8 = new Evenementdeplacement(simu, simu.donnees.GetRobots()[0], voisine8);
+          simu.addEvenement(deplacer8);
+
+          Case voisine9 = simu.donnees.GetCarte().GetTableauDeCases()[8*(simu.donnees.GetRobots()[0].GetLigne()+4) + simu.donnees.GetRobots()[0].GetColonne()];
+          Evenementdeplacement deplacer9 = new Evenementdeplacement(simu, simu.donnees.GetRobots()[0], voisine9);
+          simu.addEvenement(deplacer9);
+
+
+         Case voisine10 = simu.donnees.GetCarte().GetTableauDeCases()[8*(simu.donnees.GetRobots()[0].GetLigne()+4) + simu.donnees.GetRobots()[0].GetColonne()-1];
+         Evenementdeplacement deplacer10 = new Evenementdeplacement(simu, simu.donnees.GetRobots()[0], voisine10);
+         simu.addEvenement(deplacer10);
+
+
+         Case voisine11 = simu.donnees.GetCarte().GetTableauDeCases()[8*(simu.donnees.GetRobots()[0].GetLigne()+4) + simu.donnees.GetRobots()[0].GetColonne()-2];
+         Evenementdeplacement deplacer11 = new Evenementdeplacement(simu, simu.donnees.GetRobots()[0], voisine11);
+         simu.addEvenement(deplacer11);
+
+        //  EvenementviderReservoir vide2 = new EvenementviderReservoir(300, simu.donnees.GetRobots()[0], );
+
+        //  vide2.execute();
 
           Case voisine2 = simu.donnees.GetCarte().GetTableauDeCases()[8*simu.donnees.GetRobots()[1].GetLigne() + simu.donnees.GetRobots()[1].GetColonne() -1];
           Evenementdeplacement deplacer2 = new Evenementdeplacement(simu, simu.donnees.GetRobots()[1], voisine2);
