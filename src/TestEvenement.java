@@ -18,7 +18,7 @@ public class TestEvenement {
 
           //
           // Incendie I = new Incendie(3, 3, 100000);
-          // EvenementviderReservoir vide = new EvenementviderReservoir(1, simu.donnees.GetRobots()[0], I);
+          // EvementDeverserEau vide = new EvementDeverserEau(1, simu.donnees.GetRobots()[0], I);
           //
           // System.out.println("Intensité de l'incendie avant l'éxécution de l'evenement");
           // System.out.println(I.GetIntensite());
@@ -81,7 +81,7 @@ public class TestEvenement {
         //  Evenementdeplacement deplacer11 = new Evenementdeplacement(simu, simu.donnees.GetRobots()[0], voisine11);
         //  simu.addEvenement(deplacer11);
         //
-        // //  EvenementviderReservoir vide2 = new EvenementviderReservoir(300, simu.donnees.GetRobots()[0], );
+        // //  EvementDeverserEau vide2 = new EvementDeverserEau(300, simu.donnees.GetRobots()[0], );
         //
         // //  vide2.execute();
         //

@@ -39,6 +39,11 @@ public class Robotachenilles extends Robot {
     return vitesse;
   }
 
+
+  public long getDatevider(){
+    return 8;
+  }
+
   public boolean test_deplacement(Case C){
     boolean possible = true;
     switch (C.GetNature()){
@@ -49,21 +54,22 @@ public class Robotachenilles extends Robot {
           possible = false;
           break;
       default:
-          break;
+          break;()
     }
     return possible;
   }
 
-
-
-  public int testVider(Incendie incendie){
-    boolean test1 = (this.GetLigne() == incendie.GetLigne()+1)&&(this.GetColonne() == incendie.GetColonne());
-    boolean test2 = (this.GetLigne() == incendie.GetLigne()) && (this.GetColonne() == incendie.GetColonne()-1);
-    boolean test3 = (this.GetLigne() == incendie.GetLigne()) && (this.GetColonne() == incendie.GetColonne()+1);
-    boolean test4 = (this.GetLigne() == incendie.GetLigne()-1) && (this.GetColonne() == incendie.GetColonne());
-    if (test1 || test2 ||test3 || test4){
-      return 1;
+  public int Vider(){
+    if (testVider(this.GetLigne(), this.GetColonne()){
+        return 100;
     }
-    return 0;
+  }
+
+  public int testVider(int lig, int col ){
+    boolean test1 = (lig == this.GetLigne()+1)&&(this.GetColonne() == col);
+    boolean test2 = (lig == this.GetLigne()) && (this.GetColonne() == col-1);
+    boolean test3 = (lig == this.GetLigne()) && (this.GetColonne() == col+1);
+    boolean test4 = (lig == this.GetLigne()-1) && (this.GetColonne() == col);
+    return (test1 || test2 ||test3 || test4);
   }
 }

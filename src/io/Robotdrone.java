@@ -17,6 +17,15 @@ public class Robotdrone extends Robot{
 
   }
 
+  public long getDatevider(){
+    return 30;
+  }
+
+  public int Vider(){
+    if (testVider(this.GetLigne(), this.GetColonne()){
+        return 10000;
+    }
+  }
 
   public double GetVitesse(NatureTerrain Nature){
     double vitesse = super.GetVitesse();
