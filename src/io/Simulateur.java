@@ -19,7 +19,7 @@ public class Simulateur implements Simulable {
     public DonneesSimulation donnees;
 
     public int pas;
-    public long time;
+    public int time;
 
     public Evenement[] Evenements = new Evenement[1000];
     public int nb_evenements;
@@ -87,15 +87,15 @@ public class Simulateur implements Simulable {
       int sauvegarde_nb_evenements = this.nb_evenements;
     //   Evenement[] sauvegarde_evenements = Evenements;
       try{
-          System.out.println("##########AVANT RESET########");
-          AfficherEvenements();
+        //   System.out.println("##########AVANT RESET########");
+        //   AfficherEvenements();
           DonneesSimulation data_init = LecteurDonnees.lire(this.donnees.fichier);
           this.donnees.RemettreInitial(data_init);
         //   System.out.println(this.nb_evenements);
           this.nb_evenements = sauvegarde_nb_evenements;
         //   System.out.println(this.nb_evenements);
-        System.out.println("##########APRES RESET########");
-        AfficherEvenements();
+        // System.out.println("##########APRES RESET########");
+        // AfficherEvenements();
         //   this.Evenements = sauvegarde_evenements;
           draw();
       }

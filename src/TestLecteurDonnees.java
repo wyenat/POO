@@ -15,9 +15,8 @@ public class TestLecteurDonnees {
             Simulateur simu = new Simulateur(LecteurDonnees.lire(args[0]));
             Robot aDeplacer = simu.donnees.GetRobots()[0];
             long dateFin = (long) simu.donnees.GetCarte().GetTailleCases()/ (long) aDeplacer.GetVitesse();
-            Case voisine = simu.donnees.GetCarte().GetTableauDeCases()[3*8+4];
-            Evenementdeplacement deplacer = new Evenementdeplacement(simu, aDeplacer, voisine);
-            System.out.println("Date fin = " + dateFin);
+            Evenementdeplacement deplacer = new Evenementdeplacement(simu, aDeplacer, "EST");
+            // System.out.println("Date fin = " + dateFin);
             simu.addEvenement(deplacer);
         }
 
