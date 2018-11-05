@@ -47,23 +47,26 @@ public class TestEvenement {
           Robot Vivien = simu.donnees.GetRobots()[0];
 
 
-          Evenementdeplacement deplacer = new Evenementdeplacement(simu, Vivien, dir, simu.donnees);
-          simu.addEvenement(deplacer);
+          Evenementdeplacement deplacer = new Evenementdeplacement(simu, Vivien, dir);
 
           while(simu.time <= deplacer.getDate()){
-            System.out.println(Vivien.GetLigne());
+            System.out.println("1");
             System.out.println(deplacer.getDate());
           }
-          System.out.println(simu.donnees.GetRobots()[0].GetLigne());
+          System.out.println(Vivien.GetLigne());
 
-          Evenementdeplacement deplacerencore = new Evenementdeplacement(simu, simu.donnees.GetRobots()[0], dir, simu.donnees);
-          simu.addEvenement(deplacerencore);
+          Evenementdeplacement deplacerencore = new Evenementdeplacement(simu, Vivien, dir);
 
-          Evenementdeplacement deplacerencoreencore = new Evenementdeplacement(simu, simu.donnees.GetRobots()[0], dir, simu.donnees);
-          simu.addEvenement(deplacerencoreencore);
+          while(simu.time <= deplacerencore.getDate()){
+            System.out.println("2");
+          }
 
-          Evenementdeplacement deplacerencoreencorencore = new Evenementdeplacement(simu, simu.donnees.GetRobots()[0], dir, simu.donnees);
-          simu.addEvenement(deplacerencoreencorencore);
+          Evenementdeplacement deplacerencoreencore = new Evenementdeplacement(simu, Vivien, dir);
+
+          while(simu.time <= deplacerencoreencore.getDate()){
+            System.out.println("3");
+          }
+          Evenementdeplacement deplacerencoreencorencore = new Evenementdeplacement(simu, Vivien, dir);
         //
         //
         //
