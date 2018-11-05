@@ -3,35 +3,40 @@ package io;
 
 
 
-public class EvenementDeversereau extends Evenement {
+public class EvenementDeverserEau extends Evenement {
+    private int ligne;
+    private int colonne;
 
-
-  public EvementDeverserEau(Simulateur simu, Robot robot){
+  public EvenementDeverserEau(Simulateur simu, Robot robot, int lig, int col){
     super(robot, simu, robot.getDatevider());
+    this.colonne = col;
+    this.ligne = lig;
+    simu.addEvenement(this);
 
   }
 
   public void execute(){
-      int possible = 0;
-      switch (this.robot.GetTypeRobot()) {
+      int volume = 0;
+      Robot robot = super.getRobot();
+      switch (robot.GetTypeRobot()) {
         case ROUES:
-          Robotaroues Robot_roue = new Robotaroues(robot.GetLigne(), this.robot.GetColonne(), this.robot.GetVitesse());
-          volume = Robot_roue.Vider();
+          Robotaroues Robot_roue = new Robotaroues(robot.GetLigne(), robot.GetColonne(), robot.GetVitesse());
+          volume = Robot_roue.Vider(super.getSimu(), this.ligne, this.colonne);
           break;
 
         case CHENILLES:
-          Robotachenilles Robot_chenille = new Robotachenilles(this.robot.GetLigne(), this.robot.GetColonne(), this.robot.GetVitesse());
-          volume = Robot_chenille.Vider();
+          Robotachenilles Robot_chenille = new Robotachenilles(robot.GetLigne(), robot.GetColonne(), robot.GetVitesse());
+          volume = Robot_chenille.Vider(super.getSimu(), this.ligne, this.colonne);
           break;
 
         case PATTES:
-          Robotapattes Robot_pattes = new Robotapattes(this.robot.GetLigne(), this.robot.GetColonne(), this.robot.GetVitesse());
-          volume = Robot_pattes.Vider();
+          Robotapattes Robot_pattes = new Robotapattes(robot.GetLigne(), robot.GetColonne(), robot.GetVitesse());
+          volume = Robot_pattes.Vider(super.getSimu(), this.ligne, this.colonne);
           break;
 
         case DRONE:
-          Robotdrone Robot_drone = new Robotdrone(this.robot.GetLigne(), this.robot.GetColonne(), this.robot.GetVitesse());
-          volume = Robot_drone.Vider();
+          Robotdrone Robot_drone = new Robotdrone(robot.GetLigne(), robot.GetColonne(), robot.GetVitesse());
+          volume = Robot_drone.Vider(super.getSimu(), this.ligne, this.colonne);
           break;
 
         default:
@@ -42,14 +47,22 @@ public class EvenementDeversereau extends Evenement {
       if (volume  == 0){
         return;
       }
+      Incendie[] incendies = super.getSimu().donnees.GetIncendies();
+      Incendie incendie = incendies[0];
+      for (int i=0; i<incendies.length; i++){
+        if (incendies[i].GetLigne()==this.ligne && incendies[i].GetColonne()==this.colonne){
+          incendie = incendies[i];
 
-      int reste = this.robot.getReservoir();
-      int volume = volume;
+        }
+      }
+      int intensite = incendie.GetIntensite();
+      int reste = super.robot.getReservoir();
+      System.out.println(volume);
       if (intensite - reste < 0 ){
-        this.robot.setReservoir(reste - intensite);
+        super.robot.setReservoir(reste - intensite);
       }
       else {
-        this.robot.setReservoir(0);
+        super.robot.setReservoir(0);
       }
   }
 }

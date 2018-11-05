@@ -41,8 +41,13 @@ public class TestEvenement {
           // simu.addEvenement(remplir);
 
           Direction dir;
-          String mdir = "NORD";
+          String mdir = "SUD";
           dir = Direction.valueOf(mdir);
+
+
+          Direction dir2;
+          String mdir2 = "OUEST";
+          dir2 = Direction.valueOf(mdir2);
 
           Robot Vivien = simu.donnees.GetRobots()[0];
 
@@ -51,16 +56,19 @@ public class TestEvenement {
 
           Evenementdeplacement deplacerencore = new Evenementdeplacement(simu, Vivien, dir);
 
-          while(simu.time <= deplacerencore.getDate()){
-            System.out.println("2");
-          }
-
           Evenementdeplacement deplacerencoreencore = new Evenementdeplacement(simu, Vivien, dir);
 
-          while(simu.time <= deplacerencoreencore.getDate()){
-            System.out.println("3");
-          }
-          Evenementdeplacement deplacerencoreencorencore = new Evenementdeplacement(simu, Vivien, dir);
+          Evenementdeplacement deplace = new Evenementdeplacement(simu, Vivien, dir);
+
+          Evenementdeplacement deplac = new Evenementdeplacement(simu, Vivien, dir2);
+
+          Evenementdeplacement depla = new Evenementdeplacement(simu, Vivien, dir2);
+
+          EvenementDeverserEau vide = new EvenementDeverserEau(simu, Vivien, 7, 1);
+
+          Evenementdeplacement depl = new Evenementdeplacement(simu, Vivien, dir2);
+
+          // Evenementdeplacement deplacerencoreencorencore = new Evenementdeplacement(simu, Vivien, dir);
         //
         //
         //

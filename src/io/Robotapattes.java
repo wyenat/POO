@@ -37,10 +37,38 @@ public class Robotapattes extends Robot {
   }
 
 
-  public int Vider(){
-    if (testVider(this.GetLigne(), this.GetColonne()){
+
+
+  public boolean testVider(Simulateur simu, int lig, int col){
+
+    Incendie[] incendies = simu.donnees.GetIncendies();
+    boolean incendie_ici = false;
+    Incendie incendie = incendies[0];
+
+    for (int i=0; i<incendies.length; i++){
+      if (incendies[i].GetLigne()==lig && incendies[i].GetColonne()==col){
+        incendie_ici = true;
+        incendie = incendies[i];
+
+      }
+    }
+    if (incendie_ici){
+
+      boolean test1 = (this.GetLigne() == incendie.GetLigne()+1)&&(this.GetColonne() == incendie.GetColonne());
+      boolean test2 = (this.GetLigne() == incendie.GetLigne()) && (this.GetColonne() == incendie.GetColonne()-1);
+      boolean test3 = (this.GetLigne() == incendie.GetLigne()) && (this.GetColonne() == incendie.GetColonne()+1);
+      boolean test4 = (this.GetLigne() == incendie.GetLigne()-1) && (this.GetColonne() == incendie.GetColonne());
+      return (test1 || test2 ||test3 || test4);
+
+    }
+    return false;
+  }
+
+  public int Vider(Simulateur simu, int ligne, int colonne){
+    if (testVider(simu, ligne, colonne)){
         return 10;
     }
+    return 0;
   }
 
   public int remplirReservoir(){
@@ -60,18 +88,4 @@ public class Robotapattes extends Robot {
     return possible;
   }
 
-
-
-
-  public int testVider(Incendie incendie){
-    boolean test1 = (this.GetLigne() == incendie.GetLigne()+1)&&(this.GetColonne() == incendie.GetColonne());
-    boolean test2 = (this.GetLigne() == incendie.GetLigne()) && (this.GetColonne() == incendie.GetColonne()-1);
-    boolean test3 = (this.GetLigne() == incendie.GetLigne()) && (this.GetColonne() == incendie.GetColonne()+1);
-    boolean test4 = (this.GetLigne() == incendie.GetLigne()-1) && (this.GetColonne() == incendie.GetColonne());
-
-    if (test1 || test2 ||test3 || test4){
-      return 1;
-    }
-    return 0;
-  }
 }

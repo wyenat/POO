@@ -123,31 +123,33 @@ public abstract class Robot {
     }
 
     public long getDatevider(){
-      switch (this.robot.GetTypeRobot()) {
+      long Date = 0;
+      switch (this.GetTypeRobot()) {
         case ROUES:
-          Robotaroues Robot_roue = new Robotaroues(robot.GetLigne(), this.robot.GetColonne(), this.robot.GetVitesse());
-          possible = Robot_roue.getDatevider();
+          Robotaroues Robot_roue = new Robotaroues(GetLigne(), this.GetColonne(), this.GetVitesse());
+          Date = Robot_roue.getDatevider();
           break;
 
         case CHENILLES:
-          Robotachenilles Robot_chenille = new Robotachenilles(this.robot.GetLigne(), this.robot.GetColonne(), this.robot.GetVitesse());
-          possible = Robot_chenille.getDatevider();
+          Robotachenilles Robot_chenille = new Robotachenilles(this.GetLigne(), this.GetColonne(), this.GetVitesse());
+          Date = Robot_chenille.getDatevider();
           break;
 
         case PATTES:
-          Robotapattes Robot_pattes = new Robotapattes(this.robot.GetLigne(), this.robot.GetColonne(), this.robot.GetVitesse());
-          possible = Robot_pattes.getDatevider();
+          Robotapattes Robot_pattes = new Robotapattes(this.GetLigne(), this.GetColonne(), this.GetVitesse());
+          Date = Robot_pattes.getDatevider();
           break;
 
         case DRONE:
-          Robotdrone Robot_drone = new Robotdrone(this.robot.GetLigne(), this.robot.GetColonne(), this.robot.GetVitesse());
-          possible = Robot_drone.getDatevider();
+          Robotdrone Robot_drone = new Robotdrone(this.GetLigne(), this.GetColonne(), this.GetVitesse());
+          Date = Robot_drone.getDatevider();
           break;
 
         default:
           System.out.println("AIE");
           break;
       }
+      return Date;
     }
 
 
