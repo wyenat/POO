@@ -24,4 +24,9 @@ public abstract class Evenement{
     //A FAIRE
   }
 
+  @Override
+  public String toString(){
+      return "Evenement : date de fin = " + this.getDate() + ", de type : ";
+  }
+
 }

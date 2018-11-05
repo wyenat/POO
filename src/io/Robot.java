@@ -36,11 +36,11 @@ public abstract class Robot {
         return this.colonne;
     }
 
-    private void setLigne(int ligne){
+    public void setLigne(int ligne){
         this.ligne = ligne;
     }
 
-    private void setColonne(int colonne){
+    public void setColonne(int colonne){
         this.colonne = colonne;
     }
 
@@ -118,6 +118,11 @@ public abstract class Robot {
               gui.addGraphicalElement(new ImageElement(y, x, "pattes.jpg", taille, taille, new Canvas()));
               break;
       }
+    }
+
+    @Override
+    public String toString(){
+        return "Type : " +  this.GetTypeRobot().toString() + ", Case = (" + this.GetLigne() + ", " + this.GetColonne() + ")";
     }
 
 }
