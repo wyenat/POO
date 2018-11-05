@@ -15,6 +15,9 @@ public class Robotapattes extends Robot {
 
   }
 
+  public long getDatevider(){
+    return 1;
+  }
 
   public double GetVitesse(NatureTerrain Nature){
     double vitesse = super.GetVitesse();
@@ -33,6 +36,12 @@ public class Robotapattes extends Robot {
     return vitesse;
   }
 
+
+  public int Vider(){
+    if (testVider(this.GetLigne(), this.GetColonne()){
+        return 10;
+    }
+  }
 
   public int remplirReservoir(){
       return -1;

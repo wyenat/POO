@@ -122,6 +122,35 @@ public abstract class Robot {
       }
     }
 
+    public long getDatevider(){
+      switch (this.robot.GetTypeRobot()) {
+        case ROUES:
+          Robotaroues Robot_roue = new Robotaroues(robot.GetLigne(), this.robot.GetColonne(), this.robot.GetVitesse());
+          possible = Robot_roue.getDatevider();
+          break;
+
+        case CHENILLES:
+          Robotachenilles Robot_chenille = new Robotachenilles(this.robot.GetLigne(), this.robot.GetColonne(), this.robot.GetVitesse());
+          possible = Robot_chenille.getDatevider();
+          break;
+
+        case PATTES:
+          Robotapattes Robot_pattes = new Robotapattes(this.robot.GetLigne(), this.robot.GetColonne(), this.robot.GetVitesse());
+          possible = Robot_pattes.getDatevider();
+          break;
+
+        case DRONE:
+          Robotdrone Robot_drone = new Robotdrone(this.robot.GetLigne(), this.robot.GetColonne(), this.robot.GetVitesse());
+          possible = Robot_drone.getDatevider();
+          break;
+
+        default:
+          System.out.println("AIE");
+          break;
+      }
+    }
+
+
     @Override
     public String toString(){
         return "Type : " +  this.GetTypeRobot().toString() + ", Case = (" + this.GetLigne() + ", " + this.GetColonne() + ")";

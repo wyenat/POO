@@ -15,6 +15,9 @@ public class Robotaroues extends Robot {
 
   }
 
+  public long getDatevider(){
+    return 5;
+  }
 
   public double GetVitesse(NatureTerrain Nature){
     double vitesse = super.GetVitesse();
@@ -38,6 +41,11 @@ public class Robotaroues extends Robot {
       return 5000;
   }
 
+  public int Vider(){
+    if (testVider(this.GetLigne(), this.GetColonne()){
+        return 100;
+    }
+  }
 
 
   public boolean test_deplacement(Case C){

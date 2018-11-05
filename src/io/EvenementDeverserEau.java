@@ -3,16 +3,11 @@ package io;
 
 
 
-public class EvenementviderReservoir extends Evenement {
-  private Robot robot;
-  private Incendie incendie;
-  private DonneesSimulation Donnees;
+public class EvenementDeversereau extends Evenement {
 
 
-  public EvenementviderReservoir(long Datefin, Robot robot, Incendie incendie){
-    super(Datefin);
-    this.robot = robot;
-    this.incendie = incendie;
+  public EvementDeverserEau(Simulateur simu, Robot robot){
+    super(robot, simu, robot.getDatevider());
 
   }
 
@@ -21,22 +16,22 @@ public class EvenementviderReservoir extends Evenement {
       switch (this.robot.GetTypeRobot()) {
         case ROUES:
           Robotaroues Robot_roue = new Robotaroues(robot.GetLigne(), this.robot.GetColonne(), this.robot.GetVitesse());
-          possible = Robot_roue.testVider(this.incendie);
+          volume = Robot_roue.Vider();
           break;
 
         case CHENILLES:
           Robotachenilles Robot_chenille = new Robotachenilles(this.robot.GetLigne(), this.robot.GetColonne(), this.robot.GetVitesse());
-          possible = Robot_chenille.testVider(this.incendie);
+          volume = Robot_chenille.Vider();
           break;
 
         case PATTES:
           Robotapattes Robot_pattes = new Robotapattes(this.robot.GetLigne(), this.robot.GetColonne(), this.robot.GetVitesse());
-          possible = Robot_pattes.testVider(this.incendie);
+          volume = Robot_pattes.Vider();
           break;
 
         case DRONE:
           Robotdrone Robot_drone = new Robotdrone(this.robot.GetLigne(), this.robot.GetColonne(), this.robot.GetVitesse());
-          possible = Robot_drone.testVider(this.incendie);
+          volume = Robot_drone.Vider();
           break;
 
         default:
@@ -44,19 +39,17 @@ public class EvenementviderReservoir extends Evenement {
           break;
       }
 
-      if (possible == 0){
+      if (volume  == 0){
         return;
       }
 
       int reste = this.robot.getReservoir();
-      int intensite = incendie.GetIntensite();
+      int volume = volume;
       if (intensite - reste < 0 ){
         this.robot.setReservoir(reste - intensite);
-        incendie.setIntensite(0);
       }
       else {
         this.robot.setReservoir(0);
-        incendie.setIntensite(intensite - reste);
       }
   }
 }
