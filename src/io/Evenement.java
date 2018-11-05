@@ -2,26 +2,54 @@ package io;
 import java.io.*;
 
 public abstract class Evenement{
+  protected Robot robot;
   private long Datefin;
+  private Simulateur simu;
   // private Evenement[] Events;
   // public int nombre_evenements;
 
-  public Evenement(long Datefin){
+
+public Simulateur getSimu(){
+    return this.simu;
+}
+
+public void setSimu(Simulateur simulateur){
+    this.simu = simulateur;
+}
+
+  public Evenement(Simulateur simulation, long Datefin){
+    this.simu = simulation;
     this.setDate(Datefin);
     // this.Events = new void[1000];
     // this.nombre_evenements = 0;
+    this.getSimu().addEvenement(this);
   }
 
+public Robot getRobot(){
+     return this.robot;
+  }
+
+
   private void setDate(long Date){
-    this.Datefin = Date;
+    long dateMax = 0;
+    for (int evenement=0; evenement < simu.nb_evenements; evenement++){
+        if ( this.getRobot() == simu.Evenements[evenement].getRobot()){
+            if ( dateMax < simu.Evenements[evenement].getDate()){
+                dateMax = simu.Evenements[evenement].getDate();
+            }
+        }
+    }
+    this.Datefin = Date + dateMax;
+  }
+
+  public void execute(){
+      /**
+       * Ne fait absolument rien ptdr
+       */
   }
 
   public long getDate(){
     return this.Datefin;
-  }
-
-  public void execute(){
-    //A FAIRE
   }
 
   @Override
