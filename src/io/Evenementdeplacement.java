@@ -19,6 +19,7 @@ public class Evenementdeplacement extends Evenement {
     else{
       throw new IllegalArgumentException("Le robot ne peut pas sortir de la carte");
     }
+    simu.addEvenement(this);
   }
 
   public Robot getRobot(){

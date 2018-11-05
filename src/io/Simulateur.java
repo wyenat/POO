@@ -95,7 +95,7 @@ public class Simulateur implements Simulable {
           this.nb_evenements = sauvegarde_nb_evenements;
         //   System.out.println(this.nb_evenements);
         // System.out.println("##########APRES RESET########");
-        // AfficherEvenements();
+        AfficherEvenements();
         //   this.Evenements = sauvegarde_evenements;
           draw();
       }
