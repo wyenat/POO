@@ -13,11 +13,11 @@ public class TestLecteurDonnees {
         }
         try {
             Simulateur simu = new Simulateur(LecteurDonnees.lire(args[0]));
-            Robot aDeplacer = simu.donnees.GetRobots()[0];
-            long dateFin = (long) simu.donnees.GetCarte().GetTailleCases()/ (long) aDeplacer.GetVitesse();
-            Evenementdeplacement deplacer = new Evenementdeplacement(simu, aDeplacer, "EST");
+            // Robot aDeplacer = simu.donnees.GetRobots()[0];
+            // long dateFin = (long) simu.donnees.GetCarte().GetTailleCases()/ (long) aDeplacer.GetVitesse();
+            // Evenementdeplacement deplacer = new Evenementdeplacement(simu, aDeplacer, "EST");
             // System.out.println("Date fin = " + dateFin);
-            simu.addEvenement(deplacer);
+            // simu.addEvenement(deplacer);
         }
 
         // Partie levée d'exception
