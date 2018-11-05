@@ -7,6 +7,8 @@ TODO:
 	// Pour l'instant, une seule contrainte : que le chemin soit empruntable pour le robot. A faire plus tard..
 	Programmer une méthode qui, en fonction de la case et de la direction, renvoie la case voisine
 	Programmer une méthode qui renvoie un pointeur vers la case (i,j) si on donne les entiers (i,j)
+	Il faut changer un peu les déplacements
+
 
 Enguerran:
 	Evenement et ses executions

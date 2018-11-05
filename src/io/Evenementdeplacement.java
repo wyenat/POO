@@ -3,14 +3,24 @@ package io;
 
 public class Evenementdeplacement extends Evenement {
   private Robot robot;
+  private Direction direction;
   private Case Case;
   private DonneesSimulation donnees;
 
 
-  public Evenementdeplacement(Simulateur simu, Robot robot, Case cas){
+  public Evenementdeplacement(Simulateur simu, Robot robot, Direction direction, DonneesSimulation donnees){
     super(simu.time + ((long) simu.donnees.GetCarte().GetTailleCases()/ (long) robot.GetVitesse()));
-    this.robot = robot;
-    this.Case = cas;
+    Carte map = donnees.GetCarte();
+    Case C = map.GetTableauDeCases()[robot.GetLigne()*map.GetNbLignes() + robot.GetColonne()];
+    System.out.println(map.voisinExiste(C, direction));
+    if (map.voisinExiste(C, direction)){
+        this.Case = map.GetVoisin(C, direction);
+        this.robot = robot;
+    }
+    else{
+      throw new IllegalArgumentException("Le robot ne peut pas sortir de la carte");
+    }
+
   }
 
   public void execute(){

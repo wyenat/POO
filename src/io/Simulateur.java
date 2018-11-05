@@ -19,7 +19,7 @@ public class Simulateur implements Simulable {
     public DonneesSimulation donnees;
 
     public int pas;
-    public int time;
+    public long time;
 
     public Evenement[] Evenements = new Evenement[1000];
     public int nb_evenements;

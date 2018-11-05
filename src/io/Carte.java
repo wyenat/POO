@@ -88,6 +88,92 @@ public class Carte{
           */
           return this.nb_colonnes;
       }
+
+      public boolean voisinExiste(Case C, Direction direction){
+         /*Renvoie 1 s'il a un voisin dans la direction donnée*/
+            switch(direction){
+              /*Fais un case sur la direction
+              On vérifie qu'on ne depasse pas */
+                case NORD:
+                  if (C.GetLigne() -1 >= 0){
+                    return true;
+                  }
+                  else{
+                    return false;
+                  }
+
+
+                case EST:
+                  if (C.GetColonne() +1 <= this.GetNbColonnes()){
+                    return true;
+                  }
+                  else{
+                    return false;
+                  }
+
+
+                case SUD:
+                  if (C.GetLigne() -1 <= this.GetNbColonnes()){
+                    return true;
+                  }
+                  else{
+                    return false;
+                  }
+
+                case OUEST:
+                  if (C.GetColonne() -1 >= 0){
+                    return true;
+                    }
+                  else{
+                    return false;
+                  }
+                default:
+                  return false;
+
+            }
+
+       }
+
+       public Case GetVoisin(Case C, Direction direction){
+            /*Renvoie le voisin de la case C dans la direction donnée*/
+            if (voisinExiste(C, direction)){
+
+              /*On vérifie quand même que ce voisin existe*/
+              int ligne = C.GetLigne();
+              int colonne = C.GetColonne();
+              Case[] Tableau = this.GetTableauDeCases();
+              int taille = this.GetNbColonnes();
+
+              switch(direction){
+
+                case NORD:
+                  return Tableau[taille*(ligne-1) + colonne];
+
+                case EST:
+                  return Tableau[taille*(ligne) + colonne+1];
+
+                case SUD:
+                  return Tableau[taille*(ligne+1) + colonne];
+
+                case OUEST:
+                  return Tableau[taille*(ligne) + colonne -1];
+                default:
+                  return C;
+            }
+          } else {
+            /*Triche pour renvoyer quelquechose même s'il y a pas de voisin*/
+            return C;
+          }
+       }
+
+
+
+
+
+
+
+
+
       public String ToString(){
          String returned_string =  "Taille des cases : " + this.GetTailleCases() + "\n" + "Dimensions : " + this.GetNbLignes() + " * " + this.GetNbColonnes();
          for (int lig=0; lig < this.GetNbLignes(); lig++){

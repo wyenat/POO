@@ -1,10 +1,10 @@
 package io;
 
 public enum Direction {
-    NORD ("NORD", "N", "Nord"),
-    EST ("EST", "E", "Est"),
-    SUD ("SUD", "S", "Sud"),
-    OUEST ("OUEST", "O", "W", "Ouest");
+    NORD ("NORD"),
+    EST ("EST"),
+    SUD ("SUD"),
+    OUEST ("OUEST");
 
     private String name = "";
 
