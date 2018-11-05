@@ -108,16 +108,16 @@ public abstract class Robot {
       /*A FINIR*/
       switch (this.GetTypeRobot()){
           case DRONE:
-              gui.addGraphicalElement(new ImageElement(y, x, "drone.jpg", taille, taille, new Canvas()));
+              gui.addGraphicalElement(new ImageElement(y, x, "img/drone.png", taille, taille, new Canvas()));
               break;
           case ROUES:
-              gui.addGraphicalElement(new ImageElement(y, x, "roues.jpg", taille, taille, new Canvas()));
+              gui.addGraphicalElement(new ImageElement(y, x, "img/roues.png", taille, taille, new Canvas()));
               break;
           case CHENILLES:
-              gui.addGraphicalElement(new ImageElement(y, x, "chenilles.png", taille, taille, new Canvas()));
+              gui.addGraphicalElement(new ImageElement(y, x, "img/chenilles.png", taille, taille, new Canvas()));
               break;
           case PATTES:
-              gui.addGraphicalElement(new ImageElement(y, x, "pattes.jpg", taille, taille, new Canvas()));
+              gui.addGraphicalElement(new ImageElement(y, x, "img/pattes.jpg", taille, taille, new Canvas()));
               break;
       }
     }

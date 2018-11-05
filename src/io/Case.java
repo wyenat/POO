@@ -80,23 +80,23 @@ public class Case {
       int taille = taille_case;
       switch (this.GetNature()){
           case EAU:
-            gui.addGraphicalElement(new ImageElement(y, x, "EAU.jpg", taille, taille, new Canvas()));
+            gui.addGraphicalElement(new ImageElement(y, x, "img/EAU.jpg", taille, taille, new Canvas()));
             break;
 
           case FORET:
-            gui.addGraphicalElement(new ImageElement(y, x, "FORET.jpg", taille, taille, new Canvas()));
+            gui.addGraphicalElement(new ImageElement(y, x, "img/FORET.png", taille, taille, new Canvas()));
             break;
 
           case ROCHE:
-            gui.addGraphicalElement(new ImageElement(y, x, "ROCHE.jpg", taille, taille, new Canvas()));
+            gui.addGraphicalElement(new ImageElement(y, x, "img/ROCHE.jpg", taille, taille, new Canvas()));
             break;
 
           case HABITAT:
-            gui.addGraphicalElement(new ImageElement(y, x, "HABITAT.jpg", taille, taille, new Canvas()));
+            gui.addGraphicalElement(new ImageElement(y, x, "img/HABITAT.jpg", taille, taille, new Canvas()));
             break;
 
           case TERRAIN_LIBRE:
-            gui.addGraphicalElement(new ImageElement(y, x, "TERRAIN_LIBRE.jpg", taille, taille, new Canvas()));
+            gui.addGraphicalElement(new ImageElement(y, x, "img/TERRAIN_LIBRE.jpg", taille, taille, new Canvas()));
             break;
       }
 

@@ -60,7 +60,7 @@ public class Incendie{
       int x = taille_case/5 + (this.GetLigne())* taille_case;
       int y =  taille_case/5 + (this.GetColonne())* taille_case;
       int taille = 4 * taille_case/5;
-      gui.addGraphicalElement(new ImageElement(y, x, "incendie.jpg", taille, taille, new Canvas()));
+      gui.addGraphicalElement(new ImageElement(y, x, "img/flammes.png", taille, taille, new Canvas()));
       ;
   }
 
