@@ -39,6 +39,14 @@ evenement:
 	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestEvenement.java
 	java -classpath bin:bin/* TestEvenement cartes/carteSujet.map
 
+scenario0:
+	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestScenario0.java
+	java -classpath bin:bin/* TestScenario0 cartes/carteSujet.map
+
+scenario1:
+	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestScenario1.java
+	java -classpath bin:bin/* TestScenario1 cartes/carteSujet.map
+
 clean:
 	rm -rf bin/*.class
 	rm -rf bin/io/*.class

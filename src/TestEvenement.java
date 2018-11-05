@@ -46,12 +46,20 @@ public class TestEvenement {
 
           Robot Vivien = simu.donnees.GetRobots()[0];
 
-
           Evenementdeplacement deplacer = new Evenementdeplacement(simu, Vivien, dir);
+
+
           Evenementdeplacement deplacerencore = new Evenementdeplacement(simu, Vivien, dir);
-          //
+
+          while(simu.time <= deplacerencore.getDate()){
+            System.out.println("2");
+          }
+
           Evenementdeplacement deplacerencoreencore = new Evenementdeplacement(simu, Vivien, dir);
-          //
+
+          while(simu.time <= deplacerencoreencore.getDate()){
+            System.out.println("3");
+          }
           Evenementdeplacement deplacerencoreencorencore = new Evenementdeplacement(simu, Vivien, dir);
         //
         //
