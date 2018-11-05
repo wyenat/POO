@@ -5,12 +5,11 @@ public class Evenementdeplacement extends Evenement {
   private Robot robot;
   private Direction direction;
   private Case Case;
-  private DonneesSimulation donnees;
 
 
-  public Evenementdeplacement(Simulateur simu, Robot robot, Direction direction, DonneesSimulation donnees){
+  public Evenementdeplacement(Simulateur simu, Robot robot, Direction direction){
     super(simu.time + ((long) simu.donnees.GetCarte().GetTailleCases()/ (long) robot.GetVitesse()));
-    Carte map = donnees.GetCarte();
+    Carte map = simu.donnees.GetCarte();
     Case C = map.GetTableauDeCases()[robot.GetLigne()*map.GetNbLignes() + robot.GetColonne()];
     System.out.println(map.voisinExiste(C, direction));
     if (map.voisinExiste(C, direction)){
@@ -20,7 +19,7 @@ public class Evenementdeplacement extends Evenement {
     else{
       throw new IllegalArgumentException("Le robot ne peut pas sortir de la carte");
     }
-
+    simu.addEvenement(this);
   }
 
   public Robot getRobot(){
