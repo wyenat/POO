@@ -48,29 +48,10 @@ public class TestEvenement {
 
 
           Evenementdeplacement deplacer = new Evenementdeplacement(simu, Vivien, dir);
-
-          while(simu.time <= deplacer.getDate()){
-
-            System.out.println(simu.time);
-            // System.out.println(deplacer.getDate());
-
-          }
-
           Evenementdeplacement deplacerencore = new Evenementdeplacement(simu, Vivien, dir);
-
-          while(simu.time <= deplacerencore.getDate()){
-            System.out.println(simu.time);
-
-            // System.out.println("2");
-          }
-
+          //
           Evenementdeplacement deplacerencoreencore = new Evenementdeplacement(simu, Vivien, dir);
-
-          while(simu.time <= deplacerencoreencore.getDate()){
-            // System.out.println("3");
-            System.out.println(simu.time);
-
-          }
+          //
           Evenementdeplacement deplacerencoreencorencore = new Evenementdeplacement(simu, Vivien, dir);
         //
         //

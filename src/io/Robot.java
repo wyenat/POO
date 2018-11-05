@@ -66,22 +66,22 @@ public abstract class Robot {
       switch (this.GetTypeRobot()) {
         case ROUES:
           Robotaroues Robot_roue = new Robotaroues(this.GetLigne(), this.GetColonne(), this.GetVitesse());
-          vitesse = (Robot_roue.GetVitesse());
+          vitesse = Robot_roue.GetVitesse(Case.GetNature());
           break;
 
         case CHENILLES:
           Robotachenilles Robot_chenille = new Robotachenilles(this.GetLigne(), this.GetColonne(), this.GetVitesse());
-          vitesse = Robot_chenille.GetVitesse();
+          vitesse = Robot_chenille.GetVitesse(Case.GetNature());
           break;
 
         case PATTES:
           Robotapattes Robot_pattes = new Robotapattes(this.GetLigne(), this.GetColonne(), this.GetVitesse());
-          vitesse = Robot_pattes.GetVitesse();
+          vitesse = Robot_pattes.GetVitesse(Case.GetNature());
           break;
 
         case DRONE:
           Robotdrone Robot_drone = new Robotdrone(this.GetLigne(), this.GetColonne(), this.GetVitesse());
-          vitesse = Robot_drone.GetVitesse();
+          vitesse = Robot_drone.GetVitesse(Case.GetNature());
           break;
 
         default:

@@ -9,6 +9,14 @@ public abstract class Evenement{
   // public int nombre_evenements;
 
 
+public Evenement(Robot robot, Simulateur simulation, long Datefin){
+    this.simu = simulation;
+    this.robot = robot;
+    this.setDate(Datefin);
+    // this.Events = new void[1000];
+    // this.nombre_evenements = 0;
+    // this.getSimu().addEvenement(this);
+  }
 public Simulateur getSimu(){
     return this.simu;
 }
@@ -17,13 +25,6 @@ public void setSimu(Simulateur simulateur){
     this.simu = simulateur;
 }
 
-  public Evenement(Simulateur simulation, long Datefin){
-    this.simu = simulation;
-    this.setDate(Datefin);
-    // this.Events = new void[1000];
-    // this.nombre_evenements = 0;
-    this.getSimu().addEvenement(this);
-  }
 
 public Robot getRobot(){
      return this.robot;
@@ -32,10 +33,13 @@ public Robot getRobot(){
 
   private void setDate(long Date){
     long dateMax = 0;
+    System.out.println("#### ON RENTRE DANS LE SET ####");
+    System.out.println("Robot de this : " + this.robot);
     for (int evenement=0; evenement < simu.nb_evenements; evenement++){
+        // System.out.println("Robot de this : " + this.getRobot() + "\n Simu " + simu.Evenements[evenement].getRobot());
         if ( this.getRobot() == simu.Evenements[evenement].getRobot()){
             if ( dateMax < simu.Evenements[evenement].getDate()){
-                dateMax = simu.Evenements[evenement].getDate();
+              dateMax = simu.Evenements[evenement].getDate();
             }
         }
     }

@@ -7,17 +7,9 @@ public class Evenementdeplacement extends Evenement {
 
 
   public Evenementdeplacement(Simulateur simu, Robot robot, Direction direction){
-    super(simu, ((long) simu.donnees.GetCarte().GetTailleCases()/ (long) robot.GetVitesse()));
-    Carte map = simu.donnees.GetCarte();
-    Case C = map.GetTableauDeCases()[robot.GetLigne()*map.GetNbLignes() + robot.GetColonne()];
-    System.out.println(map.voisinExiste(C, direction));
-    if (map.voisinExiste(C, direction)){
-        this.Case = map.GetVoisin(C, direction);
-        this.robot = robot;
-    }
-    else{
-      throw new IllegalArgumentException("Le robot ne peut pas sortir de la carte");
-    }
+    super(robot, simu, ((long) simu.donnees.GetCarte().GetTailleCases()/ (long) robot.GetVitesse()));
+    this.Case = simu.donnees.GetCarte().GetTableauDeCases()[0];
+    this.direction = direction;
     simu.addEvenement(this);
   }
 
@@ -26,36 +18,49 @@ public class Evenementdeplacement extends Evenement {
   }
 
   public void execute(){
-    boolean possible = false;
-    switch (this.robot.GetTypeRobot()) {
-      case ROUES:
-        Robotaroues Robot_roue = new Robotaroues(this.robot.GetLigne(), this.robot.GetColonne(), this.robot.GetVitesse());
-        possible = Robot_roue.test_deplacement(this.Case);
-        break;
+    Simulateur simu = super.getSimu();
+    Carte map = simu.donnees.GetCarte();
+    Robot robot  = super.getRobot();
+    int lig = robot.GetLigne();
+    Case C = map.GetTableauDeCases()[(robot.GetLigne())*(map.GetNbLignes()) + robot.GetColonne()];
+    this.Case = C;
+    if (map.voisinExiste(C, this.direction)){
+        this.Case = map.GetVoisin(C, this.direction);
+        super.robot = robot;
+        boolean possible = false;
+        switch (this.robot.GetTypeRobot()) {
+          case ROUES:
+          Robotaroues Robot_roue = new Robotaroues(this.robot.GetLigne(), this.robot.GetColonne(), this.robot.GetVitesse());
+          possible = Robot_roue.test_deplacement(this.Case);
+          break;
 
-      case CHENILLES:
-        Robotachenilles Robot_chenille = new Robotachenilles(this.robot.GetLigne(), this.robot.GetColonne(), this.robot.GetVitesse());
-        possible = Robot_chenille.test_deplacement(this.Case);
-        break;
+          case CHENILLES:
+          Robotachenilles Robot_chenille = new Robotachenilles(this.robot.GetLigne(), this.robot.GetColonne(), this.robot.GetVitesse());
+          possible = Robot_chenille.test_deplacement(this.Case);
+          break;
 
-      case PATTES:
-        Robotapattes Robot_pattes = new Robotapattes(this.robot.GetLigne(), this.robot.GetColonne(), this.robot.GetVitesse());
-        possible = Robot_pattes.test_deplacement(this.Case);
-        break;
+          case PATTES:
+          Robotapattes Robot_pattes = new Robotapattes(this.robot.GetLigne(), this.robot.GetColonne(), this.robot.GetVitesse());
+          possible = Robot_pattes.test_deplacement(this.Case);
+          break;
 
-      case DRONE:
-        Robotdrone Robot_drone = new Robotdrone(this.robot.GetLigne(), this.robot.GetColonne(), this.robot.GetVitesse());
-        possible = Robot_drone.test_deplacement(this.Case);
-        break;
+          case DRONE:
+          Robotdrone Robot_drone = new Robotdrone(this.robot.GetLigne(), this.robot.GetColonne(), this.robot.GetVitesse());
+          possible = Robot_drone.test_deplacement(this.Case);
+          break;
 
-      default:
-        System.out.println("AIE");
-        break;
+          default:
+          System.out.println("AIE");
+          break;
 
+        }
+
+        if (possible){
+          this.robot.setPosition(this.Case);
+        }
     }
-
-    if (possible){
-        this.robot.setPosition(this.Case);
+    else{
+      throw new IllegalArgumentException("Le robot ne peut pas sortir de la carte");
     }
   }
   public void deplacement(Robot robot, Case C, DonneesSimulation donnees){
@@ -92,6 +97,6 @@ public class Evenementdeplacement extends Evenement {
 
     @Override
     public String toString(){
-        return super.toString() + "Déplacement : le Robot" + this.getRobot().toString() + " va en case " + this.getCase().toString();
+        return super.toString() + "Déplacement : le Robot" + (super.getRobot()).toString() + " va en case " + this.getCase().toString();
     }
   }
