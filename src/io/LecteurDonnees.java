@@ -46,6 +46,7 @@ public class LecteurDonnees {
         robots = lecteur.lireRobots();
         scanner.close();
         DonneesSimulation donneesSimulation = new DonneesSimulation(carte, incendies, robots, fichierDonnees);
+        System.out.println(donneesSimulation.afficher());
         return donneesSimulation;
     }
 
