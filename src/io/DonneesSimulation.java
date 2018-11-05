@@ -10,7 +10,7 @@ public class DonneesSimulation{
     private Robot[] robots;
     public String fichier;
 
-    public DonneesSimulation(Carte c, Incendie i[], Robot r[], String file) 
+    public DonneesSimulation(Carte c, Incendie i[], Robot r[], String file)
     throws FileNotFoundException, DataFormatException
     {
         /**
@@ -49,7 +49,7 @@ public class DonneesSimulation{
 
     private static String AfficherIncendies(Incendie[] incendies){
         /**
-         * Affiche textuellement les incendies 
+         * Affiche textuellement les incendies
          */
          String returned_string = "\n\n\t#Incendies";
          for (int i=0; i<incendies.length; i++){
@@ -80,4 +80,19 @@ public class DonneesSimulation{
         stringReturned += AfficherIncendies(this.incendies) + AfficherRobots(this.robots);
         return stringReturned;
     }
+
+    public void RemettreInitial(DonneesSimulation nouvelle){
+        /**
+         * Mets les paramètres Robots et Incendie de this aux états de nouvelle
+         * SANS MODIFIER l'adresse des robots ou des incendies
+         */
+         for (int len=0; len < this.GetRobots().length; len++){
+             this.GetRobots()[len].setLigne(nouvelle.GetRobots()[len].GetLigne());
+             this.GetRobots()[len].setColonne(nouvelle.GetRobots()[len].GetColonne());
+             this.GetRobots()[len].setReservoir(nouvelle.GetRobots()[len].getReservoir());
+         }
+         for (int len=0; len < this.GetIncendies().length; len++){
+             this.GetIncendies()[len].setIntensite(nouvelle.GetIncendies()[len].GetIntensite());
+         }
+     }
 }

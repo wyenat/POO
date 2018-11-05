@@ -23,6 +23,14 @@ public class Evenementdeplacement extends Evenement {
 
   }
 
+  public Robot getRobot(){
+      return this.robot;
+  }
+
+  public Case getCase(){
+      return this.Case;
+  }
+
   public void execute(){
     boolean possible = false;
     switch (this.robot.GetTypeRobot()) {
@@ -86,5 +94,10 @@ public class Evenementdeplacement extends Evenement {
     //   }
     //
     //
+    }
+
+    @Override
+    public String toString(){
+        return super.toString() + "Déplacement : le Robot" + this.getRobot().toString() + " va en case " + this.getCase().toString();
     }
   }

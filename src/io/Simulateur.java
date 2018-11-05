@@ -42,7 +42,8 @@ public class Simulateur implements Simulable {
          * et les execute
          */
          for (int i=0; i<nb_evenements; i++){
-             if (this.Evenements[i].getDate() <= this.time){
+             if (this.time <= this.Evenements[i].getDate() &  this.Evenements[i].getDate() <= this.time + this.pas){
+                System.out.println("On execute ! ");
                 this.Evenements[i].execute();
              }
          }
@@ -56,6 +57,15 @@ public class Simulateur implements Simulable {
          this.nb_evenements++;
     }
 
+    public void AfficherEvenements(){
+        /**
+         * Affiche les Evenements dans le tableau d'évènements
+         */
+         for (int i=0; i<nb_evenements; i++){
+            System.out.println(i +  " : " + this.Evenements[i].toString());
+         }
+    }
+
 
     @Override
     public void next() {
@@ -63,9 +73,9 @@ public class Simulateur implements Simulable {
        * Avance la simulation d'un pas de temps
        */
       this.time += this.pas;
+      System.out.println("time = " + this.time);
       executeEvenements();
       draw();
-      System.out.println("time = " + this.time);
     }
 
     @Override
@@ -74,8 +84,19 @@ public class Simulateur implements Simulable {
        * Replace la simulation dans les conditions initiales
        */
       this.time = 0;
+      int sauvegarde_nb_evenements = this.nb_evenements;
+    //   Evenement[] sauvegarde_evenements = Evenements;
       try{
-          this.donnees = LecteurDonnees.lire(this.donnees.fichier);
+          System.out.println("##########AVANT RESET########");
+          AfficherEvenements();
+          DonneesSimulation data_init = LecteurDonnees.lire(this.donnees.fichier);
+          this.donnees.RemettreInitial(data_init);
+        //   System.out.println(this.nb_evenements);
+          this.nb_evenements = sauvegarde_nb_evenements;
+        //   System.out.println(this.nb_evenements);
+        System.out.println("##########APRES RESET########");
+        AfficherEvenements();
+        //   this.Evenements = sauvegarde_evenements;
           draw();
       }
       catch (FileNotFoundException e) {

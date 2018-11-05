@@ -40,6 +40,8 @@ public class Case {
        */
        return this.nature;
   }
+
+  @Override
   public String toString(){
     int lig = this.GetLigne();
     int col = this.GetColonne();
