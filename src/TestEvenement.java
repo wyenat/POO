@@ -50,7 +50,8 @@ public class TestEvenement {
           Evenementdeplacement deplacer = new Evenementdeplacement(simu, Vivien, dir);
 
           while(simu.time <= deplacer.getDate()){
-            System.out.println("1");
+
+            // System.out.println("1");
             System.out.println(deplacer.getDate());
           }
           System.out.println(Vivien.GetLigne());
