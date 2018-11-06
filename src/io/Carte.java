@@ -104,7 +104,7 @@ public class Carte{
 
 
                 case EST:
-                  if (C.GetColonne() +1 <= this.GetNbColonnes()){
+                  if (C.GetColonne() +1 < this.GetNbColonnes()){
                     return true;
                   }
                   else{
@@ -113,7 +113,7 @@ public class Carte{
 
 
                 case SUD:
-                  if (C.GetLigne() -1 <= this.GetNbColonnes()){
+                  if (C.GetLigne() +1 < this.GetNbLignes()){
                     return true;
                   }
                   else{

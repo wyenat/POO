@@ -27,6 +27,7 @@ public class Chemin {
         /**
          * Itère une fois
          */
+         // On parcourt toutes les cases présentes dans le distance_temporelle
          Iterator<Case> cases = distance_temporelle.keySet().iterator();
          // Copie de l'itérateur pour éviter java.util.ConcurrentModificationException
          // Si meilleur solution je suis preneur
@@ -36,21 +37,33 @@ public class Chemin {
              copie[size-indice] = cases.next();
          }
          // fin copie
+         // Indice sans importance : on parcourt juste toutes les cases
          for (int indice = 0; indice<size; indice++){
              Case current = copie[indice];
+             // On vérifie que les voisins existent dans la direction dir
              for (Direction dir : Direction.values()) {
                  if (this.getSimu().donnees.GetCarte().voisinExiste(current, dir)){
+                     // On vérifie que le robot peut bien se déplacer sur la case voisine
+                     if (!this.getRobot().test_deplacement(voisine)){
+                         System.out.println("\n \n Case interdite !");
+                         break;
+                     }
+                     // On calcule le temps qu'il faut pour aller à la case voisine
                      Integer dist = new Integer(getDistanceTemp(current, this.getSimu()));
+                     // On ajoute ce temps au temps qu'il fallait pour aller à la case courante
                      dist += distance_temporelle.get(current);
-                     if (distance_temporelle.containsKey(this.getSimu().donnees.GetCarte().GetVoisin(current, dir))){
+                     // On regarde si la case est déjà dans le dico distance_temporelle
+                     if (distance_temporelle.containsKey(voisine)){
                          if (dist < distance_temporelle.get(current)){
-                             System.out.println("Temps mis à jour : " + this.getSimu().donnees.GetCarte().GetVoisin(current, dir) + ". Distance = " + dist +"s");
-                             distance_temporelle.put(this.getSimu().donnees.GetCarte().GetVoisin(current, dir), dist);
+                             // Le temps est plus petit : un nouveau chemin est trouvé, et plus rapide
+                             System.out.println("Temps mis à jour : " + voisine + ". Distance = " + dist +"s");
+                             distance_temporelle.put(voisine, dist);
                          }
                      }
                      else{
-                         System.out.println("\n Case ajoutée : " + this.getSimu().donnees.GetCarte().GetVoisin(current, dir) + ". Distance = " + dist +"s");
-                         distance_temporelle.put(this.getSimu().donnees.GetCarte().GetVoisin(current, dir), dist);
+                         // On ajoute dans le dico la case.
+                         System.out.println("\n Case ajoutée : " + voisine + ". Distance = " + dist +"s");
+                         distance_temporelle.put(voisine, dist);
                      }
                  }
              }
@@ -70,13 +83,17 @@ public class Chemin {
          * On stoque en parallèle le chemin pour accéder à la case dans un autre
          * dictionnaire, sous la forme d'une queue.
          */
+         Case depart = this.getDepart();
+         Case arrivee = this.getArrivee();
+          // Création du dictionnaire contenant le temps pour aller dans toutes les autres cases depuis le départ
           Map<Case, Integer> distance_temporelle = new HashMap<Case, Integer> ();
+          distance_temporelle.put(depart, 0);
+          // Création du dictionnaire contenant la file des cases à parcourir pour aller à la case voulue depuis le départ
+          // en temps optimal
           Map<Case, LinkedList<Case>> chemin_jusqua_case = new HashMap<Case, LinkedList<Case>> ();
-          Case depart = this.getDepart();
-          Case arrivee = this.getArrivee();
           int taille_tableau = this.getSimu().donnees.GetCarte().GetNbLignes()* this.getSimu().donnees.GetCarte().GetNbColonnes();
           ArrayList<LinkedList<Case>> tableau_de_chemin = new ArrayList<LinkedList<Case>>(taille_tableau);
-          distance_temporelle.put(depart, 0);
+          // Début de l'itération
           int i=0;
           while (this.nonFini(i++)){
               this.iterer(distance_temporelle, chemin_jusqua_case);
@@ -87,8 +104,9 @@ public class Chemin {
         /**
          * Vérifie si on a encore besoin d'itérer
          * TODO, là c'est un truc merdique pour boucler trkl
+         * N'itère plus quand le tableau chemin_jusqua_case est stable par itération
          */
-         return (i!=5);
+         return (i!=20);
     }
 
     // Set et get...
