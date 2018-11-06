@@ -13,10 +13,6 @@ public class Robotachenilles extends Robot {
     //
   }
 
-  public int remplirReservoir(){
-      return 2000;
-  }
-
   public double GetVitesse(NatureTerrain Nature){
     double vitesse = super.GetVitesse();
     switch (Nature){
@@ -39,6 +35,30 @@ public class Robotachenilles extends Robot {
     return vitesse;
   }
 
+
+
+  public long getDateremplir(){
+    return 5*60;
+  }
+
+  public boolean testRemplir(Simulateur simu, int lig, int col){
+      boolean test1 = (lig == this.GetLigne()+1)&&(this.GetColonne() == col);
+      boolean test2 = (lig == this.GetLigne()) && (this.GetColonne() == col-1);
+      boolean test3 = (lig == this.GetLigne()) && (this.GetColonne() == col+1);
+      boolean test4 = (lig == this.GetLigne()-1) && (this.GetColonne() == col);
+      return (test1 || test2 ||test3 || test4);
+
+
+
+
+  }
+
+  public int remplirReservoir(Simulateur simu, int ligne, int colonne){
+    if (testRemplir(simu, ligne, colonne)){
+      return 2000;
+    }
+    return 0;
+  }
 
   public long getDatevider(){
     return 8;

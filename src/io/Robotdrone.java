@@ -17,6 +17,26 @@ public class Robotdrone extends Robot{
 
   }
 
+  public long getDateremplir(){
+    return 30*60;
+  }
+
+  public boolean testRemplir(Simulateur simu, int lig, int col){
+    if (super.GetLigne() == lig && super.GetColonne() == col){
+        return true;
+      }
+
+    return false;
+  }
+
+  public int remplirReservoir(Simulateur simu, int lig, int col){
+    System.out.println(this.testRemplir(simu, lig, col));
+    if (testRemplir(simu, lig, col)){
+      return 10000;
+    }
+    return 0;
+  }
+
   public long getDatevider(){
     return 30;
   }
@@ -56,9 +76,6 @@ public class Robotdrone extends Robot{
     return false;
   }
 
-  public int remplirReservoir(){
-    return 10000;
-  }
 
 
   public boolean test_deplacement(Case C){

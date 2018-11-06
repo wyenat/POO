@@ -117,7 +117,7 @@ public abstract class Robot {
               gui.addGraphicalElement(new ImageElement(y, x, "img/chenilles.png", taille, taille, new Canvas()));
               break;
           case PATTES:
-              gui.addGraphicalElement(new ImageElement(y, x, "img/pattes.jpg", taille, taille, new Canvas()));
+              gui.addGraphicalElement(new ImageElement(y, x, "img/pattes.png", taille, taille, new Canvas()));
               break;
       }
     }
@@ -143,6 +143,37 @@ public abstract class Robot {
         case DRONE:
           Robotdrone Robot_drone = new Robotdrone(this.GetLigne(), this.GetColonne(), this.GetVitesse());
           Date = Robot_drone.getDatevider();
+          break;
+
+        default:
+          System.out.println("AIE");
+          break;
+      }
+      return Date;
+    }
+
+
+    public long getDateremplir(){
+      long Date = 0;
+      switch (this.GetTypeRobot()) {
+        case ROUES:
+          Robotaroues Robot_roue = new Robotaroues(GetLigne(), this.GetColonne(), this.GetVitesse());
+          Date = Robot_roue.getDateremplir();
+          break;
+
+        case CHENILLES:
+          Robotachenilles Robot_chenille = new Robotachenilles(this.GetLigne(), this.GetColonne(), this.GetVitesse());
+          Date = Robot_chenille.getDateremplir();
+          break;
+
+        case PATTES:
+          Robotapattes Robot_pattes = new Robotapattes(this.GetLigne(), this.GetColonne(), this.GetVitesse());
+          Date = Robot_pattes.getDateremplir();
+          break;
+
+        case DRONE:
+          Robotdrone Robot_drone = new Robotdrone(this.GetLigne(), this.GetColonne(), this.GetVitesse());
+          Date = Robot_drone.getDateremplir();
           break;
 
         default:

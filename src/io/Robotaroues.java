@@ -15,9 +15,6 @@ public class Robotaroues extends Robot {
 
   }
 
-  public long getDatevider(){
-    return 5;
-  }
 
   public double GetVitesse(NatureTerrain Nature){
     double vitesse = super.GetVitesse();
@@ -36,9 +33,30 @@ public class Robotaroues extends Robot {
 
   }
 
+  public long getDateremplir(){
+    return 10*60;
+  }
 
-  public int remplirReservoir(){
+  public int remplirReservoir(Simulateur simu, int lig, int col){
+
+    if (testRemplir(simu, lig, col)){
       return 5000;
+    }
+    return 0;
+  }
+
+  public boolean testRemplir(Simulateur simu, int lig, int col){
+      boolean test1 = (this.GetLigne() == lig+1)&&(this.GetColonne() == col);
+      boolean test2 = (this.GetLigne() == lig) && (this.GetColonne() == col-1);
+      boolean test3 = (this.GetLigne() == lig) && (this.GetColonne() == col+1);
+      boolean test4 = (this.GetLigne() == lig-1) && (this.GetColonne() == col);
+
+      return (test1 || test2 ||test3 || test4);
+      }
+
+
+  public long getDatevider(){
+    return 5;
   }
 
   public int Vider(Simulateur simu, int ligne, int colonne){
