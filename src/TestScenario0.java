@@ -11,9 +11,7 @@ public class TestScenario0 {
           Simulateur simu = new Simulateur(LecteurDonnees.lire(args[0]));
 
           // Mise en place de la direction ( on ne sait pas faire mieux )
-          Direction dir;
-          String mdir = "NORD";
-          dir = Direction.valueOf(mdir);
+          Direction dir = Direction.NORD;
 
           // Mise en place du robot
           Robot drone = simu.donnees.GetRobots()[0];

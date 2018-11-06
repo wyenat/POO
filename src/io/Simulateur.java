@@ -43,7 +43,7 @@ public class Simulateur implements Simulable {
          */
          for (int i=0; i<nb_evenements; i++){
              if (this.time <= this.Evenements[i].getDate() &  this.Evenements[i].getDate() <= this.time + this.pas){
-                System.out.println("Vivien a " + this.Evenements[i].getRobot().getReservoir() + "L d'eau");
+                // System.out.println("Vivien a " + this.Evenements[i].getRobot().getReservoir() + "L d'eau");
                 this.Evenements[i].execute();
              }
          }

@@ -77,8 +77,11 @@ public class TestEvenement {
 
           EvenementRemplirReservoir remplir = new EvenementRemplirReservoir(simu, Vivien, 7, 3);
 
-
           Evenementdeplacement deplacerencoreencorencore = new Evenementdeplacement(simu, Vivien, ouest);
+
+           Evenementdeplacement deplacerencoreencorencore2 = new Evenementdeplacement(simu, Vivien, ouest);
+
+           EvenementDeverserEau vide2 = new EvenementDeverserEau(simu, Vivien, 7, 1);
         //
         //
         //

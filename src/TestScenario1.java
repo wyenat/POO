@@ -10,28 +10,17 @@ public class TestScenario1 {
           // Mise en place de la simulation.
           Simulateur simu = new Simulateur(LecteurDonnees.lire(args[0]));
 
-          // Mise en place de la direction ( on ne sait pas faire mieux )
-          Direction dirN;
-          Direction dirO;
-          Direction dirE;
-          String mdirN = "NORD";
-          String mdirO = "OUEST";
-          String mdirE = "EST";
-          dirN = Direction.valueOf(mdirN);
-          dirO = Direction.valueOf(mdirO);
-          dirE = Direction.valueOf(mdirE);
-
           // Mise en place du robot
           Robot roues = simu.donnees.GetRobots()[1];
 
           // Mise en place des évenements;
-          Evenementdeplacement premierDeplacer = new Evenementdeplacement(simu, roues, dirN);
+          Evenementdeplacement premierDeplacer = new Evenementdeplacement(simu, roues, Direction.NORD);
           // intervention
-          Evenementdeplacement deuxiemeDeplacer = new Evenementdeplacement(simu, roues, dirO);
-          Evenementdeplacement troisiemeDeplacer = new Evenementdeplacement(simu, roues, dirO);
+          Evenementdeplacement deuxiemeDeplacer = new Evenementdeplacement(simu, roues, Direction.OUEST);
+          Evenementdeplacement troisiemeDeplacer = new Evenementdeplacement(simu, roues, Direction.OUEST);
           //remplir
-          Evenementdeplacement quatriemeDeplacer = new Evenementdeplacement(simu, roues, dirE);
-          Evenementdeplacement cinquiemeDeplacer = new Evenementdeplacement(simu, roues, dirE);
+          Evenementdeplacement quatriemeDeplacer = new Evenementdeplacement(simu, roues, Direction.EST);
+          Evenementdeplacement cinquiemeDeplacer = new Evenementdeplacement(simu, roues, Direction.EST);
           //Intervenir
 
 
