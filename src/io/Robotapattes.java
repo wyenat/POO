@@ -81,9 +81,9 @@ public class Robotapattes extends Robot {
     switch (C.GetNature()){
       case EAU:
         possible = false;
-        throw new IllegalArgumentException("Le robot ne peut pas aller là");
+        break;
       default:
-          break;
+        break;
     }
     return possible;
   }
