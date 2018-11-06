@@ -43,7 +43,14 @@ public class Robotdrone extends Robot{
 
   public int vider(Simulateur simu, int ligne, int colonne, int intensite){
       if (testVider(simu, ligne, colonne)){
-        return 10000;
+        if (intensite >= this.getReservoir()){
+
+          return 10000;
+        }
+        else{
+
+          return 10000-intensite;
+        }
     }
     return 0;
   }

@@ -85,7 +85,6 @@ public abstract class Robot {
           break;
 
         default:
-          System.out.println("AIE");
           break;
 
       }
@@ -146,7 +145,6 @@ public abstract class Robot {
           break;
 
         default:
-          System.out.println("AIE");
           break;
       }
       return Date;
@@ -167,9 +165,8 @@ public abstract class Robot {
           break;
 
         case PATTES:
-          Robotapattes Robot_pattes = new Robotapattes(this.GetLigne(), this.GetColonne(), this.GetVitesse());
-          Date = Robot_pattes.getDateremplir();
-          break;
+          throw new IllegalArgumentException("On ne peut pas remplir le reservoir d'un robot à pattes");
+
 
         case DRONE:
           Robotdrone Robot_drone = new Robotdrone(this.GetLigne(), this.GetColonne(), this.GetVitesse());
@@ -182,6 +179,36 @@ public abstract class Robot {
       }
       return Date;
     }
+
+    public int remplirReservoir(Simulateur simu, int ligne, int colonne){
+        int volume = 0;
+        switch (this.GetTypeRobot()) {
+            case ROUES:
+                Robotaroues Robot_roues = new Robotaroues(this.GetLigne(), this.GetColonne(), this.GetVitesse());
+                volume = Robot_roues.remplirReservoir(simu, ligne, colonne);
+                break;
+
+            case CHENILLES:
+                Robotachenilles Robot_chenilles = new Robotachenilles(this.GetLigne(), this.GetColonne(), this.GetVitesse());
+                volume = Robot_chenilles.remplirReservoir(simu, ligne, colonne);
+                break;
+
+            case PATTES:
+                throw new IllegalArgumentException("On ne peut pas remplir le reservoir d'un robot à pattes");
+
+            case DRONE:
+                Robotdrone Robot_drone = new Robotdrone(this.GetLigne(), this.GetColonne(), this.GetVitesse());
+                volume = Robot_drone.remplirReservoir(simu, ligne, colonne);
+                break;
+
+            default:
+              System.out.println("AIE");
+              break;
+        }
+        return volume;
+      }
+
+
 public int Vider(Simulateur simu,  int ligne, int colonne, int intensite){
     int volume = 0;
     switch (this.GetTypeRobot()) {

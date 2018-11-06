@@ -50,7 +50,6 @@ public class Evenementdeplacement extends Evenement {
           break;
 
           default:
-          System.out.println("AIE");
           break;
 
         }
@@ -60,7 +59,7 @@ public class Evenementdeplacement extends Evenement {
         }
     }
     else{
-      throw new IllegalArgumentException("Le robot ne peut pas sortir de la carte");
+      throw new IllegalArgumentException("Le robot ne peut pas aller la");
     }
   }
   public void deplacement(Robot robot, Case C, DonneesSimulation donnees){

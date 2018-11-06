@@ -74,7 +74,7 @@ public class Simulateur implements Simulable {
                  return false;
              }
          }
-         return false;
+         return true;
     }
 
     @Override

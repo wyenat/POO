@@ -53,10 +53,14 @@ public class TestEvenement {
           String mdir3 = "EST";
           est = Direction.valueOf(mdir3);
 
-
+          Robot pattes = simu.donnees.GetRobots()[2];
+          Robot roues = simu.donnees.GetRobots()[1];
           Robot Vivien = simu.donnees.GetRobots()[0];
 
+
           Evenementdeplacement deplacer = new Evenementdeplacement(simu, Vivien, sud);
+
+          //EvenementRemplirReservoir remplirpattes = new EvenementRemplirReservoir(simu, pattes);
 
 
           Evenementdeplacement deplacerencore = new Evenementdeplacement(simu, Vivien, sud);
@@ -69,19 +73,26 @@ public class TestEvenement {
 
           Evenementdeplacement depla = new Evenementdeplacement(simu, Vivien, ouest);
 
-          EvenementDeverserEau vide = new EvenementDeverserEau(simu, Vivien, 7, 1);
+          EvenementDeverserEau vide = new EvenementDeverserEau(simu, Vivien);
 
           Evenementdeplacement depl = new Evenementdeplacement(simu, Vivien, est);
 
           Evenementdeplacement dep = new Evenementdeplacement(simu, Vivien, est);
 
-          EvenementRemplirReservoir remplir = new EvenementRemplirReservoir(simu, Vivien, 7, 3);
+          EvenementRemplirReservoir remplir = new EvenementRemplirReservoir(simu, Vivien);
 
           Evenementdeplacement deplacerencoreencorencore = new Evenementdeplacement(simu, Vivien, ouest);
 
-           Evenementdeplacement deplacerencoreencorencore2 = new Evenementdeplacement(simu, Vivien, ouest);
+          //  Evenementdeplacement deplacerencoreencorencore2 = new Evenementdeplacement(simu, Vivien, ouest);
 
-           EvenementDeverserEau vide2 = new EvenementDeverserEau(simu, Vivien, 7, 1);
+           EvenementDeverserEau vide2 = new EvenementDeverserEau(simu, Vivien);
+
+           Evenementdeplacement de = new Evenementdeplacement(simu, roues, ouest);
+
+           Evenementdeplacement d = new Evenementdeplacement(simu, roues, ouest);
+
+
+
         //
         //
         //

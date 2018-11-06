@@ -66,17 +66,17 @@ public class Robotachenilles extends Robot {
 
 
   public int vider(Simulateur simu, int ligne, int colonne, int intensite){
-    if (testVider(simu, ligne, colonne)){
-      if (intensite >= super.getReservoir()){
-        return 20*100;
+      if (testVider(simu, ligne, colonne)){
+        if (intensite >= super.getReservoir()){
+          return 20*100;
+        }
+        else {
+          return (intensite/100)*100;
+        }
       }
-      else {
-
-        return (intensite/100 +1)*100;
-      }
+      return 0;
     }
-    return 0;
-  }
+
 
 
   public boolean testVider(Simulateur simu, int lig, int col){
@@ -91,11 +91,8 @@ public class Robotachenilles extends Robot {
       }
     }
     if (incendie_ici){
-      boolean test1 = (lig == this.GetLigne()+1)&&(this.GetColonne() == col);
-      boolean test2 = (lig == this.GetLigne()) && (this.GetColonne() == col-1);
-      boolean test3 = (lig == this.GetLigne()) && (this.GetColonne() == col+1);
-      boolean test4 = (lig == this.GetLigne()-1) && (this.GetColonne() == col);
-      return (test1 || test2 ||test3 || test4);
+      boolean test = (lig == this.GetLigne()) && (this.GetColonne() == col);
+      return test;
 
     }
     return false;
@@ -107,10 +104,10 @@ public class Robotachenilles extends Robot {
     switch (C.GetNature()){
       case EAU:
           possible = false;
-          break;
+          throw new IllegalArgumentException("Le robot ne peut pas aller là");
       case ROCHE:
           possible = false;
-          break;
+          throw new IllegalArgumentException("Le robot ne peut pas aller là");
       default:
           break;
     }

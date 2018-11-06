@@ -60,15 +60,13 @@ public class Robotaroues extends Robot {
   }
 
   public int vider(Simulateur simu, int ligne, int colonne, int intensite){
-    System.out.println("al " + testVider(simu, ligne, colonne));
+    System.out.println("al " + intensite);
     if (testVider(simu, ligne, colonne)){
       if (intensite >= super.getReservoir()){
-        System.out.println("alors " + 50*100);
         return 50*100;
       }
       else {
-        System.out.println("alors " + (intensite/100 +1)*100);
-        return (intensite/100 +1)*100;
+        return (intensite/100)*100;
       }
     }
     return 0;
@@ -101,14 +99,14 @@ public class Robotaroues extends Robot {
     switch (C.GetNature()){
       case TERRAIN_LIBRE:
           possible = true;
-          break;
+          return possible;
       case HABITAT:
           possible = true;
-          break;
+          return possible;
       default:
           break;
     }
-    return possible;
+    throw new IllegalArgumentException("Le robot ne peut pas aller là");
   }
 
 
