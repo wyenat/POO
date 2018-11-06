@@ -40,17 +40,22 @@ public class Chemin {
              Case current = copie[indice];
              for (Direction dir : Direction.values()) {
                  if (this.getSimu().donnees.GetCarte().voisinExiste(current, dir)){
+                     Case voisine = this.getSimu().donnees.GetCarte().GetVoisin(current, dir);
+                     if (!this.getRobot().test_deplacement(voisine)){
+                         System.out.println("\n \n Case interdite !");
+                         break;
+                     }
                      Integer dist = new Integer(getDistanceTemp(current, this.getSimu()));
                      dist += distance_temporelle.get(current);
-                     if (distance_temporelle.containsKey(this.getSimu().donnees.GetCarte().GetVoisin(current, dir))){
+                     if (distance_temporelle.containsKey(voisine)){
                          if (dist < distance_temporelle.get(current)){
-                             System.out.println("Temps mis à jour : " + this.getSimu().donnees.GetCarte().GetVoisin(current, dir) + ". Distance = " + dist +"s");
-                             distance_temporelle.put(this.getSimu().donnees.GetCarte().GetVoisin(current, dir), dist);
+                             System.out.println("Temps mis à jour : " + voisine + ". Distance = " + dist +"s");
+                             distance_temporelle.put(voisine, dist);
                          }
                      }
                      else{
-                         System.out.println("\n Case ajoutée : " + this.getSimu().donnees.GetCarte().GetVoisin(current, dir) + ". Distance = " + dist +"s");
-                         distance_temporelle.put(this.getSimu().donnees.GetCarte().GetVoisin(current, dir), dist);
+                         System.out.println("\n Case ajoutée : " + voisine + ". Distance = " + dist +"s");
+                         distance_temporelle.put(voisine, dist);
                      }
                  }
              }
