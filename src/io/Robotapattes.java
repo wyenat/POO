@@ -34,12 +34,10 @@ public class Robotapattes extends Robot {
 
 
   public long getDateremplir(){
-    return 0;
+    throw new IllegalArgumentException("On ne peut pas remplir le reservoir d'un robot à pattes");
   }
 
-  public int remplirReservoir(Simulateur simu, int ligne, int colonne){
-    return 0;
-  }
+
 
   public long getDatevider(){
     return 1;
@@ -50,20 +48,32 @@ public class Robotapattes extends Robot {
 
 
   public boolean testVider(Simulateur simu, int lig, int col){
-    return true;
+    Incendie[] incendies = simu.donnees.GetIncendies();
+    boolean incendie_ici = false;
+    Incendie incendie = incendies[0];
+    for (int i=0; i<incendies.length; i++){
+      if (incendies[i].GetLigne()==lig && incendies[i].GetColonne()==col){
+        incendie_ici = true;
+        incendie = incendies[i];
+
+      }
+    }
+    if (incendie_ici){
+      boolean test = (lig == this.GetLigne()) && (this.GetColonne() == col);
+      return test;
+
+    }
+    return false;
 
   }
 
-  public int Vider(Simulateur simu, int ligne, int colonne){
+  public int vider(Simulateur simu, int ligne, int colonne, int intensite){
     if (testVider(simu, ligne, colonne)){
-        return 10;
+      return intensite;
     }
     return 0;
   }
 
-  public int remplirReservoir(){
-      return -1;
-  }
 
 
   public boolean test_deplacement(Case C){
@@ -71,7 +81,7 @@ public class Robotapattes extends Robot {
     switch (C.GetNature()){
       case EAU:
         possible = false;
-        break;
+        throw new IllegalArgumentException("Le robot ne peut pas aller là");
       default:
           break;
     }

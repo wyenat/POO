@@ -33,10 +33,7 @@ public Robot getRobot(){
 
   private void setDate(long Date){
     long dateMax = 0;
-    System.out.println("#### ON RENTRE DANS LE SET ####");
-    System.out.println("Robot de this : " + this.robot);
     for (int evenement=0; evenement < simu.nb_evenements; evenement++){
-        // System.out.println("Robot de this : " + this.getRobot() + "\n Simu " + simu.Evenements[evenement].getRobot());
         if ( this.getRobot() == simu.Evenements[evenement].getRobot()){
             if ( dateMax < simu.Evenements[evenement].getDate()){
               dateMax = simu.Evenements[evenement].getDate();

@@ -30,7 +30,6 @@ public class Robotdrone extends Robot{
   }
 
   public int remplirReservoir(Simulateur simu, int lig, int col){
-    System.out.println(this.testRemplir(simu, lig, col));
     if (testRemplir(simu, lig, col)){
       return 10000;
     }
@@ -42,9 +41,16 @@ public class Robotdrone extends Robot{
   }
 
 
-  public int Vider(Simulateur simu, int ligne, int colonne){
+  public int vider(Simulateur simu, int ligne, int colonne, int intensite){
       if (testVider(simu, ligne, colonne)){
-        return 10000;
+        if (intensite >= this.getReservoir()){
+
+          return 10000;
+        }
+        else{
+
+          return 10000-intensite;
+        }
     }
     return 0;
   }

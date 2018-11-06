@@ -57,11 +57,14 @@ public class Incendie{
       //         (taille_case*9)/10 //diamètre
       //     )
       //)
+      if (this.GetIntensite() == 0){
+        return;
+      }
       int x = taille_case/5 + (this.GetLigne())* taille_case;
       int y =  taille_case/5 + (this.GetColonne())* taille_case;
       int taille = 4 * taille_case/5;
       gui.addGraphicalElement(new ImageElement(y, x, "img/flammes.png", taille, taille, new Canvas()));
-      ;
+      
   }
 
 }

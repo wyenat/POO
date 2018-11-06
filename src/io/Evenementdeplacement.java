@@ -30,37 +30,36 @@ public class Evenementdeplacement extends Evenement {
         boolean possible = false;
         switch (this.robot.GetTypeRobot()) {
           case ROUES:
-          Robotaroues Robot_roue = new Robotaroues(this.robot.GetLigne(), this.robot.GetColonne(), this.robot.GetVitesse());
+          Robotaroues Robot_roue = new Robotaroues(robot.GetLigne(), robot.GetColonne(), robot.GetVitesse());
           possible = Robot_roue.test_deplacement(this.Case);
           break;
 
           case CHENILLES:
-          Robotachenilles Robot_chenille = new Robotachenilles(this.robot.GetLigne(), this.robot.GetColonne(), this.robot.GetVitesse());
+          Robotachenilles Robot_chenille = new Robotachenilles(robot.GetLigne(), robot.GetColonne(), robot.GetVitesse());
           possible = Robot_chenille.test_deplacement(this.Case);
           break;
 
           case PATTES:
-          Robotapattes Robot_pattes = new Robotapattes(this.robot.GetLigne(), this.robot.GetColonne(), this.robot.GetVitesse());
+          Robotapattes Robot_pattes = new Robotapattes(robot.GetLigne(), robot.GetColonne(), robot.GetVitesse());
           possible = Robot_pattes.test_deplacement(this.Case);
           break;
 
           case DRONE:
-          Robotdrone Robot_drone = new Robotdrone(this.robot.GetLigne(), this.robot.GetColonne(), this.robot.GetVitesse());
+          Robotdrone Robot_drone = new Robotdrone(robot.GetLigne(), robot.GetColonne(), robot.GetVitesse());
           possible = Robot_drone.test_deplacement(this.Case);
           break;
 
           default:
-          System.out.println("AIE");
           break;
 
         }
 
         if (possible){
-          this.robot.setPosition(this.Case);
+          super.getRobot().setPosition(this.Case);
         }
     }
     else{
-      throw new IllegalArgumentException("Le robot ne peut pas sortir de la carte");
+      throw new IllegalArgumentException("Le robot ne peut pas aller la");
     }
   }
   public void deplacement(Robot robot, Case C, DonneesSimulation donnees){
