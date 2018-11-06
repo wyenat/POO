@@ -13,7 +13,7 @@ public class EvenementDeverserEau extends Evenement {
   }
 
   public void execute(){
-
+      super.execute();
       Robot robot = super.getRobot();
       int ligne = robot.GetLigne();
       int colonne = robot.GetColonne();

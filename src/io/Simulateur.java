@@ -74,7 +74,7 @@ public class Simulateur implements Simulable {
                  return false;
              }
          }
-         return true;
+         return false;
     }
 
     @Override
@@ -82,14 +82,17 @@ public class Simulateur implements Simulable {
       /**
        * Avance la simulation d'un pas de temps
        */
+
        if (simulationTerminee()){
        }
        else{
+          System.out.println("etat : " + this.donnees.GetRobots()[1].getEtat());
           this.time += this.pas;
           System.out.println("time = " + this.time);
           executeEvenements();
           draw();
       }
+
     }
 
     @Override

@@ -20,12 +20,14 @@ public abstract class Robot {
   private double vitesse_deplacement;
   private int reservoir;
   private TypeRobot type;
+  private Etat etat;
 
   public Robot(int lig, int col, double vitesse_deplacement){
     this.ligne = lig;
     this.colonne = col;
     this.vitesse_deplacement = vitesse_deplacement;
     this.reservoir = 0; //Absurde car c'est pas lui qui remplit
+    this.etat = Etat.LIBRE;
   }
 
     public int GetLigne(){
@@ -34,6 +36,15 @@ public abstract class Robot {
 
     public int GetColonne(){
         return this.colonne;
+    }
+
+    public Etat getEtat(){
+        return this.etat;
+    }
+
+
+    public void setEtat(Etat etat){
+        this.etat = etat;
     }
 
     public void setLigne(int ligne){

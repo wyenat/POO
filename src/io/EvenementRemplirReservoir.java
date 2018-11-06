@@ -11,6 +11,7 @@ public class EvenementRemplirReservoir extends Evenement {
   }
 
   public void execute(){
+    super.execute();
     int ligne = super.getRobot().GetLigne();
     int colonne = super.getRobot().GetColonne();
     int volume = super.getRobot().remplirReservoir(super.getSimu(), ligne, colonne);
