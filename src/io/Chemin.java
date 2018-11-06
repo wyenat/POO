@@ -20,7 +20,7 @@ public class Chemin {
          * Calcule le temps que met le robot à aller à une autre case depuis
          * la case départ
          */
-         return ((int) simu.donnees.GetCarte().GetTailleCases()/ (int) this.getRobot().GetVitesse());
+         return (simu.donnees.GetCarte().GetTailleCases()/ (int) this.getRobot().GetVitesse());
     }
 
     private void iterer(Map<Case, Integer> distance_temporelle, Map<Case, LinkedList<Case>> chemin_jusqua_case){
@@ -28,14 +28,30 @@ public class Chemin {
          * Itère une fois
          */
          Iterator<Case> cases = distance_temporelle.keySet().iterator();
-         for (int indice = distance_temporelle.keySet().size(); indice>0; indice--){
-             Case current = cases.next();
-             System.out.println(current);
+         // Copie de l'itérateur pour éviter java.util.ConcurrentModificationException
+         // Si meilleur solution je suis preneur
+         int size = distance_temporelle.keySet().size();
+         Case[] copie = new Case[size];
+         for (int indice = size; indice>0; indice--){
+             copie[size-indice] = cases.next();
+         }
+         // fin copie
+         for (int indice = 0; indice<size; indice++){
+             Case current = copie[indice];
              for (Direction dir : Direction.values()) {
                  if (this.getSimu().donnees.GetCarte().voisinExiste(current, dir)){
-                     System.out.println("Il y a un voisin de " + current.toString() + "à " + dir.toString());
                      Integer dist = new Integer(getDistanceTemp(current, this.getSimu()));
-                     distance_temporelle.put(this.getSimu().donnees.GetCarte().GetVoisin(current, dir), dist);
+                     dist += distance_temporelle.get(current);
+                     if (distance_temporelle.containsKey(this.getSimu().donnees.GetCarte().GetVoisin(current, dir))){
+                         if (dist < distance_temporelle.get(current)){
+                             System.out.println("Temps mis à jour : " + this.getSimu().donnees.GetCarte().GetVoisin(current, dir) + ". Distance = " + dist +"s");
+                             distance_temporelle.put(this.getSimu().donnees.GetCarte().GetVoisin(current, dir), dist);
+                         }
+                     }
+                     else{
+                         System.out.println("\n Case ajoutée : " + this.getSimu().donnees.GetCarte().GetVoisin(current, dir) + ". Distance = " + dist +"s");
+                         distance_temporelle.put(this.getSimu().donnees.GetCarte().GetVoisin(current, dir), dist);
+                     }
                  }
              }
          }
@@ -59,10 +75,20 @@ public class Chemin {
           Case depart = this.getDepart();
           Case arrivee = this.getArrivee();
           int taille_tableau = this.getSimu().donnees.GetCarte().GetNbLignes()* this.getSimu().donnees.GetCarte().GetNbColonnes();
-          ArrayList<LinkedList<Case>> tableau_de_chemin = new ArrayList(taille_tableau);
+          ArrayList<LinkedList<Case>> tableau_de_chemin = new ArrayList<LinkedList<Case>>(taille_tableau);
           distance_temporelle.put(depart, 0);
-          this.iterer(distance_temporelle, chemin_jusqua_case);
-          this.iterer(distance_temporelle, chemin_jusqua_case);
+          int i=0;
+          while (this.nonFini(i++)){
+              this.iterer(distance_temporelle, chemin_jusqua_case);
+          }
+    }
+
+    private boolean nonFini(int i){
+        /**
+         * Vérifie si on a encore besoin d'itérer
+         * TODO, là c'est un truc merdique pour boucler trkl
+         */
+         return (i!=5);
     }
 
     // Set et get...

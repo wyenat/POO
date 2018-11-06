@@ -10,7 +10,7 @@ public class TestChemin {
           Simulateur simu = new Simulateur(LecteurDonnees.lire(args[0]));
           Case depart = simu.donnees.GetCarte().GetTableauDeCases()[0];
           Case arrivee = simu.donnees.GetCarte().GetTableauDeCases()[1];
-          Robot robot = simu.donnees.GetRobots()[0];
+          Robot robot = simu.donnees.GetRobots()[1];
           Chemin route = new Chemin(depart, arrivee, robot, simu);
           route.calculer();
         }
