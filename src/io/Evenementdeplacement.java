@@ -30,22 +30,22 @@ public class Evenementdeplacement extends Evenement {
         boolean possible = false;
         switch (this.robot.GetTypeRobot()) {
           case ROUES:
-          Robotaroues Robot_roue = new Robotaroues(this.robot.GetLigne(), this.robot.GetColonne(), this.robot.GetVitesse());
+          Robotaroues Robot_roue = new Robotaroues(robot.GetLigne(), robot.GetColonne(), robot.GetVitesse());
           possible = Robot_roue.test_deplacement(this.Case);
           break;
 
           case CHENILLES:
-          Robotachenilles Robot_chenille = new Robotachenilles(this.robot.GetLigne(), this.robot.GetColonne(), this.robot.GetVitesse());
+          Robotachenilles Robot_chenille = new Robotachenilles(robot.GetLigne(), robot.GetColonne(), robot.GetVitesse());
           possible = Robot_chenille.test_deplacement(this.Case);
           break;
 
           case PATTES:
-          Robotapattes Robot_pattes = new Robotapattes(this.robot.GetLigne(), this.robot.GetColonne(), this.robot.GetVitesse());
+          Robotapattes Robot_pattes = new Robotapattes(robot.GetLigne(), robot.GetColonne(), robot.GetVitesse());
           possible = Robot_pattes.test_deplacement(this.Case);
           break;
 
           case DRONE:
-          Robotdrone Robot_drone = new Robotdrone(this.robot.GetLigne(), this.robot.GetColonne(), this.robot.GetVitesse());
+          Robotdrone Robot_drone = new Robotdrone(robot.GetLigne(), robot.GetColonne(), robot.GetVitesse());
           possible = Robot_drone.test_deplacement(this.Case);
           break;
 
@@ -56,7 +56,7 @@ public class Evenementdeplacement extends Evenement {
         }
 
         if (possible){
-          this.robot.setPosition(this.Case);
+          super.getRobot().setPosition(this.Case);
         }
     }
     else{

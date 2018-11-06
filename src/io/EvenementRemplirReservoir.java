@@ -32,7 +32,6 @@ public class EvenementRemplirReservoir extends Evenement {
             break;
 
         case DRONE:
-            System.out.println("AAAAAh");
             Robotdrone Robot_drone = new Robotdrone(super.getRobot().GetLigne(), super.getRobot().GetColonne(), super.getRobot().GetVitesse());
             volume = Robot_drone.remplirReservoir(super.getSimu(), this.ligne, this.colonne);
             break;

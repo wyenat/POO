@@ -54,9 +54,9 @@ public class Robotapattes extends Robot {
 
   }
 
-  public int Vider(Simulateur simu, int ligne, int colonne){
+  public int vider(Simulateur simu, int ligne, int colonne, int intensite){
     if (testVider(simu, ligne, colonne)){
-        return 10;
+      return intensite;
     }
     return 0;
   }

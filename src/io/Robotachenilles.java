@@ -64,9 +64,16 @@ public class Robotachenilles extends Robot {
     return 8;
   }
 
-  public int Vider(Simulateur simu, int ligne, int colonne){
+
+  public int vider(Simulateur simu, int ligne, int colonne, int intensite){
     if (testVider(simu, ligne, colonne)){
-      return 100;
+      if (intensite >= super.getReservoir()){
+        return 20*100;
+      }
+      else {
+
+        return (intensite/100 +1)*100;
+      }
     }
     return 0;
   }

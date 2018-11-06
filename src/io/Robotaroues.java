@@ -59,9 +59,17 @@ public class Robotaroues extends Robot {
     return 5;
   }
 
-  public int Vider(Simulateur simu, int ligne, int colonne){
+  public int vider(Simulateur simu, int ligne, int colonne, int intensite){
+    System.out.println("al " + testVider(simu, ligne, colonne));
     if (testVider(simu, ligne, colonne)){
-        return 100;
+      if (intensite >= super.getReservoir()){
+        System.out.println("alors " + 50*100);
+        return 50*100;
+      }
+      else {
+        System.out.println("alors " + (intensite/100 +1)*100);
+        return (intensite/100 +1)*100;
+      }
     }
     return 0;
   }
@@ -81,12 +89,9 @@ public class Robotaroues extends Robot {
     }
     if (incendie_ici){
 
-      boolean test1 = (this.GetLigne() == incendie.GetLigne()+1)&&(this.GetColonne() == incendie.GetColonne());
-      boolean test2 = (this.GetLigne() == incendie.GetLigne()) && (this.GetColonne() == incendie.GetColonne()-1);
-      boolean test3 = (this.GetLigne() == incendie.GetLigne()) && (this.GetColonne() == incendie.GetColonne()+1);
-      boolean test4 = (this.GetLigne() == incendie.GetLigne()-1) && (this.GetColonne() == incendie.GetColonne());
+      boolean test = (this.GetLigne() == incendie.GetLigne()) && (this.GetColonne() == incendie.GetColonne());
 
-      return (test1 || test2 ||test3 || test4);
+      return test;
     }
     return false;
   }

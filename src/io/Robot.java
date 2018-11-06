@@ -182,7 +182,35 @@ public abstract class Robot {
       }
       return Date;
     }
+public int Vider(Simulateur simu,  int ligne, int colonne, int intensite){
+    int volume = 0;
+    switch (this.GetTypeRobot()) {
+      case ROUES:
+        Robotaroues Robot_roue = new Robotaroues(this.GetLigne(), this.GetColonne(), this.GetVitesse());
+        volume = Robot_roue.vider(simu, ligne, colonne, intensite);
+        break;
 
+      case CHENILLES:
+        Robotachenilles Robot_chenille = new Robotachenilles(this.GetLigne(), this.GetColonne(), this.GetVitesse());
+        volume = Robot_chenille.vider(simu, ligne, colonne, intensite);
+        break;
+
+      case PATTES:
+        Robotapattes Robot_pattes = new Robotapattes(this.GetLigne(), this.GetColonne(), this.GetVitesse());
+        volume = Robot_pattes.vider(simu, ligne, colonne, intensite);
+        break;
+
+      case DRONE:
+        Robotdrone Robot_drone = new Robotdrone(this.GetLigne(), this.GetColonne(), this.GetVitesse());
+        volume = Robot_drone.vider(simu, ligne, colonne, intensite);
+        break;
+
+      default:
+        System.out.println("AIE");
+        break;
+    }
+    return volume;
+  }
 
     @Override
     public String toString(){
