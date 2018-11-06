@@ -91,6 +91,36 @@ public abstract class Robot {
       this.setVitesse(vitesse);
     }
 
+
+    public boolean test_deplacement(Case C){
+      boolean boo = false;
+      switch (this.GetTypeRobot()) {
+        case ROUES:
+          Robotaroues Robot_roue = new Robotaroues(this.GetLigne(), this.GetColonne(), this.GetVitesse());
+          boo = Robot_roue.test_deplacement(C);
+          break;
+
+        case CHENILLES:
+          Robotachenilles Robot_chenille = new Robotachenilles(this.GetLigne(), this.GetColonne(), this.GetVitesse());
+          boo = Robot_chenille.test_deplacement(C);
+          break;
+
+        case PATTES:
+          Robotapattes Robot_pattes = new Robotapattes(this.GetLigne(), this.GetColonne(), this.GetVitesse());
+          boo = Robot_pattes.test_deplacement(C);
+          break;
+
+        case DRONE:
+          Robotdrone Robot_drone = new Robotdrone(this.GetLigne(), this.GetColonne(), this.GetVitesse());
+          boo = Robot_drone.test_deplacement(C);
+          break;
+
+        default:
+          break;
+      }
+      return boo;
+    }
+
     public TypeRobot GetTypeRobot(){
       return this.type;
     }

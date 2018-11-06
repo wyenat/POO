@@ -106,7 +106,7 @@ public class Robotaroues extends Robot {
       default:
           break;
     }
-    throw new IllegalArgumentException("Le robot ne peut pas aller là");
+    return possible;
   }
 
 
