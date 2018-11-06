@@ -7,6 +7,7 @@ public class Chemin {
     private Case arrivee;
     private Robot robot;
     private Simulateur simu;
+    private LinkedList<Case> liste_cases; //correspond au chemin final
 
     public Chemin(Case d, Case a, Robot r, Simulateur s){
         this.setDepart(d);
@@ -21,6 +22,14 @@ public class Chemin {
          * la case départ
          */
          return (simu.donnees.GetCarte().GetTailleCases()/ (int) this.getRobot().GetVitesse());
+    }
+
+    public LinkedList<Case> GetListeCases(){
+        return this.liste_cases;
+    }
+
+    public void SetListeCases(LinkedList<Case> liste){
+        this.liste_cases = liste;
     }
 
     private void iterer(Map<Case, Integer> distance_temporelle, Map<Case, LinkedList<Case>> chemin_jusqua_case){
@@ -44,6 +53,7 @@ public class Chemin {
              for (Direction dir : Direction.values()) {
                  if (this.getSimu().donnees.GetCarte().voisinExiste(current, dir)){
                      // On vérifie que le robot peut bien se déplacer sur la case voisine
+                     Case voisine = this.simu.donnees.GetCarte().GetVoisin(current, dir);
                      if (!this.getRobot().test_deplacement(voisine)){
                          System.out.println("\n \n Case interdite !");
                          break;
@@ -72,32 +82,37 @@ public class Chemin {
 
     public void calculer(){
         /**
-         * Calcule le plus court chemin entre d et a, et crée les évènements
-         * pour que le robot s'y déplace effectivement.
+         * Calcule le plus court chemin entre d et a
          *
          * La méthode de calcul est la suivante :
          * - On crée un dictionnaire, qui associe à chaque case sa distance
          *   temporelle à la case de départ.
          * - On la complète en parcourant la carte.
          * - On la retourne lorsque l'itération ne modifie pas le dictionnaire.
-         * On stoque en parallèle le chemin pour accéder à la case dans un autre
+         * On stocke en parallèle le chemin pour accéder à la case dans un autre
          * dictionnaire, sous la forme d'une queue.
          */
          Case depart = this.getDepart();
          Case arrivee = this.getArrivee();
-          // Création du dictionnaire contenant le temps pour aller dans toutes les autres cases depuis le départ
-          Map<Case, Integer> distance_temporelle = new HashMap<Case, Integer> ();
-          distance_temporelle.put(depart, 0);
-          // Création du dictionnaire contenant la file des cases à parcourir pour aller à la case voulue depuis le départ
-          // en temps optimal
-          Map<Case, LinkedList<Case>> chemin_jusqua_case = new HashMap<Case, LinkedList<Case>> ();
-          int taille_tableau = this.getSimu().donnees.GetCarte().GetNbLignes()* this.getSimu().donnees.GetCarte().GetNbColonnes();
-          ArrayList<LinkedList<Case>> tableau_de_chemin = new ArrayList<LinkedList<Case>>(taille_tableau);
-          // Début de l'itération
-          int i=0;
-          while (this.nonFini(i++)){
-              this.iterer(distance_temporelle, chemin_jusqua_case);
-          }
+         // Création du dictionnaire contenant le temps pour aller dans toutes les autres cases depuis le départ
+         Map<Case, Integer> distance_temporelle = new HashMap<Case, Integer> ();
+         distance_temporelle.put(depart, 0);
+         // Création du dictionnaire contenant la file des cases à parcourir pour aller à la case voulue depuis le départ
+         // en temps optimal
+         Map<Case, LinkedList<Case>> chemin_jusqua_case = new HashMap<Case, LinkedList<Case>> ();
+         int taille_tableau = this.getSimu().donnees.GetCarte().GetNbLignes()* this.getSimu().donnees.GetCarte().GetNbColonnes();
+         // Début de l'itération
+         int i=0;
+         while (this.nonFini(i++)){
+             this.iterer(distance_temporelle, chemin_jusqua_case);
+         }
+
+         this.SetListeCases(chemin_jusqua_case.get(arrivee));
+    }
+
+    public void deplacement(){
+        /*Création des événements pour que le robot se déplace*/
+
     }
 
     private boolean nonFini(int i){
