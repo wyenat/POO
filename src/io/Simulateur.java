@@ -66,16 +66,31 @@ public class Simulateur implements Simulable {
          }
     }
 
+    public boolean simulationTerminee(){
+        /**
+         * Retourne true s'il n'y a plus d'évènements en cours
+         */
+         for (int i=0; i<nb_evenements; i++){
+             if (this.time <= this.Evenements[i].getDate()){
+                 return false;
+             }
+         }
+         return false;
+    }
 
     @Override
     public void next() {
       /**
        * Avance la simulation d'un pas de temps
        */
-      this.time += this.pas;
-      System.out.println("time = " + this.time);
-      executeEvenements();
-      draw();
+       if (simulationTerminee()){
+       }
+       else{
+          this.time += this.pas;
+          System.out.println("time = " + this.time);
+          executeEvenements();
+          draw();
+      }
     }
 
     @Override

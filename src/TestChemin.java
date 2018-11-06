@@ -12,8 +12,8 @@ public class TestChemin {
           Case arrivee = simu.donnees.GetCarte().GetTableauDeCases()[1];
           Robot robot = simu.donnees.GetRobots()[0];
           Chemin route = new Chemin(depart, arrivee, robot, simu);
+          route.calculer();
         }
-
           // Partie levée d'exception
           catch (FileNotFoundException e) {
             System.out.println("fichier " + args[0] + " inconnu ou illisible");
