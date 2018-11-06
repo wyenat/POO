@@ -17,10 +17,9 @@ public class TestScenario0 {
           Robot drone = simu.donnees.GetRobots()[0];
 
           // Mise en place des évenements;
-          Evenementdeplacement premierDeplacer = new Evenementdeplacement(simu, drone, dir);
-          Evenementdeplacement deuxiemeDeplacer = new Evenementdeplacement(simu, drone, dir);
-          Evenementdeplacement troisiemeDeplacer = new Evenementdeplacement(simu, drone, dir);
-          Evenementdeplacement quatriemeDeplacer = new Evenementdeplacement(simu, drone, dir);
+          for (int i=0; i<4; i++){
+              Evenementdeplacement premierDeplacer = new Evenementdeplacement(simu, drone, dir);
+            }
         }
         // Partie levée d'exception
         catch (FileNotFoundException e) {

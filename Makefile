@@ -48,8 +48,8 @@ scenar1:
 	java -classpath bin:bin/* TestScenario1 cartes/carteSujet.map
 
 chemin:
-	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestChemin.java
-	java -classpath bin:bin/* TestChemin cartes/carteSujet.map
+	javac -d bin -classpath bin/gui.jar -Xlint -sourcepath src src/TestChemin.java
+	java -classpath bin:bin/*  TestChemin cartes/carteSujet.map
 
 clean:
 	rm -rf bin/*.class
