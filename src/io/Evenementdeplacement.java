@@ -37,7 +37,7 @@ public class Evenementdeplacement extends Evenement {
       throw new IllegalArgumentException("Le robot ne peut pas aller la");
     }
   }
-  
+
 
     @Override
     public String toString(){

@@ -13,6 +13,7 @@ public Evenement(Robot robot, Simulateur simulation, long Datefin){
     this.simu = simulation;
     this.robot = robot;
     this.setDate(Datefin);
+    this.robot.setEtat(Etat.OCCUPE);
     // this.Events = new void[1000];
     // this.nombre_evenements = 0;
     // this.getSimu().addEvenement(this);
@@ -47,6 +48,19 @@ public Robot getRobot(){
       /**
        * Ne fait absolument rien ptdr
        */
+       long dateMax = 0;
+       for (int evenement=0; evenement < simu.nb_evenements; evenement++){
+           if ( this.getRobot() == simu.Evenements[evenement].getRobot()){
+               if ( dateMax < simu.Evenements[evenement].getDate()){
+                 dateMax = simu.Evenements[evenement].getDate();
+               }
+           }
+       }
+       System.out.println("Date: " + dateMax + "temps : " + this.simu.time);
+       if (dateMax <= this.simu.time + this.simu.pas){
+          this.getRobot().setEtat(Etat.LIBRE);
+       }
+
   }
 
   public long getDate(){
