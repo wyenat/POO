@@ -32,7 +32,7 @@ public class Simulateur implements Simulable {
         /*Lecture des données de simulation */
         this.donnees = data;
         this.time = 0;
-        this.pas = 20; //Pour l'instant je le set à 20.
+        this.pas = 1 + this.donnees.GetCarte().GetTailleCases()/500;
         this.nb_evenements = 0;
         draw();
     }

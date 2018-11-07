@@ -7,13 +7,18 @@ public class Chemin {
     private Case arrivee;
     private Robot robot;
     private Simulateur simu;
+    private long temps;
     private LinkedList<Case> liste_cases; //correspond au chemin final
+    public boolean possible;
 
     public Chemin(Case d, Case a, Robot r, Simulateur s){
         this.setDepart(d);
         this.setArrivee(a);
         this.setRobot(r);
         this.setSimu(s);
+        this.setTemps(0);
+        this.possible = false;
+        this.calculer();
     }
 
     private int getDistanceTemp(Case courante, Simulateur simu){
@@ -24,13 +29,6 @@ public class Chemin {
          return (simu.donnees.GetCarte().GetTailleCases()/ (int) this.getRobot().GetVitesse());
     }
 
-    public LinkedList<Case> GetListeCases(){
-        return this.liste_cases;
-    }
-
-    public void SetListeCases(LinkedList<Case> liste){
-        this.liste_cases = liste;
-    }
 
     private void iterer(Map<Case, Integer> distance_temporelle, Map<Case, LinkedList<Case>> chemin_jusqua_case){
         /**
@@ -51,12 +49,13 @@ public class Chemin {
              Case current = copie[indice];
              // On vérifie que les voisins existent dans la direction dir
              for (Direction dir : Direction.values()) {
+                //  System.out.println("Voisin de " + current + " à " + dir + " existe : " + this.getSimu().donnees.GetCarte().voisinExiste(current, dir));
                  if (this.getSimu().donnees.GetCarte().voisinExiste(current, dir)){
                      // On vérifie que le robot peut bien se déplacer sur la case voisine
                      Case voisine = this.simu.donnees.GetCarte().GetVoisin(current, dir);
                      if (!this.getRobot().test_deplacement(voisine)){
-                         System.out.println("Case interdite !");
-                         break;
+                        //  System.out.println("Case interdite !");
+                         continue;
                      }
                      // On calcule le temps qu'il faut pour aller à la case voisine
                      Integer dist = new Integer(getDistanceTemp(current, this.getSimu()));
@@ -66,21 +65,31 @@ public class Chemin {
                      if (distance_temporelle.containsKey(voisine)){
                          if (dist < distance_temporelle.get(current)){
                              // Le temps est plus petit : un nouveau chemin est trouvé, et plus rapide
-                             System.out.println("Temps mis à jour : " + voisine + ". Distance = " + dist +"s");
+                            //  System.out.println("Temps mis à jour : " + voisine + ". Distance = " + dist +"s");
                              distance_temporelle.put(voisine, dist);
                          }
                      }
                      else{
                          // On ajoute dans le dico la case.
-                         System.out.println("Case ajoutée : " + voisine + ". Distance = " + dist +"s");
+                        //  System.out.println("Case ajoutée : " + voisine + ". Distance = " + dist +"s");
                          distance_temporelle.put(voisine, dist);
+                         LinkedList<Case> chem = chemin_jusqua_case.get(current);
+                         LinkedList<Case> nouv = new LinkedList<Case>();
+                         int n = chem.size();
+                         for (int indice_copie=0; indice_copie < n; indice_copie++){
+                             nouv.add(chem.get(indice_copie));
+                         }
+                         nouv.add(voisine);
+                         chemin_jusqua_case.put(voisine, nouv);
+                        //  System.out.println("\n \n ALLER EN CASE : "+ voisine);
+                        //  afficherTrajet(chem);
                      }
                  }
              }
          }
      }
 
-    public void calculer(){
+    private void calculer(){
         /**
          * Calcule le plus court chemin entre d et a
          *
@@ -103,15 +112,82 @@ public class Chemin {
          int taille_tableau = this.getSimu().donnees.GetCarte().GetNbLignes()* this.getSimu().donnees.GetCarte().GetNbColonnes();
          // Début de l'itération
          int i=0;
+         LinkedList<Case> chemin_initial = new LinkedList<Case>();
+         chemin_jusqua_case.put(depart, chemin_initial);
          while (this.nonFini(i++)){
              this.iterer(distance_temporelle, chemin_jusqua_case);
          }
-         this.SetListeCases(chemin_jusqua_case.get(arrivee));
+         this.possible = chemin_jusqua_case.containsKey(arrivee);
+         System.out.println(this.possible);
+         if (this.possible){
+             this.setTemps(distance_temporelle.get(arrivee));
+             System.out.println(chemin_jusqua_case.get(arrivee));
+             this.SetListeCases(chemin_jusqua_case.get(arrivee));
+         }
     }
 
-    public void deplacement(LinkedList<Case> parcourt){
+    public void deplacement(){
         /*Création des événements pour que le robot se déplace*/
-        
+        Case prece = this.getSimu().donnees.GetCarte().GetTableauDeCases()[this.getRobot().GetLigne()* this.getSimu().donnees.GetCarte().GetNbColonnes()+this.getRobot().GetColonne()];
+        LinkedList<Case> parcourt = this.GetListeCases();
+        int n = parcourt.size();
+        for (int indice=0; indice < n; indice++){
+            Direction dir = trouverDirection(this.getSimu(), prece, parcourt.get(indice));
+            prece = parcourt.get(indice);
+            Evenementdeplacement deplacement = new Evenementdeplacement(this.getSimu(), this.getRobot(), dir);
+            System.out.println(dir);
+        }
+    }
+
+    public void afficherTrajet(LinkedList<Case> trajet){
+        int n = trajet.size();
+        for (int indice=0; indice < n; indice++){
+            System.out.println(trajet.get(indice));
+        }
+    }
+
+    private Direction trouverDirection(Simulateur simu, Case prece, Case endroit){
+        int ligne_robot = prece.GetLigne();
+        int col_robot = prece.GetColonne();
+        Direction dir = Direction.SUD;
+        int diff_ligne  = ligne_robot - endroit.GetLigne();
+        int diff_col = col_robot - endroit.GetColonne();
+        if (diff_ligne == 1){dir = Direction.NORD;}
+        if (diff_col == 1){dir = Direction.OUEST;}
+        if (diff_col == -1){dir = Direction.EST;}
+        System.out.println("diff_col = " + diff_col + " diff_ligne = " + diff_ligne);
+        return dir;
+        // if ((ligne_robot - endroit.GetLigne() != 0 & col_robot - endroit.GetColonne() == 0 ) | (ligne_robot - endroit.GetLigne() ==0 & col_robot - endroit.GetColonne() !=0)){
+        //     switch(ligne_robot - endroit.GetLigne()){
+        //         case 1:
+        //              dir = Direction.NORD;
+        //              break;
+        //         case -1:
+        //              dir = Direction.SUD;
+        //              break;
+        //         case 0:
+        //              switch(col_robot - endroit.GetColonne()){
+        //                  case 1:
+        //                      dir = Direction.OUEST;
+        //                      break;
+        //                  case -1:
+        //                      dir = Direction.EST;
+        //                      break;
+        //                  case 0:
+        //                     throw new IllegalArgumentException("Déplacement sur même case");
+        //                  default:
+        //                     throw new IllegalArgumentException("Colonne : Il faut donner une case voisine !" + col_robot);
+        //              }
+        //              break;
+        //         default:
+        //           throw new IllegalArgumentException("Ligne : Il faut donner une case voisine !" + ligne_robot);
+        //         }
+        // // }
+        // // else{
+        // //     // throw new IllegalArgumentException("Diagonale !");
+        // //     System.out.println("diago :)");
+        // // }
+        // return dir;
     }
 
     private boolean nonFini(int i){
@@ -120,7 +196,7 @@ public class Chemin {
          * TODO, là c'est un truc merdique pour boucler trkl
          * N'itère plus quand le tableau chemin_jusqua_case est stable par itération
          */
-         return (i!=20);
+         return (i!=64);
     }
 
     // Set et get...
@@ -154,6 +230,22 @@ public class Chemin {
 
     public Simulateur getSimu(){
     return this.simu;
+    }
+
+    public LinkedList<Case> GetListeCases(){
+        return this.liste_cases;
+    }
+
+    public void SetListeCases(LinkedList<Case> liste){
+        this.liste_cases = liste;
+    }
+
+    public long getTemps(){
+        return this.temps;
+    }
+
+    public void setTemps(long time){
+        this.temps = time;
     }
     // Fin set et get...
 }
