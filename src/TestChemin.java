@@ -8,11 +8,12 @@ public class TestChemin {
         try {
           // Mise en place de la simulation.
           Simulateur simu = new Simulateur(LecteurDonnees.lire(args[0]));
-          Case depart = simu.donnees.GetCarte().GetTableauDeCases()[0];
-          Case arrivee = simu.donnees.GetCarte().GetTableauDeCases()[1];
           Robot robot = simu.donnees.GetRobots()[1];
+          Case depart = simu.donnees.GetCarte().GetTableauDeCases()[robot.GetLigne()*simu.donnees.GetCarte().GetNbLignes()+robot.GetColonne()];
+          Case arrivee = simu.donnees.GetCarte().GetTableauDeCases()[57];
+          System.out.println("On va de " + depart + " vers " + arrivee);
           Chemin route = new Chemin(depart, arrivee, robot, simu);
-          route.calculer();
+          route.deplacement();
         }
           // Partie levée d'exception
           catch (FileNotFoundException e) {
