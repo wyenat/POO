@@ -55,7 +55,7 @@ public class Chemin {
                      // On vérifie que le robot peut bien se déplacer sur la case voisine
                      Case voisine = this.simu.donnees.GetCarte().GetVoisin(current, dir);
                      if (!this.getRobot().test_deplacement(voisine)){
-                         System.out.println("\n \n Case interdite !");
+                         System.out.println("Case interdite !");
                          break;
                      }
                      // On calcule le temps qu'il faut pour aller à la case voisine
@@ -72,7 +72,7 @@ public class Chemin {
                      }
                      else{
                          // On ajoute dans le dico la case.
-                         System.out.println("\n Case ajoutée : " + voisine + ". Distance = " + dist +"s");
+                         System.out.println("Case ajoutée : " + voisine + ". Distance = " + dist +"s");
                          distance_temporelle.put(voisine, dist);
                      }
                  }
@@ -106,13 +106,12 @@ public class Chemin {
          while (this.nonFini(i++)){
              this.iterer(distance_temporelle, chemin_jusqua_case);
          }
-
          this.SetListeCases(chemin_jusqua_case.get(arrivee));
     }
 
-    public void deplacement(){
+    public void deplacement(LinkedList<Case> parcourt){
         /*Création des événements pour que le robot se déplace*/
-
+        
     }
 
     private boolean nonFini(int i){

@@ -51,6 +51,10 @@ chemin:
 	javac -d bin -classpath bin/gui.jar -Xlint -sourcepath src src/TestChemin.java
 	java -classpath bin:bin/*  TestChemin cartes/carteSujet.map
 
+chef:
+	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestchefPompier.java
+	java -classpath bin:bin/*  TestchefPompier cartes/carteSujet.map
+
 clean:
 	rm -rf bin/*.class
 	rm -rf bin/io/*.class
