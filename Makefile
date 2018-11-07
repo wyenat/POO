@@ -52,8 +52,8 @@ chemin:
 	java -classpath bin:bin/*  TestChemin cartes/carteSujet.map
 
 chef:
-	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestchefPompier.java
-	java -classpath bin:bin/*  TestchefPompier cartes/carteSujet.map
+	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestChefPompier.java
+	java -classpath bin:bin/*  TestChefPompier cartes/carteSujet.map
 
 clean:
 	rm -rf bin/*.class

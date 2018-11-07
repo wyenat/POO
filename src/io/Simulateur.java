@@ -86,7 +86,6 @@ public class Simulateur implements Simulable {
        if (simulationTerminee()){
        }
        else{
-          System.out.println("etat : " + this.donnees.GetRobots()[1].getEtat());
           this.time += this.pas;
           System.out.println("time = " + this.time);
           executeEvenements();
