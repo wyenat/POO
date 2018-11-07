@@ -28,11 +28,7 @@ public class ChefPompier {
       * Donne les ordres au robot d'aller traiter cet incendie sa mère
       */
       //tODO;
-      // chemin.deplacement();
-      Evenementdeplacement Event = new Evenementdeplacement(simu, chem.getRobot(), Direction.NORD);
-      Evenementdeplacement Event2 = new Evenementdeplacement(simu, chem.getRobot(), Direction.NORD);
-      Evenementdeplacement Event3 = new Evenementdeplacement(simu, chem.getRobot(), Direction.NORD);
-
+      chem.deplacement();
       EvenementDeverserEau vider = new EvenementDeverserEau(simu, chem.getRobot());
     }
 
@@ -71,41 +67,44 @@ public class ChefPompier {
     public void proposer_incendie_evolue(){
         Incendie[] incendies = this.simu.donnees.GetIncendies();
         Robot[] robots = this.simu.donnees.GetRobots();
-        Robot candidat;
-        Chemin chemin_candidat = new Chemin(new Case(0, 0, NatureTerrain.EAU), new Case(1, 0, NatureTerrain.EAU), robots[0], simu);
+        Robot candidat = new Robotdrone(0, 0, 0);
 
         for (int incendie_indice = 0; incendie_indice < this.incendiesAffectes.length; incendie_indice++){
-          for (int robot_indice = 0; robot_indice < this.simu.donnees.GetRobots().length; robot_indice++){
-            long tempsmin = 1000000; //TRICHE mais je sais pas comment init
-            if (!this.incendiesAffectes[incendie_indice]){
-              if (robots[robot_indice].getEtat() == Etat.LIBRE){
-                  Carte map =this.simu.donnees.GetCarte();
-                  Case depart = map.GetTableauDeCases()[map.GetNbColonnes()*robots[robot_indice].GetLigne() + robots[robot_indice].GetColonne()];
-                  Case arrivee = map.GetTableauDeCases()[map.GetNbColonnes()*incendies[incendie_indice].GetLigne() + incendies[incendie_indice].GetColonne()];
-                  Chemin chem = new Chemin(depart, arrivee, robots[robot_indice],this.simu);
-                  if (chem.possible){
-                    if (tempsmin>chem.getTemps()){
-                      chemin_candidat = chem;
-                      candidat = robots[robot_indice];
-                      tempsmin = chem.getTemps();
+          Chemin chemin_candidat = new Chemin(new Case(0, 0, NatureTerrain.EAU), new Case(0, 0, NatureTerrain.EAU), robots[0], this.simu);
+          if (!this.incendiesAffectes[incendie_indice]){
+            for (int robot_indice = 0; robot_indice < this.simu.donnees.GetRobots().length; robot_indice++){
+              long tempsmin = 1000000; //TRICHE mais je sais pas comment init
+                if (robots[robot_indice].getEtat() == Etat.LIBRE){
+                    Carte map =this.simu.donnees.GetCarte();
+                    Case depart = map.GetTableauDeCases()[map.GetNbColonnes()*robots[robot_indice].GetLigne() + robots[robot_indice].GetColonne()];
+                    Case arrivee = map.GetTableauDeCases()[map.GetNbColonnes()*incendies[incendie_indice].GetLigne() + incendies[incendie_indice].GetColonne()];
+                    Chemin chem = new Chemin(depart, arrivee, robots[robot_indice],this.simu);
+                    if (chem.possible){
+                      if (tempsmin>chem.getTemps()){
+                        chemin_candidat = chem;
+                        candidat = robots[robot_indice];
+                        tempsmin = chem.getTemps();
+                      }
                     }
-                  }
-                  else{
-                    continue;
-                  }
-              }
-              else{
-                continue;
-              }
-            }
-            else{
-              continue;
+                    else{
+                      continue;
+                    }
                 }
+                else{
+                  continue;
+                }
+
+            }
+
+            System.out.println(candidat + " en passant par " + chemin_candidat + "pour " + incendies[incendie_indice]);
+            if (chemin_candidat.getDepart() != chemin_candidat.getArrivee()){
+              this.incendiesAffectes[incendie_indice] = true;
+              this.traiterIncendie(chemin_candidat);
+            }
           }
-          this.incendiesAffectes[incendie_indice] = true;
-          this.traiterIncendie(chemin_candidat);
+          else{
+              continue;
+            }
+          }
         }
     }
-
-
-}

@@ -64,7 +64,11 @@ public class Incendie{
       int y =  taille_case/5 + (this.GetColonne())* taille_case;
       int taille = 4 * taille_case/5;
       gui.addGraphicalElement(new ImageElement(y, x, "img/flammes.png", taille, taille, new Canvas()));
-      
+
+  }
+
+  public String toString(){
+      return "(" + this.ligne + ", " + this.colonne + ", " + this.nb_litres_extinction + ")";
   }
 
 }

@@ -118,10 +118,10 @@ public class Chemin {
              this.iterer(distance_temporelle, chemin_jusqua_case);
          }
          this.possible = chemin_jusqua_case.containsKey(arrivee);
-         System.out.println(this.possible);
+        //  System.out.println(this.possible);
          if (this.possible){
              this.setTemps(distance_temporelle.get(arrivee));
-             System.out.println(chemin_jusqua_case.get(arrivee));
+            //  System.out.println(chemin_jusqua_case.get(arrivee));
              this.SetListeCases(chemin_jusqua_case.get(arrivee));
          }
     }
@@ -135,7 +135,7 @@ public class Chemin {
             Direction dir = trouverDirection(this.getSimu(), prece, parcourt.get(indice));
             prece = parcourt.get(indice);
             Evenementdeplacement deplacement = new Evenementdeplacement(this.getSimu(), this.getRobot(), dir);
-            System.out.println(dir);
+            // System.out.println(dir);
         }
     }
 
@@ -155,7 +155,7 @@ public class Chemin {
         if (diff_ligne == 1){dir = Direction.NORD;}
         if (diff_col == 1){dir = Direction.OUEST;}
         if (diff_col == -1){dir = Direction.EST;}
-        System.out.println("diff_col = " + diff_col + " diff_ligne = " + diff_ligne);
+        // System.out.println("diff_col = " + diff_col + " diff_ligne = " + diff_ligne);
         return dir;
         // if ((ligne_robot - endroit.GetLigne() != 0 & col_robot - endroit.GetColonne() == 0 ) | (ligne_robot - endroit.GetLigne() ==0 & col_robot - endroit.GetColonne() !=0)){
         //     switch(ligne_robot - endroit.GetLigne()){
@@ -248,4 +248,8 @@ public class Chemin {
         this.temps = time;
     }
     // Fin set et get...
+
+    public String toString(){
+        return "[" + this.liste_cases + "]";
+    }
 }
