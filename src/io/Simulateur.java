@@ -142,6 +142,8 @@ public class Simulateur implements Simulable {
       // System.out.println("LIGNE = " + nb_lignes + "\nColonne = " + nb_colonnes);
       // System.out.println("Taille des cases = " + taille_cases);
 
+      this.gui.reset();
+
       for (Case c : cart.GetTableauDeCases()){
           c.draw_case(this.gui, taille_cases);
       }
