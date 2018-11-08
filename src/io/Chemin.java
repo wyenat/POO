@@ -126,6 +126,7 @@ public class Chemin {
          }
     }
 
+
     public void deplacement(){
         /*Création des événements pour que le robot se déplace*/
         Case prece = this.getSimu().donnees.GetCarte().GetTableauDeCases()[this.getRobot().GetLigne()* this.getSimu().donnees.GetCarte().GetNbColonnes()+this.getRobot().GetColonne()];
@@ -135,7 +136,9 @@ public class Chemin {
             Direction dir = trouverDirection(this.getSimu(), prece, parcourt.get(indice));
             prece = parcourt.get(indice);
             Evenementdeplacement deplacement = new Evenementdeplacement(this.getSimu(), this.getRobot(), dir);
-            // System.out.println(dir);
+            deplacement.setCase(prece);
+            this.robot.setFuturLigne(prece.GetLigne());
+            this.robot.setFuturCol(prece.GetColonne());
         }
     }
 

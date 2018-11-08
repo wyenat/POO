@@ -17,6 +17,8 @@ import gui.Text;
 public abstract class Robot {
   private int ligne;
   private int colonne;
+  private int futurLigne;
+  private int futurColonne;
   private double vitesse_deplacement;
   private int reservoir;
   private TypeRobot type;
@@ -25,6 +27,8 @@ public abstract class Robot {
   public Robot(int lig, int col, double vitesse_deplacement){
     this.ligne = lig;
     this.colonne = col;
+    this.futurLigne = lig;
+    this.futurColonne = col;
     this.vitesse_deplacement = vitesse_deplacement;
     this.reservoir = 0; //Absurde car c'est pas lui qui remplit
     this.etat = Etat.LIBRE;
@@ -32,6 +36,22 @@ public abstract class Robot {
 
     public int GetLigne(){
         return this.ligne;
+    }
+
+    public int getFuturLigne(){
+        return this.futurLigne;
+    }
+
+    public void setFuturLigne(int f){
+        this.futurLigne = f;
+    }
+
+    public void setFuturCol(int f){
+        this.futurColonne = f;
+    }
+
+    public int getFuturCol(){
+        return this.futurColonne;
     }
 
     public int GetColonne(){
@@ -282,7 +302,7 @@ public int Vider(Simulateur simu,  int ligne, int colonne, int intensite){
 
     @Override
     public String toString(){
-        return "Type : " +  this.GetTypeRobot().toString() + ", Case = (" + this.GetLigne() + ", " + this.GetColonne() + ")";
+        return "Type : " +  this.GetTypeRobot().toString() + ", Case = (" + this.getFuturLigne() + ", " + this.getFuturCol() + ")";
     }
 
 }

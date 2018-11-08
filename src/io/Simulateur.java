@@ -43,7 +43,7 @@ public class Simulateur implements Simulable {
          */
          for (int i=0; i<nb_evenements; i++){
              if (this.time <= this.Evenements[i].getDate() &  this.Evenements[i].getDate() < this.time + this.pas){
-                System.out.println(this.Evenements[i]);
+                // System.out.println(this.Evenements[i]);
                 this.Evenements[i].execute();
              }
          }
@@ -88,7 +88,7 @@ public class Simulateur implements Simulable {
        }
        else{
           this.time += this.pas;
-          System.out.println("time = " + this.time);
+        //   System.out.println("time = " + this.time);
           executeEvenements();
           draw();
       }

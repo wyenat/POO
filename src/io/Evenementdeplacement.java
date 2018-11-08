@@ -17,6 +17,10 @@ public class Evenementdeplacement extends Evenement {
       return this.Case;
   }
 
+  public void setCase(Case c){
+      this.Case = c;
+  }
+
   public void execute(){
     Simulateur simu = super.getSimu();
     Carte map = simu.donnees.GetCarte();
@@ -34,7 +38,7 @@ public class Evenementdeplacement extends Evenement {
         }
     }
     else{
-      throw new IllegalArgumentException("Le robot ne peut pas aller la");
+    //   throw new IllegalArgumentException(robot + "ne peut pas aller à " + C);
     }
   }
 
