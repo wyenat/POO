@@ -7,7 +7,7 @@ public class EvenementDeverserEau extends Evenement {
 
 
   public EvenementDeverserEau(Simulateur simu, Robot robot){
-    super(robot, simu, robot.getDatevider());
+    super(robot, simu, robot.getDatevider(simu), TypeEvenement.DeverserEau);
     simu.addEvenement(this);
 
   }
@@ -39,7 +39,9 @@ public class EvenementDeverserEau extends Evenement {
 
       }
 
-
+      public String toString(){
+          return super.toString() + ": DeverserEau: " + this.robot + "déverse en (" + this.getRobot().GetLigne() + ", " + this.getRobot().GetColonne() + ")";
+      }
 
 
   }

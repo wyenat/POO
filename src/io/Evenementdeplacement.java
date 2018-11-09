@@ -7,14 +7,20 @@ public class Evenementdeplacement extends Evenement {
 
 
   public Evenementdeplacement(Simulateur simu, Robot robot, Direction direction){
-    super(robot, simu, ((long) simu.donnees.GetCarte().GetTailleCases()/ (long) robot.GetVitesse()));
+    super(robot, simu, ((long) simu.donnees.GetCarte().GetTailleCases()/ (long) robot.GetVitesse()), TypeEvenement.deplacement);
     this.Case = simu.donnees.GetCarte().GetTableauDeCases()[0];
     this.direction = direction;
+    Case but = simu.donnees.GetCarte().GetVoisin(simu.getPosition(robot), direction);
+    simu.setPosition(robot, but);
     simu.addEvenement(this);
   }
 
   public Case getCase(){
       return this.Case;
+  }
+
+  public Direction getDirection(){
+      return this.direction;
   }
 
   public void execute(){
@@ -41,6 +47,6 @@ public class Evenementdeplacement extends Evenement {
 
     @Override
     public String toString(){
-        return super.toString() + "Déplacement : le Robot" + (super.getRobot()).toString() + " va en case " + this.getCase().toString();
+        return super.toString() + "Déplacement : le Robot" + (super.getRobot()).toString() + " va vers " + this.getDirection();
     }
   }

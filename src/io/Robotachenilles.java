@@ -60,23 +60,26 @@ public class Robotachenilles extends Robot {
     return 0;
   }
 
-  public long getDatevider(){
-    return 8;
+  public long getDateVider(int intensite){
+      if (intensite >= super.getReservoir()){
+          return 5*20;
+      }
+      else{
+          return 5*(intensite/100);
+      }
   }
 
-
   public int vider(Simulateur simu, int ligne, int colonne, int intensite){
-      if (testVider(simu, ligne, colonne)){
+    if (testVider(simu, ligne, colonne)){
         if (intensite >= super.getReservoir()){
-          return 20*100;
+            return 20*100;
         }
-        else {
-          return (intensite/100)*100;
+        else{
+            return (intensite/100)*100;
         }
-      }
-      return 0;
     }
-
+    return 0;
+  }
 
 
   public boolean testVider(Simulateur simu, int lig, int col){
@@ -91,8 +94,11 @@ public class Robotachenilles extends Robot {
       }
     }
     if (incendie_ici){
-      boolean test = (lig == this.GetLigne()) && (this.GetColonne() == col);
-      return test;
+      boolean test1 = (lig == this.GetLigne()+1)&&(this.GetColonne() == col);
+      boolean test2 = (lig == this.GetLigne()) && (this.GetColonne() == col-1);
+      boolean test3 = (lig == this.GetLigne()) && (this.GetColonne() == col+1);
+      boolean test4 = (lig == this.GetLigne()-1) && (this.GetColonne() == col);
+      return (test1 || test2 ||test3 || test4);
 
     }
     return false;

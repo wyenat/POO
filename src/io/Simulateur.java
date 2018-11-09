@@ -21,8 +21,9 @@ public class Simulateur implements Simulable {
     public int pas;
     public int time;
 
-    public Evenement[] Evenements = new Evenement[1000];
+    public Evenement[] Evenements = new Evenement[1000000];
     public int nb_evenements;
+    public Case[] positions;
 
     public GUISimulator gui = new GUISimulator(800, 600, Color.BLACK);
 
@@ -34,6 +35,13 @@ public class Simulateur implements Simulable {
         this.time = 0;
         this.pas = 1 + this.donnees.GetCarte().GetTailleCases()/500;
         this.nb_evenements = 0;
+        this.positions = new Case[this.donnees.GetRobots().length];
+        for (int i =0; i<this.donnees.GetRobots().length; i++){
+            int lig = this.donnees.GetRobots()[i].GetLigne();
+            int col = this.donnees.GetRobots()[i].GetColonne();
+            this.positions[i] = this.donnees.GetCarte().GetTableauDeCases()[lig* this.donnees.GetCarte().GetNbColonnes()+col];
+
+        }
         draw();
     }
 
@@ -155,5 +163,29 @@ public class Simulateur implements Simulable {
       for (Robot r : this.donnees.GetRobots()){
         r.draw_robot(this.gui, taille_cases);
       }
+    }
+
+    public Case getPosition(Robot robot){
+        Case C=null;
+        for (int i = 0; i<this.donnees.GetRobots().length; i++){
+            if (this.donnees.GetRobots()[i]==robot){
+
+            C = this.positions[i];
+            break;
+            }
+        }
+        return C;
+
+    }
+
+    public void setPosition(Robot robot, Case C){
+
+        for (int i = 0; i<this.donnees.GetRobots().length; i++){
+            if (this.donnees.GetRobots()[i]==robot){
+
+                this.positions[i] = C;
+                break;
+            }
+        }
     }
 }

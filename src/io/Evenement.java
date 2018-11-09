@@ -5,15 +5,15 @@ public abstract class Evenement{
   protected Robot robot;
   private long Datefin;
   private Simulateur simu;
-  // private Evenement[] Events;
-  // public int nombre_evenements;
+  private TypeEvenement typeEvenement;
 
 
-public Evenement(Robot robot, Simulateur simulation, long Datefin){
+public Evenement(Robot robot, Simulateur simulation, long Datefin, TypeEvenement type){
     this.simu = simulation;
     this.robot = robot;
     this.setDate(Datefin);
     this.robot.setEtat(Etat.OCCUPE);
+    this.typeEvenement = type;
     // this.Events = new void[1000];
     // this.nombre_evenements = 0;
     // this.getSimu().addEvenement(this);
@@ -32,7 +32,7 @@ public Robot getRobot(){
   }
 
 
-  private void setDate(long Date){
+  public void setDate(long Date){
     long dateMax = 0;
     for (int evenement=0; evenement < simu.nb_evenements; evenement++){
         if ( this.getRobot() == simu.Evenements[evenement].getRobot()){
@@ -56,15 +56,24 @@ public Robot getRobot(){
                }
            }
        }
-       System.out.println("Date: " + dateMax + "temps : " + this.simu.time);
+    //    System.out.println("Date: " + dateMax + "temps : " + this.simu.time);
        if (dateMax <= this.simu.time + this.simu.pas){
           this.getRobot().setEtat(Etat.LIBRE);
        }
 
   }
 
+
   public long getDate(){
     return this.Datefin;
+  }
+
+  public TypeEvenement getTypeEvenement(){
+      return this.typeEvenement;
+  }
+
+  public void setTypeEvenement(TypeEvenement type){
+      this.typeEvenement = type;
   }
 
   @Override

@@ -128,15 +128,30 @@ public class Chemin {
 
     public void deplacement(){
         /*Création des événements pour que le robot se déplace*/
-        Case prece = this.getSimu().donnees.GetCarte().GetTableauDeCases()[this.getRobot().GetLigne()* this.getSimu().donnees.GetCarte().GetNbColonnes()+this.getRobot().GetColonne()];
+        Case prece = this.getSimu().getPosition(this.getRobot());//this.getSimu().donnees.GetCarte().GetTableauDeCases()[this.getRobot().GetLigne()* this.getSimu().donnees.GetCarte().GetNbColonnes()+this.getRobot().GetColonne()];
+        for (int i = 0; i<this.getSimu().donnees.GetCarte().GetNbLignes(); i++){
+            for (int j=0; j<this.getSimu().donnees.GetCarte().GetNbColonnes(); j++){
+                if (prece.GetLigne() == i && prece.GetColonne() == j){
+                    prece = this.getSimu().donnees.GetCarte().GetTableauDeCases()[i* this.getSimu().donnees.GetCarte().GetNbColonnes()+j];
+                }
+            }
+        }
+        System.out.println("deplacement de " + this.getRobot() + "avec " + this.GetListeCases() + "depuis " + prece);
+
         LinkedList<Case> parcourt = this.GetListeCases();
         int n = parcourt.size();
         for (int indice=0; indice < n; indice++){
+
             Direction dir = trouverDirection(this.getSimu(), prece, parcourt.get(indice));
+            // System.out.println("on va vers " + parcourt.get(indice) + "donc" + dir);
             prece = parcourt.get(indice);
             Evenementdeplacement deplacement = new Evenementdeplacement(this.getSimu(), this.getRobot(), dir);
             // System.out.println(dir);
         }
+        // Direction dir = trouverDirection(this.getSimu(), prece, this.arrivee);
+        // System.out.println("on va vers " + this.arrivee + "donc" + dir);
+        //
+        // Evenementdeplacement deplacement = new Evenementdeplacement(this.getSimu(), this.getRobot(), dir);
     }
 
     public void afficherTrajet(LinkedList<Case> trajet){
@@ -152,6 +167,7 @@ public class Chemin {
         Direction dir = Direction.SUD;
         int diff_ligne  = ligne_robot - endroit.GetLigne();
         int diff_col = col_robot - endroit.GetColonne();
+        // System.out.println("ligne " + diff_ligne + " col " + diff_col);
         if (diff_ligne == 1){dir = Direction.NORD;}
         if (diff_col == 1){dir = Direction.OUEST;}
         if (diff_col == -1){dir = Direction.EST;}

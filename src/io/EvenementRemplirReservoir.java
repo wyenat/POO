@@ -5,7 +5,7 @@ public class EvenementRemplirReservoir extends Evenement {
 
 
   public EvenementRemplirReservoir(Simulateur simu, Robot robot){
-    super(robot, simu, robot.getDateremplir());
+    super(robot, simu, robot.getDateremplir(), TypeEvenement.remplirReservoir);
     simu.addEvenement(this);
 
   }
@@ -18,5 +18,9 @@ public class EvenementRemplirReservoir extends Evenement {
     if (volume > 0){
         this.robot.setReservoir(volume);
     }
+  }
+
+  public String toString(){
+      return super.toString() + ": remplirReservoir: fais le plein en (" + this.getRobot().GetLigne() + ", " + this.getRobot().GetColonne() + ")";
   }
 }

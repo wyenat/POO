@@ -162,27 +162,38 @@ public abstract class Robot {
       }
     }
 
-    public long getDatevider(){
+    public long getDatevider(Simulateur simu){
+        int volume = 0;
+        int ligne = simu.getPosition(this).GetLigne();
+        int colonne = simu.getPosition(this).GetColonne();
+        Incendie[] incendies = simu.donnees.GetIncendies();
+        Incendie incendie = incendies[0];
+        for (int i=0; i<incendies.length; i++){
+          if (incendies[i].GetLigne()==ligne && incendies[i].GetColonne()==colonne){
+            incendie = incendies[i];
+          }
+        }
+    int intensite = incendie.GetIntensite();
       long Date = 0;
       switch (this.GetTypeRobot()) {
         case ROUES:
           Robotaroues Robot_roue = new Robotaroues(GetLigne(), this.GetColonne(), this.GetVitesse());
-          Date = Robot_roue.getDatevider();
+          Date = Robot_roue.getDateVider(intensite);
           break;
 
         case CHENILLES:
           Robotachenilles Robot_chenille = new Robotachenilles(this.GetLigne(), this.GetColonne(), this.GetVitesse());
-          Date = Robot_chenille.getDatevider();
+          Date = Robot_chenille.getDateVider(intensite);
           break;
 
         case PATTES:
           Robotapattes Robot_pattes = new Robotapattes(this.GetLigne(), this.GetColonne(), this.GetVitesse());
-          Date = Robot_pattes.getDatevider();
+          Date = Robot_pattes.getDateVider(intensite);
           break;
 
         case DRONE:
           Robotdrone Robot_drone = new Robotdrone(this.GetLigne(), this.GetColonne(), this.GetVitesse());
-          Date = Robot_drone.getDatevider();
+          Date = Robot_drone.getDateVider(intensite);
           break;
 
         default:

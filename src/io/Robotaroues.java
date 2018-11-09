@@ -55,12 +55,18 @@ public class Robotaroues extends Robot {
       }
 
 
-  public long getDatevider(){
-    return 5;
+  public long getDateVider(int intensite){
+
+        if (intensite >= super.getReservoir()){
+          return 5*50;
+        }
+        else {
+          return 5*(intensite/100);
+        }
+
   }
 
   public int vider(Simulateur simu, int ligne, int colonne, int intensite){
-    System.out.println("al " + intensite);
     if (testVider(simu, ligne, colonne)){
       if (intensite >= super.getReservoir()){
         return 50*100;
@@ -88,7 +94,6 @@ public class Robotaroues extends Robot {
     if (incendie_ici){
 
       boolean test = (this.GetLigne() == incendie.GetLigne()) && (this.GetColonne() == incendie.GetColonne());
-
       return test;
     }
     return false;
