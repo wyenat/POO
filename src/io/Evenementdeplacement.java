@@ -40,7 +40,7 @@ public class Evenementdeplacement extends Evenement {
         }
     }
     else{
-      throw new IllegalArgumentException("Le robot ne peut pas aller la");
+    //   throw new IllegalArgumentException(robot + "ne peut pas aller à " + C);
     }
   }
 

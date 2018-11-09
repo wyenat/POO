@@ -33,6 +33,7 @@ public class ChefPompier {
          for (int c=0; c < nb_cases; c++){
              Case current = this.simu.donnees.GetCarte().GetTableauDeCases()[c];
              if (current.GetNature() == NatureTerrain.EAU){
+<<<<<<< HEAD
                  if (robo.GetTypeRobot() == TypeRobot.DRONE){
                          casesDeau.add(current);
                         //  System.out.println("current " + current);
@@ -51,18 +52,50 @@ public class ChefPompier {
             }
         }
         // System.out.println("Les cases " + casesDeau);
+=======
+                 casesDeau.add(current);
+             }
+         }
+>>>>>>> e5bc89d8503ad36b26cd23bcbd76a953efea325e
          long candidat = -1;
          Chemin chem_candidat = null;
          Iterator iter = casesDeau.descendingIterator();
          while (iter.hasNext()){
              Case eau = (Case) iter.next();
-             Chemin chem  = new Chemin(arrivee, eau, robo, this.simu);
-             if ((chem.getTemps() < candidat) | (candidat == -1)){
-                 candidat = chem.getTemps();
-                 chem_candidat = chem;
+             if (robo.GetTypeRobot() != TypeRobot.DRONE){
+                 Carte carte = this.simu.donnees.GetCarte();
+                 Case[] tab = carte.GetTableauDeCases();
+                 int lig_case = eau.GetLigne();
+                 int col_case = eau.GetColonne();
+                 int nb_col = carte.GetNbColonnes();
+                 Case voisine = null;
+                 for (Direction dir : Direction.values()) {
+                    if (carte.voisinExiste(eau, dir)){
+                        voisine = carte.GetVoisin(eau,dir);
+                        break;
+                    } else{
+                        System.out.println("PAS DE VOISIN A " + dir + " POUR LA CASE " + voisine);
+                        continue;
+                    }
+                }
+                //  System.out.println("Case : " + voisine + " est de type " + voisine.GetNature());
+                     if (voisine.GetNature() == NatureTerrain.EAU){continue;}
+                    //  System.out.println("On crée donc un chemin");
+                     Chemin chem  = new Chemin(arrivee, voisine, robo, this.simu);
+                     if ((chem.getTemps() < candidat) | (candidat == -1)){
+                         candidat = chem.getTemps();
+                         chem_candidat = chem;
+                     }
              }
-         }
-         System.out.println("arrivee" + arrivee);
+             else{
+                 Chemin chem  = new Chemin(arrivee, eau, robo, this.simu);
+                 if ((chem.getTemps() < candidat) | (candidat == -1)){
+                     candidat = chem.getTemps();
+                     chem_candidat = chem;
+                 }
+             }
+        }
+        //  System.out.println(chem_candidat);
          return chem_candidat;
     }
 
@@ -87,19 +120,19 @@ public class ChefPompier {
           intensite -= reservoir;
           pointEau.deplacement();
           EvenementRemplirReservoir remplir = new EvenementRemplirReservoir(simu, chem.getRobot());
-        //   switch(chem.getRobot().GetTypeRobot()){
-        //     case DRONE:
-        //         reservoir+=10000;
-        //         break;
-          //
-        //     case ROUES:
-        //         reservoir+= 5000;
-        //         break;
-          //
-        //     case CHENILLES:
-        //         reservoir += 2000;
-        //         break;
-        //   }
+          switch(chem.getRobot().GetTypeRobot()){
+            case DRONE:
+                reservoir+=10000;
+                break;
+
+            case ROUES:
+                reservoir+= 5000;
+                break;
+
+            case CHENILLES:
+                reservoir += 2000;
+                break;
+          }
 
 
               Chemin retour = new Chemin(pointEau.getArrivee(), case_incendie, chem.getRobot(), this.simu);
